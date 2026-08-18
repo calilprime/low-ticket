@@ -1,6 +1,14 @@
 import { BookOpen, Map, Feather, CalendarDays } from "lucide-react"
 
-const items = [
+type Item = {
+  icon: typeof BookOpen
+  tag: string
+  title: string
+  text: string
+  value?: string
+}
+
+const items: Item[] = [
   {
     icon: BookOpen,
     tag: "Principal",
@@ -10,18 +18,21 @@ const items = [
   {
     icon: Map,
     tag: "Bônus 1",
+    value: "De R$ 29 por R$ 0",
     title: "Cartão de Entrega",
     text: "Uma página para recortar, escrever o nome do seu filho e o que você entrega a Deus, e guardar na Bíblia ou na carteira.",
   },
   {
     icon: Feather,
     tag: "Bônus 2",
+    value: "De R$ 19 por R$ 0",
     title: "Checklist dos 9 Dias",
     text: "Uma folha para imprimir e marcar cada dia concluído, com espaço para anotar o seu horário fixo de oração.",
   },
   {
     icon: CalendarDays,
     tag: "Bônus 3",
+    value: "De R$ 27 por R$ 0",
     title: "Quadro de Orações Respondidas",
     text: "Um registro para anotar o que você pediu e o que foi acontecendo — inclusive as respostas pequenas, que a memória apaga.",
   },
@@ -36,18 +47,23 @@ export function WhatsInside() {
         </h2>
 
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {items.map(({ icon: Icon, tag, title, text }) => (
+          {items.map(({ icon: Icon, tag, title, text, value }) => (
             <article
               key={title}
               className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-lg hover:shadow-olive/5"
             >
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
                   {tag}
                 </span>
+                {value ? (
+                  <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wide text-primary">
+                    {value}
+                  </span>
+                ) : null}
               </div>
               <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>

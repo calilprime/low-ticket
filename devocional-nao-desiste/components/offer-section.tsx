@@ -27,7 +27,13 @@ export function OfferSection() {
               ))}
             </ul>
 
-            <div className="mt-10 flex flex-col items-center">
+            <div className="mx-auto mt-10 max-w-md rounded-2xl border border-gold/40 bg-gold/10 px-5 py-3">
+              <p className="text-sm font-semibold text-gold">
+                ⚠️ Condição especial válida para o lote digital de hoje
+              </p>
+            </div>
+
+            <div className="mt-6 flex flex-col items-center">
               <span className="text-base text-olive-foreground/70 line-through">De R$ 59,90</span>
               <span className="mt-1 font-serif text-5xl font-bold text-gold md:text-6xl">R$ 34,90</span>
             </div>
@@ -35,9 +41,15 @@ export function OfferSection() {
             <Button
               asChild
               size="lg"
-              className="mt-8 h-auto w-full max-w-md rounded-full px-8 py-4 text-base font-semibold shadow-lg shadow-black/20 transition-transform hover:scale-[1.02] sm:text-lg"
+              className="mt-8 h-auto w-full max-w-md rounded-full px-8 py-5 text-base font-bold uppercase leading-snug tracking-wide shadow-xl shadow-black/25 transition-transform hover:scale-[1.02] sm:text-lg"
             >
-              <a href="#">QUERO COMEÇAR O DIA 1 HOJE</a>
+              <a
+                href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                QUERO COMEÇAR O DIA 1 HOJE
+              </a>
             </Button>
 
             <div className="mx-auto mt-8 flex max-w-md items-start gap-4 rounded-2xl bg-olive-foreground/5 p-5 text-left ring-1 ring-olive-foreground/10">
