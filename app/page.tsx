@@ -6,10 +6,11 @@ import { Testimonials } from "@/components/testimonials"
 import { OfferSection } from "@/components/offer-section"
 import { FaqSection } from "@/components/faq-section"
 import { SiteFooter } from "@/components/site-footer"
+import { StickyCta } from "@/components/sticky-cta"
 
 export default function Page() {
   return (
-    <main className="bg-background">
+    <main className="bg-background pb-40 md:pb-0">
       <HeroSection />
       <PainSection />
       <WhatsInside />
@@ -18,6 +19,7 @@ export default function Page() {
       <OfferSection />
       <FaqSection />
       <SiteFooter />
+      <StickyCta />
     </main>
   )
 }
