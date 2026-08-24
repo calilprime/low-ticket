@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Os 3 Primeiros Meses — Devocional da Mãe Serena</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#F1EBDC;
+  --papel:#FBF8F1;
+  --oliva:#536B45;
+  --tinta:#2D3B22;
+  --dourado:#B8934A;
+  --dourado-claro:#C9A876;
+  --lapis:#6E6C5E;
+  --linha:rgba(45,59,34,.15);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1100px 460px at 50% -160px, rgba(83,107,69,.10), transparent 70%),
+    var(--creme);
+  color:var(--tinta);
+  font-family:'Karla',system-ui,sans-serif;
+  font-size:17px; line-height:1.63;
+  -webkit-font-smoothing:antialiased;
+}
+.folha{
+  max-width:640px; margin:0 auto; background:var(--papel);
+  padding:34px 26px 54px;
+  box-shadow:0 22px 60px -34px rgba(45,59,34,.5);
+}
+@media(min-width:700px){ .folha{margin:30px auto;padding:54px 62px 66px} }
+
+.marca{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--oliva);
+  text-align:center;font-weight:600;margin:0}
+.orn{text-align:center;color:var(--dourado);letter-spacing:1.1em;font-size:13px;
+  margin:15px 0 0;padding-left:1.1em}
+.corte{border:0;border-top:1.5px dashed var(--dourado-claro);margin:44px 0 0;position:relative}
+.corte::after{content:"✂";position:absolute;top:-13px;left:0;background:var(--papel);
+  padding-right:11px;color:var(--dourado-claro);font-size:16px;line-height:1}
+
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+  font-size:clamp(40px,10vw,62px);line-height:.98;margin:0;letter-spacing:-.015em}
+h1 .leve{display:block;font-style:italic;font-weight:400;color:var(--oliva);
+  font-size:.46em;letter-spacing:0;margin-bottom:8px}
+h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:31px;
+  line-height:1.12;margin:0 0 10px}
+.olho{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dourado);
+  font-weight:600;margin:0 0 6px}
+p{margin:0 0 17px}
+.lead{font-size:19.5px;line-height:1.55}
+em{font-style:italic} strong{font-weight:600}
+
+.recibo{
+  border:1px solid var(--linha);border-left:3px solid var(--oliva);
+  background:linear-gradient(180deg,#FDFBF6,#FBF8F1);
+  padding:15px 18px;margin:26px 0 34px;font-size:15.5px;color:var(--lapis);
+}
+.recibo strong{color:var(--tinta)}
+
+/* capa do PDF */
+.capa-wrap{margin:34px 0 0;text-align:center}
+.capa{
+  width:210px;display:inline-block;transform:rotate(-1.6deg);
+  box-shadow:0 20px 34px -20px rgba(45,59,34,.55), 0 0 0 1px rgba(45,59,34,.10);
+}
+.capa svg{display:block;width:100%;height:auto}
+.capa-leg{margin:16px 0 0;font-size:13.5px;color:var(--lapis)}
+
+.itens{list-style:none;padding:0;margin:22px 0 0}
+.itens li{display:flex;gap:14px;align-items:flex-start;padding:13px 0;
+  border-bottom:1px solid var(--linha);font-size:16px}
+.itens li:first-child{border-top:1px solid var(--linha)}
+.quad{flex:0 0 12px;height:12px;margin-top:7px;border:1.5px solid var(--dourado)}
+.itens b{font-weight:600;display:block}
+.itens .d{color:var(--lapis);font-size:14.5px;display:block}
+
+.versiculo{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-style:italic;
+  line-height:1.34;color:var(--tinta);margin:34px 0 6px;text-align:center}
+.ref{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dourado);
+  margin:0;text-align:center}
+
+.oferta{margin:32px 0 0;text-align:center}
+.preco{font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;line-height:1;
+  font-weight:600;margin:0}
+.preco small{display:block;font-family:'Karla',sans-serif;font-size:14px;font-weight:400;
+  color:var(--lapis);margin-top:10px;letter-spacing:.02em}
+.cta{display:block;width:100%;margin:24px 0 0;background:var(--oliva);color:var(--papel);
+  border:0;border-radius:2px;cursor:pointer;font-family:'Karla',sans-serif;font-size:17.5px;
+  font-weight:600;padding:21px 20px;text-decoration:none;letter-spacing:.01em;
+  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);transition:background .18s ease}
+.cta:hover,.cta:focus-visible{background:var(--tinta)}
+.umclique{margin:16px 0 0;font-size:15px;color:var(--tinta);font-weight:500}
+.selo{margin:9px 0 0;font-size:13.5px;color:var(--lapis);line-height:1.62}
+.recusa{display:block;text-align:center;margin:28px 0 0;font-size:14px;color:var(--lapis);
+  text-decoration:underline;text-underline-offset:3px}
+.recusa:hover{color:var(--tinta)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-offset:3px}
+.rodape{margin:46px 0 0;font-size:12.5px;color:var(--lapis);text-align:center;line-height:1.65}
+
+/* container dos botoes injetados pela HeroSpark — herda o visual da pagina */
+#upsell-herospark{margin:24px 0 0}
+#upsell-herospark:empty{min-height:0}
+#upsell-herospark a,#upsell-herospark button{
+  display:block!important;width:100%!important;margin:0 0 12px!important;
+  font-family:'Karla',system-ui,sans-serif!important;font-size:17px!important;
+  font-weight:600!important;padding:20px 18px!important;border-radius:2px!important;
+  text-decoration:none!important;cursor:pointer;line-height:1.3!important;
+  box-sizing:border-box;text-align:center!important;
+}
+/* primeiro botao = aceite */
+#upsell-herospark a:first-of-type,#upsell-herospark button:first-of-type{
+  background:var(--oliva)!important;color:var(--papel)!important;border:0!important;
+  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);
+}
+/* segundo botao = recusa, discreto */
+#upsell-herospark a:nth-of-type(2),#upsell-herospark button:nth-of-type(2){
+  background:transparent!important;color:var(--lapis)!important;border:0!important;
+  font-weight:400!important;font-size:14px!important;padding:10px 0!important;
+  text-decoration:underline!important;text-underline-offset:3px;box-shadow:none!important;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<!-- HeroSpark — botões de upsell 1 clique (oferta R$69,90) -->
+<script id="upsell-cta-script"
+        src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
+        data-upsell-id="e383387e-a96a-4af8-b905-fb608c6e5bdc"></script>
+</head>
+<body>
+<main class="folha">
+
+  <p class="marca">Devocional da Mãe Serena</p>
+  <p class="orn">✦ ❖ ✦</p>
+
+  <p class="recibo">
+    <strong>Sua compra foi aprovada.</strong> O devocional de 9 dias já está indo para o seu
+    e-mail — ele é seu, não depende de mais nada. Só peço um minuto para falar de uma coisa.
+  </p>
+
+  <h1><span class="leve">Ninguém fala do</span>Dia 10.</h1>
+
+  <p class="lead" style="margin-top:28px">
+    Os nove dias são curtos de propósito. Cabem numa semana difícil, e são longos o bastante
+    para você descobrir que dá — que existe um jeito de abrir a Bíblia num dia comum, com
+    barulho na casa, sem esperar a vida ficar organizada primeiro.
+  </p>
+
+  <p>O problema nunca foi o Dia 1.</p>
+
+  <p>
+    É o Dia 10. No Dia 10 não tem mais folha. Quem fez nove dias seguidos volta a não fazer
+    nenhum — não porque desistiu, mas porque acabou. E quando tenta retomar sozinha, quase
+    sempre tenta retomar <em>maior</em>: ler mais, orar mais, se organizar melhor. Aí trava.
+  </p>
+
+  <hr class="corte">
+
+  <div class="capa-wrap">
+    <div class="capa">
+      <svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="Capa do PDF Os 3 Primeiros Meses">
+        <rect width="210" height="297" fill="#F5F0E4"/>
+        <text x="105" y="62" text-anchor="middle" fill="#B8934A" font-size="7"
+              letter-spacing="4" font-family="serif">✦ ❖ ✦</text>
+        <text x="105" y="80" text-anchor="middle" fill="#536B45" font-size="4.6"
+              letter-spacing="1.5" font-family="Karla,sans-serif" font-weight="600">DEVOCIONAL DA MÃE SERENA</text>
+        <text x="105" y="106" text-anchor="middle" fill="#2D3B22" font-size="21"
+              font-family="'Cormorant Garamond',serif" font-weight="600">Os 3 Primeiros Meses</text>
+        <text x="105" y="120" text-anchor="middle" fill="#536B45" font-size="8"
+              font-style="italic" font-family="'Cormorant Garamond',serif">o que vem depois do Dia 9</text>
+        <g stroke="rgba(45,59,34,.22)" stroke-width=".4">
+          <line x1="40" y1="176" x2="170" y2="176"/>
+          <line x1="40" y1="196" x2="170" y2="196"/>
+          <line x1="40" y1="216" x2="170" y2="216"/>
+          <line x1="40" y1="236" x2="170" y2="236"/>
+        </g>
+        <g font-family="'Cormorant Garamond',serif" font-size="9" fill="#2D3B22">
+          <text x="62" y="190">Recomeço</text>
+          <text x="62" y="210">Rotina</text>
+          <text x="62" y="230">Paciência</text>
+        </g>
+        <g font-family="Karla,sans-serif" font-size="3.4" fill="#B8934A"
+           letter-spacing="1.1" font-weight="600">
+          <text x="40" y="189">MÊS 1</text>
+          <text x="40" y="209">MÊS 2</text>
+          <text x="40" y="229">MÊS 3</text>
+        </g>
+        <text x="105" y="266" text-anchor="middle" fill="#B8934A" font-size="3.4"
+              letter-spacing="1.6" font-family="Karla,sans-serif" font-weight="600">ARQUIVO DIGITAL · PARA IMPRIMIR EM CASA</text>
+      </svg>
+    </div>
+    <p class="capa-leg">PDF de 28 páginas, no mesmo formato dos seus 9 dias.</p>
+  </div>
+
+  <section style="margin-top:38px">
+    <p class="olho">O que continua depois do Dia 9</p>
+    <h2>Os 3 Primeiros Meses</h2>
+    <p>
+      Não é mais do mesmo em maior quantidade. É mais devagar. Onde os nove dias pediam um
+      hábito por dia, aqui é <strong>um hábito por mês</strong>. Um só, repetido até parar de
+      exigir esforço.
+    </p>
+
+    <ul class="itens">
+      <li><span class="quad"></span><span><b>Mês 1 — Recomeço</b><span class="d">Uma coisa por dia, sem lista.</span></span></li>
+      <li><span class="quad"></span><span><b>Mês 2 — Rotina</b><span class="d">Um horário fixo só seu, com lugar marcado.</span></span></li>
+      <li><span class="quad"></span><span><b>Mês 3 — Paciência</b><span class="d">Dez minutos por dia, um filho por vez.</span></span></li>
+      <li><span class="quad"></span><span><b>12 devocionais, um por semana</b><span class="d">Versículo em ARC, reflexão, oração e o hábito da semana com o tempo declarado.</span></span></li>
+      <li><span class="quad"></span><span><b>A página do dia em que não deu</b><span class="d">Uma por mês. O que fazer quando você falhar — porque você vai falhar, e é aí que quase todo mundo larga.</span></span></li>
+    </ul>
+
+    <p style="margin-top:26px">
+      Cada mês abre retomando o hábito do mês anterior. Não é um material novo a cada 30
+      dias: é a mesma coisa ficando mais fácil.
+    </p>
+  </section>
+
+  <p class="versiculo">“Mas os que esperam no Senhor renovarão as suas forças (…)<br>
+  caminharão e não se fatigarão.”</p>
+  <p class="ref">Isaías 40.31 (ARC)</p>
+  <p style="margin-top:16px;color:var(--lapis);font-size:16px;text-align:center">
+    A promessa maior não é sobre voar. É sobre caminhar —<br>que é o que a rotina exige
+    todo dia, sem plateia.
+  </p>
+
+  <hr class="corte">
+
+  <div class="oferta">
+    <p class="preco">R$ 69,90<small>pagamento único · sem assinatura</small></p>
+
+    <!-- Os botões de aceite e recusa são renderizados aqui pela HeroSpark.
+         Não criar botão nenhum manualmente: o destino da recusa é definido
+         no painel, em "Se o cliente recusar a oferta?". -->
+    <div id="upsell-herospark"></div>
+
+    <p class="umclique">Você não precisa preencher seus dados de novo.</p>
+    <p class="selo">
+      A cobrança usa os mesmos dados da compra que você acabou de fazer —
+      é só um clique no botão acima.<br><br>
+      Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
+      Acesso imediato no mesmo e-mail · 7 dias de garantia.
+    </p>
+  </div>
+
+  <p class="orn" style="margin-top:46px">✦ ❖ ✦</p>
+  <p class="rodape">
+    Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
+    © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
+  </p>
+
+</main>
+</body>
+</html>

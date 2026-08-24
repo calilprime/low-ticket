@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Devocional da Mãe Serena</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     CONFIGURAÇÃO — edite SOMENTE este bloco
+     ============================================================ -->
+<script>
+const CONFIG = {
+  SUPABASE_URL:  "https://asjakwljvzjotycmgtwd.supabase.co",
+  SUPABASE_ANON: "sb_publishable_JqCQTveGtqP01owfv_1XOA_l3BSW63H",
+  PIXEL_ID:      "1380514643999534",
+  CHECKOUT_URL:  "https://pay.herospark.com/devocional-da-mae-serena-534764",
+  DEBUG:         false
+};
+</script>
+
+<!-- Utmify: captura e PERSISTE as UTMs. Sem isso, venda vinda do quiz
+     chega na HeroSpark sem rastro e cai em "UTMs vazias". -->
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+
+<style>
+:root {
+  /* Paleta editorial "Amanhecer" */
+  --papel: #F9F8F5; 
+  --tinta: #2C2825; 
+  --tinta-suave: #625D57; 
+  --linha: #E2DDD5;
+  --oliva: #8C7A61; 
+  --oliva-claro: #F2ECE4; 
+  --branco: #FFFFFF; 
+  --acao: #2A3B32; /* Verde floresta escuro para alta conversão */
+  --acao-hover: #1E2B24;
+  --raio: 12px;
+  --foco: #A69477;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--papel);
+  /* Fundo sutil simulando a luz da manhã no topo */
+  background-image: radial-gradient(circle at 50% 0%, #FFFFFF 0%, transparent 60%);
+  background-repeat: no-repeat;
+  color: var(--tinta);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 20px env(safe-area-inset-bottom);
+  min-height: 100vh;
+}
+
+.palco {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 0 64px;
+}
+
+/* --- Progresso Elevado --- */
+.progresso {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 36px;
+  background: var(--branco);
+  padding: 6px;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  border: 1px solid var(--linha);
+}
+.progresso span {
+  flex: 1;
+  height: 6px;
+  background: var(--oliva-claro);
+  border-radius: 4px;
+  transition: background 0.4s ease, transform 0.4s ease;
+}
+.progresso span.feito {
+  background: var(--oliva);
+}
+
+/* --- Animações e Telas --- */
+.capa {
+  width: 100%; height: auto; display: block;
+  border-radius: 14px; margin-bottom: 22px;
+  aspect-ratio: 16 / 10; object-fit: cover;
+}
+.tela { display: none; animation: entra 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.tela.ativa { display: block; }
+@keyframes entra {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tela { animation: none; }
+  * { transition: none !important; }
+}
+
+/* --- Tipografia --- */
+.olho {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--oliva);
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: block;
+}
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--tinta);
+}
+h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 1.22;
+  margin-bottom: 10px;
+  color: var(--tinta);
+}
+p.apoio { color: var(--tinta-suave); margin-bottom: 28px; font-size: 18px; }
+p.dica { color: var(--tinta-suave); font-size: 14px; margin-bottom: 24px; }
+
+.versiculo {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--oliva);
+  padding: 20px;
+  border-radius: 0 var(--raio) var(--raio) 0;
+  margin: 28px 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 17px;
+  color: var(--tinta-suave);
+  font-style: italic;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.versiculo cite {
+  display: block;
+  font-style: normal;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 12px;
+  color: var(--oliva);
+  font-weight: 600;
+}
+
+/* --- Opções de Resposta --- */
+.opcoes { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+.opcao {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 12px 16px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--tinta);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 64px; /* Acessibilidade Mobile */
+}
+/* Emojis transformados em ícones elegantes */
+.opcao .emo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--oliva-claro);
+  border-radius: 50%;
+  font-size: 18px;
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+}
+.opcao:hover {
+  border-color: var(--oliva);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.opcao:active { transform: scale(0.98); }
+.opcao:active .emo { transform: scale(1.1); }
+.opcao:focus-visible { outline: 2px solid var(--foco); outline-offset: 2px; }
+
+/* --- Botão Principal --- */
+.botao {
+  display: block;
+  width: 100%;
+  background: var(--acao);
+  color: var(--branco);
+  border: 0;
+  border-radius: var(--raio);
+  padding: 20px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  min-height: 56px;
+  box-shadow: 0 4px 12px rgba(42, 59, 50, 0.15);
+}
+.botao:hover { background: var(--acao-hover); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(42, 59, 50, 0.2); }
+.botao:active { transform: translateY(1px); box-shadow: 0 2px 4px rgba(42, 59, 50, 0.1); }
+.botao:focus-visible { outline: 2px solid var(--foco); outline-offset: 3px; }
+
+/* --- Mini LP (Tela Final) --- */
+#r-titulo { color: var(--acao); }
+
+.cartao {
+  background: var(--branco);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 24px;
+  margin: 28px 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.02);
+}
+.cartao h3 { font-family: Fraunces, serif; font-size: 19px; margin-bottom: 12px; color: var(--tinta); }
+ul.itens { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+ul.itens li { display: flex; gap: 12px; font-size: 15px; align-items: center; color: var(--tinta-suave); }
+ul.itens li .emo { font-size: 16px; opacity: 0.8; }
+
+.destaque {
+  background: #EAE3D6; /* Cor de destaque orgânica para o Dia 7 */
+  border-left: 4px solid var(--oliva);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  padding: 20px;
+  margin: 24px 0;
+  font-size: 15px;
+  color: var(--tinta);
+}
+.destaque strong { display: flex; align-items: center; gap: 8px; font-family: Fraunces, serif; font-size: 18px; margin-bottom: 6px; color: var(--acao); }
+
+.preco {
+  text-align: center;
+  margin: 36px 0 24px;
+  padding: 20px 0;
+  border-top: 1px dashed var(--linha);
+  border-bottom: 1px dashed var(--linha);
+}
+.preco .valor { font-family: Fraunces, serif; font-size: 46px; font-weight: 600; display: block; line-height: 1; color: var(--tinta); }
+.preco .nota { font-size: 13px; color: var(--tinta-suave); margin-top: 8px; display: block; }
+.preco .de { font-size: 16px; color: var(--tinta-suave); text-decoration: line-through; display: block; margin-bottom: 4px; }
+.selo-oferta {
+  display: inline-block;
+  background: var(--oliva-claro);
+  color: var(--acao);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.urgencia {
+  text-align: center;
+  font-size: 15px;
+  color: var(--tinta);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+.urgencia strong { color: var(--acao); }
+
+.acesso {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  background: var(--oliva-claro);
+  color: var(--acao);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: var(--raio);
+  margin-top: 16px;
+}
+
+.microlinha {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.selo {
+  text-align: center;
+  font-size: 13px;
+  color: var(--tinta-suave);
+  margin-top: 20px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.selo::before {
+  content: "🔒";
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.rodape { text-align: center; font-size: 12px; color: var(--tinta-suave); margin-top: 40px; padding-top: 20px; }
+</style>
+</head>
+<body>
+<main class="palco">
+
+  <div class="progresso" id="progresso" hidden>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- 0 · ABERTURA -->
+  <section class="tela ativa" data-etapa="abertura" data-ordem="0">
+    <img class="capa" src="capa-quiz.jpg" alt="Bíblia aberta sobre a mesa da cozinha com uma xícara de café" loading="eager" width="1600" height="1000">
+    <span class="olho">Ninguém fala sobre isso</span>
+    <h1>A casa inteira depende de você guardar tudo de cabeça. E isso não entra em lista nenhuma.</h1>
+    <p class="apoio">São 5 perguntas rápidas. No fim eu mostro por qual dos 9 dias do devocional faz mais sentido você começar.</p>
+    <div class="versiculo">
+      Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.
+      <cite>Mateus 11.28</cite>
+    </div>
+    <button class="botao" data-avanca>Começar</button>
+    <p class="rodape">Menos de um minuto. Nenhum dado seu é pedido.</p>
+  </section>
+
+  <!-- 1 -->
+  <section class="tela" data-etapa="p1" data-ordem="1">
+    <span class="olho">1 de 5</span>
+    <h2>Como costuma ser a sua manhã?</h2>
+    <p class="dica">Não existe resposta certa aqui.</p>
+    <div class="opcoes">
+      <button class="opcao" data-resposta="corrida" data-peso="rotina"><span class="emo">🏃‍♀️</span>Acordo já correndo atrás do horário</button>
+      <button class="opcao" data-resposta="silencio" data-peso="espiritual"><span class="emo">🌅</span>Tento um momento em silêncio, quando dá</button>
+      <button class="opcao" data-resposta="cansada" data-peso="descanso"><span class="emo">😮‍💨</span>Levanto mais cansada do que deitei</button>
+      <button class="opcao" data-resposta="tranquila" data-peso="rotina"><span class="emo">☕</span>Tranquila na maioria dos dias</button>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="tela" data-etapa="p3" data-ordem="2">
+    <span class="olho">2 de 5</span>
+    <h2>O que mais pesa no seu dia?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-resposta="tudo_sozinha" data-peso="rotina"><span class="emo">🎒</span>Carregar tudo sozinha</button>
+      <button class="opcao" data-resposta="paciencia" data-peso="filhos"><span class="emo">🌡️</span>Perder a paciência com os filhos</button>
+      <button class="opcao" data-resposta="sem_tempo" data-peso="descanso"><span class="emo">⏳</span>Nunca sobrar tempo pra mim</button>
+      <button class="opcao" data-resposta="distante" data-peso="espiritual"><span class="emo">🙏</span>Sentir a vida de oração distante</button>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="tela" data-etapa="p4" data-ordem="3">
+    <span class="olho">3 de 5</span>
+    <h2>Você já tentou organizar isso antes?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-resposta="varias"><span class="emo">🔁</span>Várias vezes. Começo e não sustento</button>
+      <button class="opcao" data-resposta="uma_vez"><span class="emo">📓</span>Uma vez, com agenda ou app</button>
+      <button class="opcao" data-resposta="nunca"><span class="emo">🌱</span>Nunca parei pra tentar de verdade</button>
+      <button class="opcao" data-resposta="deu_certo"><span class="emo">✅</span>Deu certo por um tempo, depois soltou</button>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="tela" data-etapa="p5" data-ordem="4">
+    <span class="olho">4 de 5</span>
+    <h2>Se uma coisa mudasse na próxima semana, qual você escolheria?</h2>
+    <div class="opcoes">
+      <button class="opcao" data-resposta="manha_calma" data-peso="rotina"><span class="emo">🕊️</span>Uma manhã que começa calma</button>
+      <button class="opcao" data-resposta="hora_minha" data-peso="descanso"><span class="emo">🛋️</span>Uma hora por semana só minha, sem culpa</button>
+      <button class="opcao" data-resposta="casa_dividida" data-peso="rotina"><span class="emo">🏡</span>A casa dividida de verdade</button>
+      <button class="opcao" data-resposta="mais_perto" data-peso="espiritual"><span class="emo">📖</span>Voltar a me sentir perto de Deus todo dia</button>
+    </div>
+  </section>
+
+  <!-- 6 · COMPROMISSO -->
+  <section class="tela" data-etapa="compromisso" data-ordem="5">
+    <span class="olho">Última pergunta</span>
+    <h2>Nove dias. Uma leitura curta e um hábito pequeno por dia. Faz sentido pra você começar essa semana?</h2>
+    <p class="dica">O dia mais curto leva 5 minutos. O mais longo é o Dia 7 — e ele é inteiro seu.</p>
+    <div class="opcoes">
+      <button class="opcao" data-resposta="sim_agora"><span class="emo">🔥</span>Sim, quero começar hoje</button>
+      <button class="opcao" data-resposta="sim_semana"><span class="emo">📅</span>Sim, começo essa semana</button>
+      <button class="opcao" data-resposta="quero_ver"><span class="emo">👀</span>Quero ver o que tem dentro primeiro</button>
+    </div>
+  </section>
+
+  <!-- 7 · RESULTADO + MINI LP -->
+  <section class="tela" data-etapa="resultado" data-ordem="6">
+    <span class="olho" id="r-olho">Seu resultado</span>
+    <h1 id="r-titulo"></h1>
+    <p class="apoio" id="r-texto"></p>
+    <div class="versiculo" id="r-versiculo"></div>
+
+    <div class="cartao">
+      <h3>Eu queria ter descoberto isso antes</h3>
+      <p class="dica" style="margin-bottom:20px">Não é um livro pra ler. É um dia de cada vez, com uma coisa pequena pra fazer no mesmo dia.</p>
+      <ul class="itens">
+        <li><span class="emo">📖</span>9 dias de devocional — cada um termina num hábito prático</li>
+        <li><span class="emo">🗓️</span>Planner Semanal da Família, reimprimível pra sempre</li>
+        <li><span class="emo">🧺</span>Checklist do Lar em Paz</li>
+        <li><span class="emo">💌</span>Cartão de Entrega, pro nono dia</li>
+      </ul>
+    </div>
+
+    <div class="destaque">
+      <strong><span style="font-size: 22px;">🛋️</span> Dia 7: uma hora só sua</strong>
+      O único dia longo dos nove. Uma hora, marcada como compromisso, sem contrapartida.
+    </div>
+
+    <p style="margin-bottom:6px; font-weight: 500; text-align: center; color: var(--tinta);">A pior prisão não é a casa cheia.<br>É achar que descansar precisa ser merecido.</p>
+
+    <div class="preco">
+      <span class="selo-oferta">Valor promocional</span>
+      <span class="de">De R$ 59,90 por</span>
+      <span class="valor">R$ 34,90</span>
+      <span class="nota">Pagamento único · O PDF chega no seu e-mail</span>
+    </div>
+
+    <p class="urgencia">A paz do seu lar não precisa esperar até a próxima segunda-feira.<br><strong>O Dia 1 leva só 5 minutos</strong> — dá pra começar hoje, antes de dormir.</p>
+
+    <button class="botao" id="ir-checkout">quero começar meu 1º dia hoje</button>
+    <p class="acesso"><span>⚡</span>Acesso imediato: liberado no seu e-mail em até 2 minutos após o Pix</p>
+    <p class="microlinha">De R$ 59,90 por R$ 34,90 · pagamento único · acesso imediato via e-mail · 7 dias de garantia</p>
+    <p class="selo">Entrega automática após o pagamento.<br>Garantia de 7 dias — se não for pra você, devolvemos.</p>
+    <p style="text-align:center; margin-top:16px;"><a id="ver-arquivo" href="https://devocionalmaeserena.netlify.app/" style="display:inline-block; color:#6E786E; text-decoration:underline; background:none; border:0; font-size:14px; font-weight:400;">ver tudo o que vem no arquivo →</a></p>
+    <p class="rodape">Devocional da Mãe Serena</p>
+  </section>
+
+</main>
+
+<script>
+/* ---------- Pixel ---------- */
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', CONFIG.PIXEL_ID);
+fbq('track','PageView');
+
+/* ---------- Sessão ---------- */
+const url = new URLSearchParams(location.search);
+
+if (url.get('dev') === '1') localStorage.setItem('ms_dev','1');
+if (url.get('dev') === '0') localStorage.removeItem('ms_dev');
+
+const novoId = () => (crypto.randomUUID ? crypto.randomUUID()
+  : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{
+      const r=Math.random()*16|0; return (c==='x'?r:(r&0x3|0x8)).toString(16);}));
+
+let sessao = sessionStorage.getItem('ms_sessao');
+const sessaoNova = !sessao;
+if (sessaoNova) { sessao = novoId(); sessionStorage.setItem('ms_sessao', sessao); }
+
+const BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|headless|lighthouse|preview|netlify|curl|python|axios|monitor/i;
+
+const base = {
+  variante:     'quiz',
+  utm_source:   url.get('utm_source'),
+  utm_campaign: url.get('utm_campaign'),
+  utm_content:  url.get('utm_content'),
+  fbclid:       url.get('fbclid'),
+  referrer:     document.referrer || null,
+  user_agent:   navigator.userAgent,
+  is_dev:       localStorage.getItem('ms_dev') === '1',
+  is_bot:       BOT_RE.test(navigator.userAgent) || navigator.webdriver === true
+};
+
+function registrar(etapa, ordem, extra = {}) {
+  const linha = Object.assign({ sessao, etapa, ordem }, base, extra);
+  if (CONFIG.DEBUG) console.log('[quiz]', linha);
+  fetch(CONFIG.SUPABASE_URL + '/rest/v1/quiz_eventos', {
+    method:'POST',
+    headers:{
+      'apikey': CONFIG.SUPABASE_ANON,
+      'Authorization':'Bearer ' + CONFIG.SUPABASE_ANON,
+      'Content-Type':'application/json',
+      'Prefer':'return=minimal'
+    },
+    body: JSON.stringify(linha),
+    keepalive:true
+  }).catch(e => { if (CONFIG.DEBUG) console.warn('[quiz] falhou', e); });
+}
+
+/* ---------- Perfis ---------- */
+const PERFIS = {
+  rotina: {
+    olho:'Seu ponto de partida · Dia 3',
+    titulo:'Você é a agenda viva da casa',
+    texto:'O cansaço não vem da quantidade de tarefas. Vem de ser a única pessoa que lembra de todas elas, o tempo inteiro, sem ninguém notar. O Dia 3 começa exatamente aí — com o quadro de tarefas da família.',
+    versiculo:'Levai as cargas uns dos outros.<cite>Gálatas 6.2</cite>'
+  },
+  descanso: {
+    olho:'Seu ponto de partida · Dia 7',
+    titulo:'Descansar virou a coisa que sempre fica pra depois',
+    texto:'Quando sobra tempo, ele vai pra outra pessoa. O Dia 7 é o único dos nove que pede uma hora inteira — e essa hora é sua, sem justificativa.',
+    versiculo:'E havendo Deus acabado no dia sétimo a sua obra, descansou.<cite>Gênesis 2.2</cite>'
+  },
+  filhos: {
+    olho:'Seu ponto de partida · Dia 6',
+    titulo:'A paciência acaba antes do dia acabar',
+    texto:'Não é falta de amor. É esgotamento chegando na pior hora possível. O Dia 6 trabalha dez minutos que são só deles — e o que isso muda no resto da noite.',
+    versiculo:'A resposta branda desvia o furor.<cite>Provérbios 15.1</cite>'
+  },
+  espiritual: {
+    olho:'Seu ponto de partida · Dia 1',
+    titulo:'A oração ficou pra depois do resto',
+    texto:'E o resto nunca termina. O Dia 1 devolve um canto de respiro de cinco minutos, antes da casa acordar — o menor dos nove, e o que sustenta todos os outros.',
+    versiculo:'Pela manhã ouvirás a minha voz, ó Senhor.<cite>Salmo 5.3</cite>'
+  }
+};
+
+/* ---------- Navegação ---------- */
+const telas  = [...document.querySelectorAll('.tela')];
+const barra  = document.getElementById('progresso');
+const pontos = [...barra.querySelectorAll('span')];
+let atual = 0;
+const pesos = {};
+
+if (sessaoNova) {
+  registrar('abertura', 0);
+  fbq('trackCustom','QuizAbertura');
+}
+
+function perfilAtual(){
+  return Object.keys(pesos).sort((a,b)=>pesos[b]-pesos[a])[0] || 'rotina';
+}
+
+function mostrar(i){
+  telas[atual].classList.remove('ativa');
+  atual = i;
+  telas[atual].classList.add('ativa');
+  barra.hidden = (i === 0 || i === telas.length - 1);
+  pontos.forEach((p,k)=>p.classList.toggle('feito', k < i));
+  window.scrollTo({top:0,behavior:'instant'});
+  const foco = telas[i].querySelector('.opcao, .botao');
+  if (foco && i > 0) foco.focus({preventScroll:true});
+}
+
+function avancar(){
+  const prox = telas[atual + 1];
+  if (!prox) return;
+  if (prox.dataset.etapa === 'resultado') return finalizar();
+  mostrar(atual + 1);
+  registrar(prox.dataset.etapa, Number(prox.dataset.ordem));
+  fbq('trackCustom','QuizEtapa',{etapa: prox.dataset.etapa});
+}
+
+document.querySelectorAll('[data-avanca]').forEach(b =>
+  b.addEventListener('click', () => avancar()));
+
+document.querySelectorAll('.opcao').forEach(b => {
+  b.addEventListener('click', () => {
+    const tela = b.closest('.tela');
+    registrar(tela.dataset.etapa, Number(tela.dataset.ordem), {resposta: b.dataset.resposta});
+    if (b.dataset.peso) pesos[b.dataset.peso] = (pesos[b.dataset.peso] || 0) + 1;
+    setTimeout(avancar, 140);
+  });
+});
+
+function finalizar(){
+  const chave = perfilAtual();
+  const p = PERFIS[chave];
+  document.getElementById('r-olho').textContent   = p.olho;
+  document.getElementById('r-titulo').textContent = p.titulo;
+  document.getElementById('r-texto').textContent  = p.texto;
+  document.getElementById('r-versiculo').innerHTML= p.versiculo;
+  mostrar(telas.findIndex(t => t.dataset.etapa === 'resultado'));
+  registrar('resultado', 6, {perfil: chave});
+  registrar('minilp',    7, {perfil: chave});
+  fbq('track','ViewContent',{content_name:'Quiz - mini LP', content_category: chave});
+}
+
+document.getElementById('ir-checkout').addEventListener('click', () => {
+  const chave = perfilAtual();
+  registrar('checkout', 8, {perfil: chave});
+  /* IC removido: a HeroSpark dispara InitiateCheckout no load do checkout.
+     Manter os dois causava contagem dobrada. */
+  const destino = new URL(CONFIG.CHECKOUT_URL);
+  destino.searchParams.set('perfil', chave);
+  destino.searchParams.set('sessao', sessao);
+  /* Repassa as UTMs e o fbclid para o checkout. Sem isso a venda chega
+     na HeroSpark sem rastro e a Utmify marca "UTMs vazias". */
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid']
+    .forEach(k => { const v = url.get(k); if (v) destino.searchParams.set(k, v); });
+  setTimeout(()=> location.href = destino.toString(), 180);
+});
+
+document.getElementById('ver-arquivo').addEventListener('click', (e) => {
+  e.preventDefault();
+  const chave = perfilAtual();
+  registrar('minilp_para_lp', 9, {perfil: chave});
+  fbq('trackCustom','MiniLPParaLP',{perfil: chave});
+  const destino = new URL('https://devocionalmaeserena.netlify.app/');
+  destino.searchParams.set('perfil', chave);
+  destino.searchParams.set('sessao', sessao);
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid']
+    .forEach(k => { const v = url.get(k); if (v) destino.searchParams.set(k, v); });
+  setTimeout(()=> location.href = destino.toString(), 180);
+});
+</script>
+</body>
+</html>
