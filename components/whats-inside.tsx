@@ -1,72 +1,51 @@
-import { BookOpen, Map, Feather, CalendarDays } from "lucide-react"
+﻿import { BookOpenText, HandHeart, Sparkles } from "lucide-react"
 
-type Item = {
-  icon: typeof BookOpen
-  tag: string
-  title: string
-  text: string
-  value?: string
-}
-
-const items: Item[] = [
+const pillars = [
   {
-    icon: BookOpen,
-    tag: "Principal",
-    title: "Os 9 Dias de Oração pelo Coração do Seu Filho",
-    text: "Cada dia traz um versículo na versão ARC, uma reflexão curta escrita para mães, uma oração pronta e um pequeno passo de reaproximação — de 2 a 10 minutos.",
+    step: "1",
+    icon: BookOpenText,
+    title: "Versículo Acolhedor",
+    text: "Uma palavra curta e certeira para o seu dia — escolhida para acalmar a mente antes mesmo de você começar a resolver os problemas.",
   },
   {
-    icon: Map,
-    tag: "Bônus 1",
-    value: "De R$ 29 por R$ 0",
-    title: "Cartão de Entrega",
-    text: "Uma página para recortar, escrever o nome do seu filho e o que você entrega a Deus, e guardar na Bíblia ou na carteira.",
+    step: "2",
+    icon: HandHeart,
+    title: "Oração Curta de 5 Minutos",
+    text: "Já escrita para você. Basta ler. Nos dias em que faltam palavras, a oração fala por você.",
   },
   {
-    icon: Feather,
-    tag: "Bônus 2",
-    value: "De R$ 19 por R$ 0",
-    title: "Checklist dos 9 Dias",
-    text: "Uma folha para imprimir e marcar cada dia concluído, com espaço para anotar o seu horário fixo de oração.",
-  },
-  {
-    icon: CalendarDays,
-    tag: "Bônus 3",
-    value: "De R$ 27 por R$ 0",
-    title: "Quadro de Orações Respondidas",
-    text: "Um registro para anotar o que você pediu e o que foi acontecendo — inclusive as respostas pequenas, que a memória apaga.",
+    step: "3",
+    icon: Sparkles,
+    title: "Pequeno Hábito Prático",
+    text: "Uma atitude simples do dia, que cabe na sua rotina real e devolve leveza para dentro de casa.",
   },
 ]
 
 export function WhatsInside() {
   return (
     <section className="bg-background px-5 py-16 md:py-24">
-      <div className="mx-auto max-w-4xl">
-        <h2 className="text-balance text-center font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-          O que você vai receber no seu arquivo digital
+      <div className="mx-auto max-w-5xl">
+        <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">O Método de 9 Dias</p>
+        <h2 className="mt-3 text-balance text-center font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
+          Todo dia você recebe os mesmos 3 passos — e eles levam 5 minutos
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-pretty text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Nada de leitura longa, nada de estudo teológico pesado. Um caminho simples, feito para quem já está no
+          limite e mesmo assim não quer largar a mão de Deus.
+        </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {items.map(({ icon: Icon, tag, title, text, value }) => (
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {pillars.map(({ step, icon: Icon, title, text }) => (
             <article
               key={title}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-lg hover:shadow-olive/5"
+              className="relative flex flex-col rounded-3xl border border-gold/30 bg-sand/50 p-6 md:p-7"
             >
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-accent-foreground">
-                  {tag}
-                </span>
-                {value ? (
-                  <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wide text-primary">
-                    {value}
-                  </span>
-                ) : null}
-              </div>
-              <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              <span className="absolute -top-4 left-6 inline-flex h-9 w-9 items-center justify-center rounded-full bg-olive font-serif text-base font-bold text-olive-foreground shadow-md">
+                {step}
+              </span>
+              <Icon className="mt-4 h-7 w-7 text-primary" aria-hidden="true" />
+              <h3 className="mt-4 font-serif text-lg font-bold text-foreground sm:text-xl">{title}</h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground sm:text-base">{text}</p>
             </article>
           ))}
         </div>

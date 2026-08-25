@@ -19,9 +19,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Devocional da Mãe que Não Desiste | 9 Dias de Oração e Reconexão',
+  title: 'Devocional Não Desiste | 9 Dias para Renovar Suas Forças em 5 Minutos por Dia',
   description:
-    'Para a mãe que sente que está perdendo o coração do seu filho. 9 dias de oração, versículos e gestos práticos.',
+    'Para toda mãe e mulher exausta, ansiosa e perto de desistir. Em 9 dias, 5 minutos por dia: versículo acolhedor, oração curta e um hábito prático para resgatar a paz no seu lar.',
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },

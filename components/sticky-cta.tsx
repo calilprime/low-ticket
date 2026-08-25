@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
+
 import { goToCheckout } from "@/lib/checkout"
 
 export function StickyCta() {
@@ -33,17 +33,16 @@ export function StickyCta() {
       }`}
     >
       <div className="mx-auto flex max-w-md flex-col items-center gap-1.5">
-        <Button
-          size="lg"
+        <button
+          type="button"
           onClick={goToCheckout}
           tabIndex={visible ? 0 : -1}
-          className="h-auto w-full rounded-full whitespace-normal px-5 py-4 text-sm font-bold uppercase leading-snug tracking-wide shadow-lg shadow-primary/25"
+          className="w-full cursor-pointer rounded-full bg-cta px-5 py-3.5 text-center text-sm font-extrabold uppercase leading-snug tracking-wide text-cta-foreground shadow-lg shadow-cta/30 active:translate-y-px"
         >
-          QUERO RESGATAR O CORAÇÃO DO MEU FILHO
-        </Button>
+          Quero renovar minhas forças — R$ 34,90
+        </button>
         <p className="text-xs text-muted-foreground">
-          De <span className="line-through">R$ 59,90</span> por{" "}
-          <span className="font-semibold text-primary">R$ 34,90</span> • 7 dias de garantia
+          Acesso imediato no e-mail • 7 dias de garantia
         </p>
       </div>
     </div>
