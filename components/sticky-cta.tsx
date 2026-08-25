@@ -39,7 +39,7 @@ export function StickyCta() {
           tabIndex={visible ? 0 : -1}
           className="w-full cursor-pointer rounded-full bg-cta px-5 py-3.5 text-center text-sm font-extrabold uppercase leading-snug tracking-wide text-cta-foreground shadow-lg shadow-cta/30 active:translate-y-px"
         >
-          Quero renovar minhas forças — R$ 34,90
+          Quero começar o Dia 1 — R$ 34,90
         </button>
         <p className="text-xs text-muted-foreground">
           Acesso imediato no e-mail • 7 dias de garantia

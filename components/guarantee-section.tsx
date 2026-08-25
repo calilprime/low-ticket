@@ -1,4 +1,4 @@
-﻿import { ShieldCheck } from "lucide-react"
+import { ShieldCheck } from "lucide-react"
 
 export function GuaranteeSection() {
   return (
@@ -13,9 +13,9 @@ export function GuaranteeSection() {
               Garantia incondicional de 7 dias — o risco é todo nosso
             </h2>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Leia, ore, aplique. Se em 7 dias você sentir que não te ajudou em nada, é só mandar uma mensagem e
-              devolvemos os R$ 34,90 integralmente. Sem perguntas, sem burocracia, sem constrangimento. Ou seja: você
-              não arrisca nada — quem arrisca somos nós.
+              Faça as orações. Se dentro de 7 dias você não sentir o seu coração em paz e a sua mente renovada, é só
+              mandar uma mensagem e devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem
+              constrangimento. Você não arrisca nada — quem arrisca somos nós.
             </p>
           </div>
         </div>

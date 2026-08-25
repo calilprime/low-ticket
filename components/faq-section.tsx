@@ -1,17 +1,21 @@
-﻿import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const faqs = [
   {
-    q: "Como eu recebo o devocional?",
-    a: "Assim que o pagamento no PIX ou no cartão for confirmado, o devocional e os 3 bônus caem automaticamente no e-mail que você cadastrar na compra — normalmente em menos de 2 minutos. É tudo digital, em PDF, com acesso vitalício.",
+    q: "Como recebo o PDF?",
+    a: "Assim que o pagamento no PIX ou no cartão for confirmado, o devocional e os 3 bônus chegam automaticamente no e-mail que você cadastrar na compra — normalmente em menos de 2 minutos. É tudo digital, em PDF, com acesso vitalício.",
+  },
+  {
+    q: "E se meu filho não quiser participar?",
+    a: "Ele não precisa participar de nada — nem saber que você tem o devocional. Este material é para VOCÊ orar por ele. Cada dia é uma reflexão, um versículo e uma oração feitas para a mãe, não para o filho. Nenhuma conversa, nenhuma cobrança e nenhuma exigência da parte dele.",
   },
   {
     q: "Preciso imprimir?",
-    a: "Não precisa. Você pode ler direto no celular, no tablet ou no computador. Mas se você gosta de escrever à mão, o material foi diagramado para ficar bonito impresso em folha A4 comum — inclusive o Planner e o Cartão de Entrega.",
+    a: "Não precisa. Você pode ler direto no celular, no tablet ou no computador. Mas se você gosta de escrever à mão, o material foi diagramado para ficar bonito impresso em folha A4 comum — inclusive o Planner e o Cartão de Entrega a Deus.",
   },
   {
-    q: "Tenho pouco tempo. Funciona mesmo assim?",
-    a: "Funciona — foi feito exatamente para isso. Cada dia leva cerca de 5 minutos: um versículo curto, uma oração pronta e um pequeno hábito prático. Dá para fazer na fila da escola, antes de dormir ou com o café na mão.",
+    q: "Quanto tempo leva por dia?",
+    a: "Entre 2 e 10 minutos. Dá para fazer de manhã antes de todo mundo acordar, na fila da escola ou à noite antes de dormir. Foi feito para caber na rotina de quem já está cansada.",
   },
   {
     q: "E se eu não gostar?",

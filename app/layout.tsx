@@ -19,9 +19,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Devocional Não Desiste | 9 Dias para Renovar Suas Forças em 5 Minutos por Dia',
+  title: 'Devocional da Mãe que Não Desiste | O Que Orar Quando Seu Filho Se Afasta',
   description:
-    'Para toda mãe e mulher exausta, ansiosa e perto de desistir. Em 9 dias, 5 minutos por dia: versículo acolhedor, oração curta e um hábito prático para resgatar a paz no seu lar.',
+    'Para a mãe cujo filho fechou a porta e não conversa mais. 9 dias de orações de 2 a 10 minutos para clamar pela vida dele e resgatar a paz na sua casa, sem brigar ou se desesperar.',
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },

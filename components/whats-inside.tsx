@@ -1,23 +1,23 @@
-﻿import { BookOpenText, HandHeart, Sparkles } from "lucide-react"
+import { HeartHandshake, BookMarked, HandHeart } from "lucide-react"
 
 const pillars = [
   {
     step: "1",
-    icon: BookOpenText,
-    title: "Versículo Acolhedor",
-    text: "Uma palavra curta e certeira para o seu dia — escolhida para acalmar a mente antes mesmo de você começar a resolver os problemas.",
+    icon: HeartHandshake,
+    title: "Uma reflexão diária acolhedora",
+    text: "Escrita para mãe, não para teólogo. Ela nomeia o que você está sentindo e tira o peso da culpa antes de você começar a orar.",
   },
   {
     step: "2",
-    icon: HandHeart,
-    title: "Oração Curta de 5 Minutos",
-    text: "Já escrita para você. Basta ler. Nos dias em que faltam palavras, a oração fala por você.",
+    icon: BookMarked,
+    title: "Um versículo de restauração da família",
+    text: "A promessa de Deus para aquele dia — a mesma Palavra em que você se agarra quando a porta continua fechada.",
   },
   {
     step: "3",
-    icon: Sparkles,
-    title: "Pequeno Hábito Prático",
-    text: "Uma atitude simples do dia, que cabe na sua rotina real e devolve leveza para dentro de casa.",
+    icon: HandHeart,
+    title: "Um passo de oração de 2 a 10 minutos",
+    text: "A oração já vem pronta, com direção clara do que clamar pela vida dele. Nos dias em que faltam palavras, ela ora por você.",
   },
 ]
 
@@ -25,13 +25,13 @@ export function WhatsInside() {
   return (
     <section className="bg-background px-5 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
-        <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">O Método de 9 Dias</p>
+        <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-primary">O Plano de 9 Dias</p>
         <h2 className="mt-3 text-balance text-center font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-          Todo dia você recebe os mesmos 3 passos — e eles levam 5 minutos
+          Você para de orar no desespero e passa a orar com direção
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-pretty text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Nada de leitura longa, nada de estudo teológico pesado. Um caminho simples, feito para quem já está no
-          limite e mesmo assim não quer largar a mão de Deus.
+          Enquanto ele está afastado, você tem um caminho para seguir. Todo dia os mesmos 3 passos — e eles cabem
+          entre 2 e 10 minutos da sua rotina.
         </p>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">

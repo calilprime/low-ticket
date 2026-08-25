@@ -1,20 +1,20 @@
-﻿import { BatteryLow, HeartCrack, CloudOff, TriangleAlert } from "lucide-react"
+import { DoorClosed, HeartCrack, MessageCircleOff, Quote } from "lucide-react"
 
 const pains = [
   {
-    icon: BatteryLow,
-    title: "Cansaço Invisível",
-    text: "Acordar cansada, dormir ansiosa e passar o dia inteiro sobrecarregada — sem que ninguém perceba o peso que você carrega.",
+    icon: MessageCircleOff,
+    title: "O Silêncio Dói",
+    text: "Você tenta puxar assunto, ele se fecha, e você fica sem saber se ora ou se chora.",
+  },
+  {
+    icon: DoorClosed,
+    title: "A Sensação de Distanciamento",
+    text: "A dor de ver o filho que você criou com tanto amor agir como se você fosse uma estranha dentro da própria casa.",
   },
   {
     icon: HeartCrack,
-    title: "A Culpa Devastadora",
-    text: "A sensação de estar falhando como mãe e esposa, perdendo a paciência com quem você mais ama e se cobrando por isso todas as noites.",
-  },
-  {
-    icon: CloudOff,
-    title: "O Silêncio Espiritual",
-    text: "A vontade de orar existe, mas não sobra força nem tempo. E aí vem a distância de Deus justamente quando você mais precisa Dele.",
+    title: "Sem Saber o Que Pedir a Deus",
+    text: "Querer clamar pela vida dele, mas estar tão angustiada que as palavras somem justamente na hora de orar.",
   },
 ]
 
@@ -23,7 +23,7 @@ export function PainSection() {
     <section className="bg-secondary px-5 py-16 md:py-24">
       <div className="mx-auto max-w-5xl">
         <h2 className="text-balance text-center font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-          Se você se reconhece em alguma dessas três frases, este devocional foi escrito para você
+          Se a porta do quarto dele virou um muro, você não está sozinha
         </h2>
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -41,11 +41,11 @@ export function PainSection() {
           ))}
         </div>
 
-        <div className="mx-auto mt-10 flex max-w-3xl items-start gap-4 rounded-3xl border-l-4 border-destructive bg-destructive/8 p-6 md:p-7">
-          <TriangleAlert className="mt-0.5 h-6 w-6 shrink-0 text-destructive" aria-hidden="true" />
-          <p className="text-pretty text-sm font-semibold leading-relaxed text-foreground sm:text-base">
-            Continuar empurrando esse cansaço com a barriga não vai fazer a paz voltar. O esgotamento emocional cobra
-            um preço alto da sua saúde e da sua família.
+        <div className="mx-auto mt-10 flex max-w-3xl items-start gap-4 rounded-3xl border-l-4 border-primary bg-gold/12 p-6 md:p-7">
+          <Quote className="mt-0.5 h-6 w-6 shrink-0 text-primary" aria-hidden="true" />
+          <p className="text-pretty font-serif text-base font-semibold leading-relaxed text-foreground sm:text-lg">
+            O problema não é achar a palavra certa para falar com ele. É aprender o que falar com Deus enquanto ele
+            não conversa com você.
           </p>
         </div>
       </div>

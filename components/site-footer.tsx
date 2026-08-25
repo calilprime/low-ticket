@@ -4,7 +4,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-olive px-5 py-12 text-olive-foreground">
       <div className="mx-auto max-w-3xl text-center">
-        <p className="font-serif text-lg font-semibold">Devocional Não Desiste</p>
+        <p className="font-serif text-lg font-semibold">Devocional da Mãe que Não Desiste</p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-3 text-sm sm:flex-row sm:gap-8">
           <a
@@ -30,7 +30,7 @@ export function SiteFooter() {
         </p>
 
         <p className="mt-6 text-xs text-olive-foreground/50">
-          © {new Date().getFullYear()} Devocional Não Desiste. Todos os direitos reservados.
+          © {new Date().getFullYear()} Devocional da Mãe que Não Desiste. Todos os direitos reservados.
         </p>
       </div>
     </footer>
