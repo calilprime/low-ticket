@@ -1,52 +1,50 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+import { CtaButton } from "@/components/cta-button"
 
 const days = [
-  { day: "Dia 1", title: "O que eu não posso controlar", note: "Onde termina o meu esforço e começa a graça" },
-  { day: "Dia 2", title: "O silêncio que dói", note: "Quando a conversa fica curta" },
-  { day: "Dia 3", title: "Orar em vez de cobrar", note: "A conversa que muda de endereço" },
-  { day: "Dia 4", title: "A culpa que não me pertence", note: "Nem tudo é falha sua" },
-  { day: "Dia 5", title: "O que meus olhos não veem", note: "Deus trabalha no escondido" },
-  { day: "Dia 6", title: "A palavra certa na hora certa", note: "Falar pouco e falar bem" },
-  { day: "Dia 7", title: "Persistir sem forçar", note: "A oração que não desiste" },
-  { day: "Dia 8", title: "A porta que fica aberta", note: "Um lugar onde ele sempre pode voltar" },
-  { day: "Dia 9", title: "A entrega e a esperança", note: "O que eu construí, eu entrego" },
+  { day: 1, title: "Descanso", text: "Parar de carregar sozinha o peso que nunca foi só seu." },
+  { day: 2, title: "Mente Ansiosa", text: "Silenciar o pensamento acelerado que rouba o seu sono." },
+  { day: 3, title: "Culpa", text: "Sair do tribunal onde você é ré todos os dias." },
+  { day: 4, title: "Paciência", text: "Reagir com calma quando tudo em você quer explodir." },
+  { day: 5, title: "Força Renovada", text: "Encontrar energia para o dia que ainda nem começou." },
+  { day: 6, title: "Paz no Lar", text: "Mudar o clima da casa começando pelo seu coração." },
+  { day: 7, title: "Entrega", text: "Colocar nas mãos de Deus o que você não consegue resolver." },
+  { day: 8, title: "Gratidão", text: "Enxergar de novo o que o cansaço tinha apagado." },
+  { day: 9, title: "Recomeço", text: "Sair dos 9 dias com uma rotina de fé que se sustenta." },
 ]
 
 export function DayTimeline() {
   return (
     <section className="bg-secondary px-5 py-16 md:py-24">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-5xl">
         <h2 className="text-balance text-center font-serif text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-          O caminho dos 9 dias
+          Os 9 dias da sua transformação
         </h2>
-        <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-          Uma jornada progressiva que começa no seu coração e termina na entrega do futuro do seu filho a Deus.
+        <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-muted-foreground sm:text-base">
+          Um tema por dia. Cinco minutos por dia. Nove dias para respirar de novo.
         </p>
 
-        <Accordion type="single" collapsible className="mt-10 w-full">
-          {days.map(({ day, title, note }) => (
-            <AccordionItem key={day} value={day} className="border-border">
-              <AccordionTrigger className="text-left hover:no-underline">
-                <span className="flex items-center gap-4">
-                  <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 font-serif text-sm font-bold text-primary">
-                    {day.replace("Dia ", "")}
-                  </span>
-                  <span className="font-serif text-base font-semibold text-foreground">{title}</span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="pl-14 text-sm leading-relaxed text-muted-foreground">
-                {note
-                  ? note
-                  : "Uma reflexão profunda, uma oração pronta e um gesto prático de reconexão para viver junto com o seu filho."}
-              </AccordionContent>
-            </AccordionItem>
+        <ol className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {days.map(({ day, title, text }) => (
+            <li
+              key={day}
+              className="flex items-start gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 flex-col items-center justify-center rounded-xl bg-olive text-olive-foreground">
+                <span className="text-[9px] font-bold uppercase leading-none tracking-wide opacity-70">Dia</span>
+                <span className="font-serif text-lg font-bold leading-tight">{day}</span>
+              </span>
+              <div>
+                <h3 className="font-serif text-base font-bold text-foreground">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+              </div>
+            </li>
           ))}
-        </Accordion>
+        </ol>
+
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <CtaButton pulse={false}>Quero Meus 9 Dias de Renovação</CtaButton>
+          <p className="text-sm text-muted-foreground">Você começa o Dia 1 ainda hoje.</p>
+        </div>
       </div>
     </section>
   )
