@@ -4,3 +4,7 @@ out/
 .vercel
 *.tsbuildinfo
 .env*.local
+
+# Produtos pagos - nunca versionar
+Nao desiste/
+*.pdf
