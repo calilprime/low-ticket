@@ -1,5 +1,11 @@
-import { Feather, BookOpen, HandHeart } from 'lucide-react'
+import { Feather, BookOpen, HandHeart, ListChecks } from 'lucide-react'
 
+/**
+ * Os quatro blocos são a estrutura real de cada dia do PDF: versículo,
+ * reflexão, oração e passo prático. O passo prático é o "1 hábito por dia"
+ * que o criativo anuncia — ele existe no produto desde sempre, mas a página
+ * não o mostrava, e era justamente o que a leitora tinha vindo buscar.
+ */
 const passos = [
   {
     icon: Feather,
@@ -10,30 +16,36 @@ const passos = [
   {
     icon: BookOpen,
     n: '2',
-    title: 'A Palavra que acalma',
-    text: 'Um versículo estratégico para blindar sua mente contra a irritação e a ansiedade daquele dia.',
+    title: 'Um versículo para o dia',
+    text: 'A Palavra daquele dia, em Almeida Revista e Corrigida, ligada ao passo que você vai dar na sua casa.',
   },
   {
     icon: HandHeart,
     n: '3',
-    title: 'Uma oração de 2 a 10 minutos',
-    text: 'Direta e poderosa. Nos dias em que você não tem forças para criar palavras, ela clama por você.',
+    title: 'Uma oração pronta',
+    text: 'Nos dias em que você não tem forças para criar palavras, ela ora por você — sem precisar pensar no que dizer.',
+  },
+  {
+    icon: ListChecks,
+    n: '4',
+    title: 'Um passo prático na casa',
+    text: 'O hábito do dia, com três marcações para riscar. Pequeno de propósito: cabe em 10 a 15 minutos e fica feito.',
   },
 ]
 
 export function WhatsInside() {
   return (
     <section className="bg-background px-5 py-16 md:py-24">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <h2 className="text-center font-serif text-2xl font-bold text-balance text-foreground sm:text-3xl md:text-4xl">
-          Você para de reagir no estresse e passa a agir com sabedoria
+          Todo dia você ora por uma coisa e resolve uma coisa
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-pretty text-muted-foreground sm:text-base">
-          Enquanto o caos tenta dominar sua casa, você ganha uma âncora. Todos os dias, os
-          mesmos 3 passos — perfeitos para a sua rotina corrida.
+          Nada de reorganizar a casa inteira num sábado. São os mesmos 4 blocos todos os
+          dias, na mesma ordem — e ao fim de 9 dias a rotina mudou sozinha.
         </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {passos.map(({ icon: Icon, n, title, text }) => (
             <article
               key={title}
@@ -44,7 +56,7 @@ export function WhatsInside() {
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <span className="rounded-full bg-gold/15 px-3 py-1 text-xs font-semibold tracking-wide text-accent-foreground uppercase">
-                  Passo {n}
+                  {n} de 4
                 </span>
               </div>
               <h3 className="mt-4 font-serif text-lg font-semibold text-foreground">

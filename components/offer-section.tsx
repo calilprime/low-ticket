@@ -12,7 +12,7 @@ const itens = [
     tag: 'Item principal',
     title: 'Devocional da Mãe Serena (PDF — 9 dias)',
     price: 'R$ 97,00',
-    text: 'O plano completo e guiado para blindar suas emoções e restaurar a paz do seu lar, um dia de cada vez.',
+    text: 'Nove dias que unem oração e organização prática. Cada dia traz um versículo, uma reflexão, uma oração pronta e um passo prático para a sua casa.',
   },
   {
     icon: CalendarDays,

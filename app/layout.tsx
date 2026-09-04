@@ -25,9 +25,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Devocional da Mãe Serena | Plano de Oração de 9 Dias para Mães Exaustas',
+  title: 'Devocional da Mãe Serena | 9 Dias de Fé e Ordem para o Seu Lar',
   description:
-    'Um plano de 9 dias com orações de 2 a 10 minutos para blindar suas emoções, desarmar o estresse e restaurar a paz do seu lar. Planner, Checklist e Cartão de Entrega inclusos.',
+    'Nove dias que unem oração e organização prática: um versículo, uma reflexão, uma oração pronta e um passo prático para a casa, em 10 a 15 minutos por dia. Planner, Checklist e Cartão de Entrega inclusos.',
   alternates: {
     canonical: SITE_URL,
   },
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: SITE_URL,
     siteName: 'Devocional da Mãe Serena',
-    title: 'O plano de oração de 9 dias para mães exaustas',
+    title: 'Organize a casa e fortaleça a fé em 9 dias — um hábito por dia',
     description:
-      'Orações de 2 a 10 minutos por dia para trazer a paz de volta para a sua casa. Acesso imediato no e-mail, por R$ 34,90.',
+      'Uma oração e um passo prático para a sua casa por dia, em 10 a 15 minutos. Acesso imediato no e-mail, por R$ 34,90.',
     // capa.jpg é PNG (765x1024) apesar da extensão. É retrato, então o
     // preview no WhatsApp/Facebook sai cortado — vale gerar uma arte
     // 1200x630 dedicada e trocar aqui.

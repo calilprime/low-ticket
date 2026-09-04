@@ -12,7 +12,11 @@ const faqs = [
   },
   {
     q: 'Preciso de muito tempo livre?',
-    a: 'Não. O material foi desenhado para mães exaustas e sem tempo. As leituras e orações levam de 2 a 10 minutos por dia.',
+    a: 'Não. Cada dia leva de 10 a 15 minutos entre a leitura, a oração e o passo prático — e o passo é pequeno de propósito, para caber numa rotina que já está cheia. A única exceção é o Dia 7, que é o do descanso e pede um pouco mais de você.',
+  },
+  {
+    q: 'É assinatura? Vou ser cobrada de novo?',
+    a: 'Não. São R$ 34,90 uma única vez, sem mensalidade e sem renovação. O acesso é vitalício: o arquivo é seu, fica no seu e-mail e você pode baixar quantas vezes quiser.',
   },
   {
     q: 'Preciso imprimir?',

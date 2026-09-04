@@ -2,9 +2,15 @@ import Image from 'next/image'
 import { BookOpen, Mail, Clock } from 'lucide-react'
 import { CheckoutLink } from '@/components/checkout-link'
 
+/**
+ * A faixa de tempo vem do PDF, não de estimativa: os passos práticos dos dias
+ * levam de 5 a 15 minutos, e o Dia 7 (descanso) é deliberadamente mais longo.
+ * O criativo no ar anuncia "10 a 15 minutos" — os dois precisam bater, senão
+ * a leitora chega na página e encontra outra promessa.
+ */
 const selos = [
-  { icon: Clock, label: '2 a 10 minutos por dia' },
-  { icon: BookOpen, label: '100% bíblico e prático' },
+  { icon: Clock, label: '10 a 15 minutos por dia' },
+  { icon: BookOpen, label: 'Uma oração e um passo prático' },
   { icon: Mail, label: 'Chega no e-mail (leia no celular)' },
 ]
 
@@ -18,24 +24,23 @@ export function HeroSection() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-olive opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-olive" />
             </span>
-            O plano de oração de 9 dias para mães exaustas.
+            9 dias de fé e ordem para o seu lar.
           </span>
         </div>
 
         <div className="mt-8 flex flex-col items-center gap-10 lg:flex-row lg:gap-14">
           <div className="flex-1 text-center lg:text-left">
             <h1 className="font-serif text-3xl leading-tight font-bold text-balance text-foreground sm:text-4xl md:text-5xl">
-              Como parar de gritar, dominar a exaustão e se tornar a Mãe Serena que o seu
-              lar precisa?
+              Organize a casa e fortaleça a fé em 9 dias — um hábito por dia.
             </h1>
 
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-pretty text-muted-foreground sm:text-lg lg:mx-0">
-              Você promete que não vai perder a paciência, mas a rotina te engole e a culpa
-              chega à noite. Em vez de promessas vazias, aplique este{' '}
-              <strong className="font-semibold text-foreground">Plano de 9 Dias</strong>.
-              Descubra orações estratégicas de <em>2 a 10 minutos</em> diários para blindar
-              suas emoções, desarmar o estresse e trazer a paz de volta para sua casa —
-              antes que você reaja no automático.
+              As tarefas ficam pela metade, o dia acaba e a culpa vem deitar no travesseiro.
+              Você não precisa esperar a próxima segunda-feira. Cada um destes{' '}
+              <strong className="font-semibold text-foreground">9 dias</strong> traz uma
+              oração e <strong className="font-semibold text-foreground">um passo prático
+              para a sua casa</strong>, em <em>10 a 15 minutos</em> — o Dia 7 é o do
+              descanso e pede um pouco mais de você.
             </p>
 
             <div className="mt-8 flex flex-col items-center gap-3 lg:items-start">
@@ -60,7 +65,7 @@ export function HeroSection() {
           <div className="w-full max-w-md flex-1">
             <div className="relative rounded-3xl bg-card p-3 shadow-2xl shadow-olive/10 ring-1 ring-border">
               <Image
-                src="/capa.jpg"
+                src="/capa.webp"
                 alt="Devocional da Mãe Serena — capa do PDF com os 9 dias de oração"
                 width={765}
                 height={1024}
@@ -68,7 +73,7 @@ export function HeroSection() {
                 className="rounded-2xl"
               />
               <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-olive px-4 py-1.5 text-center text-[0.65rem] font-semibold tracking-wide text-olive-foreground uppercase shadow-lg sm:text-xs">
-                O guia definitivo + 3 bônus exclusivos
+                O devocional + 3 inserts para imprimir
               </span>
             </div>
           </div>
