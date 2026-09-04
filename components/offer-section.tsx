@@ -2,26 +2,33 @@ import { Check } from "lucide-react"
 
 import { CtaButton } from "@/components/cta-button"
 
+/**
+ * Os três bônus são os inserts das páginas 13, 14 e 15 do próprio PDF.
+ * A versão anterior desta lista trazia o Planner Semanal da Família e o
+ * Checklist do Lar em Paz — que são os bônus do Devocional da Mãe Serena,
+ * outro produto. Quem comprava aqui recebia três coisas diferentes das que
+ * a página tinha prometido. Conferido contra Devocional-da-Mae-que-Nao-Desiste.pdf.
+ */
 const stack = [
   {
     name: "Devocional da Mãe que Não Desiste (PDF — 9 Dias)",
-    desc: "O plano completo de oração pela vida do seu filho.",
+    desc: "Cada dia traz um versículo em ARC, uma reflexão, uma oração pronta e um pequeno passo de reaproximação.",
     from: "R$ 97,00",
     main: true,
   },
   {
-    name: "Bônus 1: Planner Semanal da Família",
-    desc: "Onde você registra os pedidos da semana e acompanha cada resposta.",
+    name: "Bônus 1: Checklist dos 9 Dias",
+    desc: "Para imprimir e marcar cada dia concluído, com um espaço para anotar o seu horário fixo de oração. Se falhar um dia, você continua de onde parou — não recomeça.",
     from: "R$ 27,00",
   },
   {
-    name: "Bônus 2: Checklist do Lar em Paz",
-    desc: "Atitudes simples que baixam a tensão dentro de casa sem virar cobrança.",
+    name: "Bônus 2: Quadro de Orações Respondidas",
+    desc: "Onde você registra o que pediu e o que viu acontecer — inclusive as respostas pequenas, que a memória apaga.",
     from: "R$ 19,00",
   },
   {
-    name: "Bônus 3: Cartão de Entrega a Deus",
-    desc: "Você escreve o nome dele e entrega a vida do seu filho nas mãos de Deus.",
+    name: "Bônus 3: Cartão de Entrega",
+    desc: "Você escreve o nome dele, recorta, dobra e guarda. Um lugar concreto para deixar o que não cabe mais em você.",
     from: "R$ 17,00",
   },
 ]

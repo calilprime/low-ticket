@@ -50,12 +50,17 @@ function ProductShowcase({ priority = false }: { priority?: boolean }) {
   return (
     <div className="mx-auto w-full max-w-md">
       <div className="relative rounded-3xl bg-gradient-to-b from-sand to-card p-4 shadow-2xl shadow-olive/15 ring-1 ring-gold/30">
+        {/* WebP de 640px (45 KB). O PNG anterior tinha 1024x1024 e 1,8 MB —
+            80% do peso da pagina inteira — e era servido cru: este projeto
+            roda com images.unoptimized, entao o next/image nao redimensiona
+            nada em build. O arquivo em public/ e o que a compradora baixa. */}
         <Image
-          src="/devocional-mockup.png"
+          src="/devocional-mockup.webp"
           alt="Devocional da Mãe que Não Desiste em PDF, exibido ao lado dos bônus impressos"
           width={640}
           height={640}
           priority={priority}
+          loading={priority ? undefined : "lazy"}
           sizes="(max-width: 1024px) 90vw, 420px"
           className="w-full rounded-2xl"
         />

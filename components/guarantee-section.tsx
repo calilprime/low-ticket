@@ -9,13 +9,16 @@ export function GuaranteeSection() {
             <ShieldCheck className="h-10 w-10 text-cta" aria-hidden="true" />
           </span>
           <div>
+            {/* Texto alinhado ao da LP do Mãe Serena. O anterior prometia
+                garantia "incondicional", "sem perguntas" e "sem
+                constrangimento" — promessas mais fortes do que a configuração
+                da HeroSpark foi confirmada como sustentando. */}
             <h2 className="text-balance font-serif text-xl font-bold text-foreground sm:text-2xl">
-              Garantia incondicional de 7 dias — o risco é todo nosso
+              Garantia de 7 dias
             </h2>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-              Faça as orações. Se dentro de 7 dias você não sentir o seu coração em paz e a sua mente renovada, é só
-              mandar uma mensagem e devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia, sem
-              constrangimento. Você não arrisca nada — quem arrisca somos nós.
+              Faça as orações. Se dentro de 7 dias você achar que o devocional não te deu a direção que procurava,
+              basta mandar um e-mail e devolvemos 100% do seu dinheiro, sem burocracia.
             </p>
           </div>
         </div>

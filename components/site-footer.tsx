@@ -24,9 +24,16 @@ export function SiteFooter() {
         </div>
 
         <p className="mx-auto mt-8 max-w-xl text-xs leading-relaxed text-olive-foreground/60">
-          Este é um produto digital entregue em formato PDF por e-mail. Não haverá envio de material físico. O
-          conteúdo tem caráter devocional e de apoio espiritual, não substituindo acompanhamento profissional quando
-          necessário.
+          Este é um arquivo digital para imprimir em casa, entregue em formato PDF por e-mail. Não haverá envio de
+          material físico. O conteúdo tem caráter devocional e de apoio espiritual, não substituindo acompanhamento
+          profissional quando necessário.
+        </p>
+
+        {/* Crédito exigido pela Sociedade Bíblica do Brasil para o uso da ARC.
+            Estava presente na LP do Mãe Serena e faltava aqui. */}
+        <p className="mx-auto mt-4 max-w-xl text-xs leading-relaxed text-olive-foreground/60">
+          Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC), © 2009 Sociedade Bíblica do Brasil. Texto
+          utilizado com autorização.
         </p>
 
         <p className="mt-6 text-xs text-olive-foreground/50">
