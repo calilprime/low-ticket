@@ -1,0 +1,5 @@
+[build]
+  # Site estatico: nao rodar o build do Next (o app/ do repo e outro produto).
+  command = "echo 'static site — no build step'"
+  publish = "."
+  functions = "netlify/functions"

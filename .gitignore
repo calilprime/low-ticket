@@ -1,0 +1,27 @@
+# Dependências e build
+node_modules
+.next/
+out/
+
+# Netlify
+.netlify/
+
+# Variáveis de ambiente — NENHUM secret entra no repositório.
+# Em dev use .env.local; em produção use as Environment Variables do
+# painel da Netlify / Supabase. A service_role key e o token da CAPI
+# da Meta nunca podem ter prefixo NEXT_PUBLIC_ nem ir para o client.
+.env
+.env.*
+!.env.example
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# v0 sandbox
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+.vercel/

@@ -1,10 +1,15 @@
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 
+// Pixel compartilhado entre os produtos (mesmo ID configurado na oferta
+// do Mãe Serena dentro da HeroSpark). Se um dia houver um pixel só deste
+// produto, é só trocar aqui — e lembrar de trocar também no painel da
+// HeroSpark, senão o checkout dispara para a conta errada.
 const PIXEL_ID = '1380514643999534'
+
+const SITE_URL = 'https://devocionalmaeserena.netlify.app'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -19,9 +24,33 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Devocional da Mãe que Não Desiste | 9 Dias de Oração e Reconexão',
+  metadataBase: new URL(SITE_URL),
+  title: 'Devocional da Mãe Serena | Plano de Oração de 9 Dias para Mães Exaustas',
   description:
-    'Para a mãe que sente que está perdendo o coração do seu filho. 9 dias de oração, versículos e gestos práticos.',
+    'Um plano de 9 dias com orações de 2 a 10 minutos para blindar suas emoções, desarmar o estresse e restaurar a paz do seu lar. Planner, Checklist e Cartão de Entrega inclusos.',
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: SITE_URL,
+    siteName: 'Devocional da Mãe Serena',
+    title: 'O plano de oração de 9 dias para mães exaustas',
+    description:
+      'Orações de 2 a 10 minutos por dia para trazer a paz de volta para a sua casa. Acesso imediato no e-mail, por R$ 34,90.',
+    // capa.jpg é PNG (765x1024) apesar da extensão. É retrato, então o
+    // preview no WhatsApp/Facebook sai cortado — vale gerar uma arte
+    // 1200x630 dedicada e trocar aqui.
+    images: [
+      {
+        url: '/capa.jpg',
+        width: 765,
+        height: 1024,
+        alt: 'Devocional da Mãe Serena — capa do PDF de 9 dias',
+      },
+    ],
+  },
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
@@ -68,8 +97,6 @@ export default function RootLayout({
             src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
-
-        <Analytics />
       </body>
     </html>
   )

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Banco Quiz — Mãe Serena</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Tema Escuro Consistente para Dashboard */
+  --fundo: #0B0E14;
+  --cartao: #151A23;
+  --borda: #222A38;
+  --texto: #E2E8F0;
+  --mutado: #94A3B8;
+  
+  --oliva: #A3E635; /* Verde elétrico para dados positivos */
+  --olivac: rgba(163, 230, 53, 0.15);
+  --azul: #38BDF8;
+  --alerta: #F87171;
+  --alerta-bg: rgba(248, 113, 113, 0.1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--fundo); color: var(--texto); font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.5; padding: 30px 18px 70px; }
+.wrap { max-width: 900px; margin: 0 auto; }
+header { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+h1 { font-family: Fraunces, serif; font-size: 28px; font-weight: 600; color: #FFFFFF; }
+.sub { color: var(--mutado); font-size: 13px; margin-bottom: 24px; font-family: 'JetBrains Mono', monospace; }
+
+select, button { font: inherit; background: var(--cartao); border: 1px solid var(--borda); border-radius: 8px; padding: 9px 14px; color: var(--texto); cursor: pointer; transition: border-color 0.2s; }
+select:focus-visible, button:focus-visible, .aba:focus-visible { outline: 2px solid var(--oliva); outline-offset: 2px; border-color: var(--oliva); }
+button:hover, select:hover { border-color: #334155; }
+.controles { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* cartões de topo */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.kpi { background: var(--cartao); border: 1px solid var(--borda); border-radius: 12px; padding: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+.kpi b { display: block; font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; line-height: 1.2; color: #FFFFFF; margin-top: 4px; }
+.kpi span { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mutado); font-weight: 600; }
+.kpi small { display: block; font-size: 12px; color: var(--mutado); margin-top: 6px; }
+
+/* abas estilo Segmented Control */
+.abas { 
+  display: inline-flex; 
+  background: var(--cartao); 
+  padding: 4px; 
+  border-radius: 10px; 
+  border: 1px solid var(--borda); 
+  margin-bottom: 24px; 
+  overflow-x: auto; 
+}
+.aba { 
+  background: transparent; 
+  border: 0; 
+  border-radius: 6px; 
+  padding: 10px 18px; 
+  color: var(--mutado); 
+  white-space: nowrap; 
+  font-weight: 500; 
+  transition: all 0.2s;
+}
+.aba[aria-selected="true"] { 
+  background: var(--borda); 
+  color: #FFFFFF; 
+  font-weight: 600; 
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3); 
+}
+.painel[hidden] { display: none; }
+
+/* funil proporcional (centralizado) */
+#funil { display: flex; flex-direction: column; align-items: center; }
+.etapa { 
+  width: 100%;
+  background: var(--cartao); 
+  border: 1px solid var(--borda); 
+  border-radius: 8px; 
+  padding: 14px 18px; 
+  margin-bottom: 6px; 
+  position: relative; 
+  overflow: hidden; 
+}
+.etapa .fundo { 
+  position: absolute; 
+  inset: 0; 
+  background: var(--olivac); 
+  /* Ajuste crucial para funil de verdade: centralizado e escalado */
+  left: 50%; 
+  transform: translateX(-50%); 
+  transition: width 0.6s cubic-bezier(0.2,0.8,0.2,1); 
+  border-radius: 4px;
+}
+.etapa .conteudo { position: relative; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; z-index: 2; }
+.etapa .nome { font-weight: 500; color: var(--texto); }
+.etapa .nome small { display: block; font-weight: 400; font-size: 12px; color: var(--mutado); margin-top: 2px; }
+.etapa .num { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: #FFFFFF; white-space: nowrap; text-align: right; }
+.etapa .num em { font-style: normal; font-size: 12px; color: var(--mutado); margin-left: 10px; font-weight: 400; }
+.queda { width: 100%; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--alerta); padding: 4px 0 12px 18px; }
+.queda.pior::after { content: " ← maior vazamento"; color: var(--mutado); }
+
+table { width: 100%; border-collapse: collapse; background: var(--cartao); border: 1px solid var(--borda); border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--borda); font-size: 14px; }
+th { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mutado); font-weight: 600; background: rgba(255,255,255,0.02); }
+tr:hover td { background: rgba(255,255,255,0.02); }
+tr:last-child td { border-bottom: 0; }
+td.n { font-family: 'JetBrains Mono', monospace; text-align: right; width: 90px; color: #FFFFFF; }
+.barra-inline { display: block; height: 5px; background: var(--borda); border-radius: 3px; margin-top: 8px; }
+.barra-inline i { display: block; height: 100%; background: var(--oliva); border-radius: 3px; }
+
+.grafico { background: var(--cartao); border: 1px solid var(--borda); border-radius: 12px; padding: 22px; margin-bottom: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+.grafico h3 { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mutado); font-weight: 600; margin-bottom: 18px; }
+.legenda { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--mutado); margin-top: 14px; }
+.legenda i { display: inline-block; width: 12px; height: 12px; border-radius: 4px; margin-right: 6px; vertical-align: -2px; }
+svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.amostra { background: var(--cartao); border: 1px solid var(--borda); border-left: 4px solid var(--azul); padding: 16px 20px; border-radius: 8px; font-size: 13px; margin-bottom: 24px; color: var(--texto); line-height: 1.6; }
+.amostra b { color: #FFFFFF; }
+.erro { background: var(--alerta-bg); border: 1px solid rgba(248, 113, 113, 0.2); border-left: 4px solid var(--alerta); padding: 16px 20px; border-radius: 8px; font-size: 14px; margin-bottom: 24px; color: #FCA5A5; }
+.vazio { color: var(--mutado); font-size: 14px; padding: 24px 0; text-align: center; font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Banco Quiz</h1>
+    <div class="controles">
+      <select id="periodo">
+        <option value="1">Hoje</option>
+        <option value="7" selected>7 dias</option>
+        <option value="14">14 dias</option>
+        <option value="30">30 dias</option>
+        <option value="90">90 dias</option>
+      </select>
+      <button id="atualizar">Atualizar</button>
+    </div>
+  </header>
+  <p class="sub" id="carimbo">carregando…</p>
+
+  <div id="erro" class="erro" hidden></div>
+  <div id="amostra" class="amostra" hidden></div>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="abas" role="tablist">
+    <button class="aba" role="tab" aria-selected="true"  data-painel="p-funil">Funil</button>
+    <button class="aba" role="tab" aria-selected="false" data-painel="p-tempo">Por dia</button>
+    <button class="aba" role="tab" aria-selected="false" data-painel="p-respostas">Respostas</button>
+    <button class="aba" role="tab" aria-selected="false" data-painel="p-perfis">Perfis</button>
+  </div>
+
+  <div class="painel" id="p-funil"><div id="funil"></div></div>
+
+  <div class="painel" id="p-tempo" hidden>
+    <div class="grafico">
+      <h3>Sessões por dia</h3>
+      <div id="linha"></div>
+      <div class="legenda">
+        <span><i style="background:var(--oliva)"></i>Abriu o quiz</span>
+        <span><i style="background:var(--azul)"></i>Chegou na mini LP</span>
+        <span><i style="background:var(--alerta)"></i>Foi pro checkout</span>
+      </div>
+    </div>
+    <div class="grafico">
+      <h3>Taxa de conclusão por dia</h3>
+      <div id="taxa"></div>
+    </div>
+  </div>
+
+  <div class="painel" id="p-respostas" hidden><div id="respostas"></div></div>
+  <div class="painel" id="p-perfis" hidden>
+    <div class="grafico"><h3>Distribuição de perfis</h3><div id="perfis-graf"></div></div>
+    <div id="perfis"></div>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  SUPABASE_URL:  "https://asjakwljvzjotycmgtwd.supabase.co",
+  SUPABASE_ANON: "sb_publishable_JqCQTveGtqP01owfv_1XOA_l3BSW63H"
+};
+
+const NOMES = {
+  abertura:['Abriu o quiz','espelha o anúncio'],
+  p1:['P1 · manhã',''], p2:['P2 · quem lembra',''], p3:['P3 · o que pesa',''],
+  p4:['P4 · já tentou',''], p5:['P5 · o que mudaria',''],
+  compromisso:['Compromisso','"faz sentido começar?"'],
+  resultado:['Viu o resultado','perfil calculado'],
+  minilp:['Mini LP','oferta na tela'],
+  checkout:['Foi pro checkout','InitiateCheckout']
+};
+const PERGUNTAS = {
+  p1:'Como é a manhã', p2:'Quem lembra de tudo', p3:'O que mais pesa',
+  p4:'Já tentou antes', p5:'O que mudaria', compromisso:'Começar essa semana'
+};
+// Cores injetadas para bater com o novo CSS Dark
+const C = { oliva:'#A3E635', azul:'#38BDF8', alerta:'#F87171', linha:'#222A38', suave:'#94A3B8', texto:'#E2E8F0' };
+
+async function rpc(fn, dias){
+  const desde = new Date(Date.now() - dias*864e5).toISOString();
+  const r = await fetch(`${CONFIG.SUPABASE_URL}/rest/v1/rpc/${fn}`,{
+    method:'POST',
+    headers:{'apikey':CONFIG.SUPABASE_ANON,'Authorization':'Bearer '+CONFIG.SUPABASE_ANON,'Content-Type':'application/json'},
+    body: JSON.stringify({desde})
+  });
+  if(!r.ok){
+    const corpo = await r.text();
+    throw new Error(`${fn} devolveu HTTP ${r.status}. ${corpo.slice(0,220)}`);
+  }
+  return r.json();
+}
+const esc = s => String(s ?? '—').replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
+const pct = (a,b) => b ? (a/b*100) : 0;
+
+/* ---------- abas ---------- */
+document.querySelectorAll('.aba').forEach(a=>{
+  a.addEventListener('click',()=>{
+    document.querySelectorAll('.aba').forEach(x=>x.setAttribute('aria-selected', x===a));
+    document.querySelectorAll('.painel').forEach(p=>p.hidden = (p.id !== a.dataset.painel));
+  });
+});
+
+/* ---------- funil ---------- */
+function pintarFunil(linhas){
+  const alvo = document.getElementById('funil');
+  if(!linhas.length){ alvo.innerHTML='<p class="vazio">Nenhuma sessão no período.</p>'; return null; }
+  const topo = linhas[0].sessoes;
+  const quedas = linhas.map((l,i)=> i===0?0:(linhas[i-1].sessoes - l.sessoes));
+  const pior = Math.max(...quedas);
+  let html='', ant=null;
+  linhas.forEach((l,i)=>{
+    const [nome,nota] = NOMES[l.etapa] || [l.etapa,''];
+    const p = pct(l.sessoes, topo);
+    if(ant!==null && ant>0 && quedas[i]>0){
+      const q = Math.round(quedas[i]/ant*100);
+      html += `<p class="queda${quedas[i]===pior&&pior>0?' pior':''}">↓ ${q}% saem aqui (${quedas[i]})</p>`;
+    }
+    // Mudança visual: Width explícito centralizado substitui o transform:scaleX origin-left
+    html += `<div class="etapa"><div class="fundo" style="width:${p.toFixed(2)}%"></div>
+      <div class="conteudo"><span class="nome">${esc(nome)}<small>${esc(nota)}</small></span>
+      <span class="num">${l.sessoes}<em>${p.toFixed(0)}%</em></span></div></div>`;
+    ant = l.sessoes;
+  });
+  alvo.innerHTML = html;
+  const f = e => (linhas.find(l=>l.etapa===e)||{}).sessoes || 0;
+  return { topo, minilp:f('minilp'), checkout:f('checkout'), compromisso:f('compromisso') };
+}
+
+/* ---------- gráfico de linha ---------- */
+function linhaSVG(alvoId, series, dias){
+  const el = document.getElementById(alvoId);
+  if(!dias.length){ el.innerHTML='<p class="vazio">Sem dados no período.</p>'; return; }
+  const W=760,H=220,L=34,R=8,T=10,B=26;
+  const max = Math.max(1, ...series.flatMap(s=>s.pontos));
+  const x = i => L + (dias.length===1 ? (W-L-R)/2 : i*(W-L-R)/(dias.length-1));
+  const y = v => T + (H-T-B) * (1 - v/max);
+  let g = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sessões por dia">`;
+  [0,.5,1].forEach(f=>{
+    const v = Math.round(max*f), yy = y(v);
+    g += `<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="${C.linha}" stroke-dasharray="4"/>
+          <text x="0" y="${yy+4}" font-size="11" fill="${C.suave}" font-family="monospace">${v}</text>`;
+  });
+  series.forEach(s=>{
+    const d = s.pontos.map((v,i)=>`${i?'L':'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ');
+    g += `<path d="${d}" fill="none" stroke="${s.cor}" stroke-width="2.5" stroke-linejoin="round"/>`;
+    s.pontos.forEach((v,i)=> {
+      // Hitbox maior invisível e círculo visual
+      g += `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="4" fill="${s.cor}"><title>${dias[i]}: ${v}</title></circle>
+            <circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="16" fill="transparent"><title>${dias[i]}: ${v}</title></circle>`;
+    });
+  });
+  dias.forEach((d,i)=>{
+    if(dias.length>10 && i%Math.ceil(dias.length/7)) return;
+    g += `<text x="${x(i)}" y="${H-4}" font-size="11" fill="${C.suave}" text-anchor="middle" font-family="monospace">${d.slice(5).replace('-','/')}</text>`;
+  });
+  el.innerHTML = g + '</svg>';
+}
+
+/* ---------- barras horizontais ---------- */
+function barrasSVG(alvoId, itens){
+  const el = document.getElementById(alvoId);
+  if(!itens.length){ el.innerHTML='<p class="vazio">Sem dados.</p>'; return; }
+  const max = Math.max(...itens.map(i=>i.v)), alt=38, W=760;
+  let g = `<svg viewBox="0 0 ${W} ${itens.length*alt}" role="img">`;
+  itens.forEach((it,i)=>{
+    const w = (W-190)*(it.v/max), yy = i*alt;
+    g += `<text x="0" y="${yy+24}" font-size="14" fill="${C.texto}">${esc(it.k)}</text>
+          <rect x="150" y="${yy+10}" width="${Math.max(w,2)}" height="18" rx="4" fill="${C.oliva}" opacity="0.85"/>
+          <text x="${150+Math.max(w,2)+10}" y="${yy+24}" font-size="13" font-family="monospace" fill="${C.suave}">${it.v}</text>`;
+  });
+  el.innerHTML = g + '</svg>';
+}
+
+/* ---------- carregar ---------- */
+async function carregar(){
+  const dias = Number(document.getElementById('periodo').value);
+  const erro = document.getElementById('erro'); erro.hidden = true;
+  try{
+    const [funil, serie, respostas, perfis] = await Promise.all([
+      rpc('funil_quiz',dias), rpc('serie_quiz',dias), rpc('respostas_quiz',dias), rpc('perfis_quiz',dias)
+    ]);
+    const r = pintarFunil(funil) || {topo:0,minilp:0,checkout:0};
+
+    document.getElementById('kpis').innerHTML = `
+      <div class="kpi"><span>Sessões</span><b>${r.topo}</b><small>abriram o quiz</small></div>
+      <div class="kpi"><span>Concluíram</span><b>${pct(r.minilp,r.topo).toFixed(0)}%</b><small>${r.minilp} chegaram na mini LP</small></div>
+      <div class="kpi"><span>Mini LP → checkout</span><b>${pct(r.checkout,r.minilp).toFixed(0)}%</b><small>${r.checkout} clicaram</small></div>
+      <div class="kpi"><span>Ponta a ponta</span><b>${pct(r.checkout,r.topo).toFixed(1)}%</b><small>abertura → checkout</small></div>`;
+
+    const am = document.getElementById('amostra');
+    am.hidden = false;
+    am.innerHTML = r.topo >= 200
+      ? `Amostra: <b>${r.topo}</b> sessões. Já dá para comparar a taxa de checkout deste funil contra a LP direta.`
+      : `Amostra: <b>${r.topo}/200</b> sessões. Os números abaixo servem para achar defeito de mecanismo (etapa quebrada, queda anômala). Para decidir <em>quiz vs. LP direta</em>, faltam ${200-r.topo}.`;
+
+    const dias_ = [...new Set(serie.map(s=>s.dia))].sort();
+    const pega = e => dias_.map(d => (serie.find(s=>s.dia===d && s.etapa===e)||{}).sessoes || 0);
+    linhaSVG('linha', [
+      {cor:C.oliva,  pontos:pega('abertura')},
+      {cor:C.azul,   pontos:pega('minilp')},
+      {cor:C.alerta, pontos:pega('checkout')}
+    ], dias_);
+    const ab = pega('abertura'), ml = pega('minilp');
+    linhaSVG('taxa', [{cor:C.azul, pontos: ab.map((v,i)=> v ? Math.round(ml[i]/v*100) : 0)}], dias_);
+
+    const porEtapa = {};
+    respostas.forEach(l => (porEtapa[l.etapa] = porEtapa[l.etapa] || []).push(l));
+    document.getElementById('respostas').innerHTML = Object.keys(porEtapa).length
+      ? Object.entries(porEtapa).map(([et,ls])=>{
+          const tot = ls.reduce((a,b)=>a+Number(b.total),0);
+          return `<table><thead><tr><th>${esc(PERGUNTAS[et]||et)}</th><th class="n">Escolhas</th></tr></thead><tbody>${
+            ls.map(l=>`<tr><td>${esc(l.resposta)}<span class="barra-inline"><i style="width:${pct(l.total,tot).toFixed(1)}%"></i></span></td>
+            <td class="n">${l.total}<br><small style="color:var(--mutado)">${pct(l.total,tot).toFixed(0)}%</small></td></tr>`).join('')
+          }</tbody></table>`;
+        }).join('')
+      : '<p class="vazio">Sem respostas ainda.</p>';
+
+    barrasSVG('perfis-graf', perfis.map(p=>({k:p.perfil, v:Number(p.sessoes)})));
+    document.getElementById('perfis').innerHTML = perfis.length
+      ? `<table><thead><tr><th>Perfil</th><th class="n">Sessões</th></tr></thead><tbody>${
+          perfis.map(p=>`<tr><td>${esc(p.perfil)}</td><td class="n">${p.sessoes}</td></tr>`).join('')}</tbody></table>`
+      : '<p class="vazio">Sem perfis ainda.</p>';
+
+    document.getElementById('carimbo').textContent =
+      `últimos ${dias}d · ${r.topo} sessões · atualizado ${new Date().toLocaleTimeString('pt-BR')}`;
+  }catch(e){
+    erro.hidden = false;
+    const dica = /Failed to fetch|NetworkError/i.test(e.message)
+      ? 'Isso é falha de <b>rede</b>, não de SQL: a URL do projeto ou a chave em CONFIG estão erradas, ou um bloqueador barrou a requisição.'
+      : /404/.test(e.message)
+      ? 'A <b>função não existe</b> no banco. Rode o <code>supabase-setup.sql</code> inteiro no SQL Editor — ele é idempotente, pode rodar de novo sem quebrar nada.'
+      : /401|403/.test(e.message)
+      ? 'Chave recusada ou <b>permissão de execução faltando</b>. Confira os <code>grant execute ... to anon</code> no fim do SQL.'
+      : 'Erro inesperado. O texto acima veio direto do Supabase.';
+    erro.innerHTML = '<b>Não deu para ler os dados.</b><br>' + esc(e.message) + '<br><br>' + dica;
+    document.getElementById('carimbo').textContent = 'falha na leitura';
+  }
+}
+document.getElementById('atualizar').addEventListener('click', carregar);
+document.getElementById('periodo').addEventListener('change', carregar);
+carregar();
+</script>
+</body>
+</html>

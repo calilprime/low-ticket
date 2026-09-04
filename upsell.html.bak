@@ -128,20 +128,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<!-- HeroSpark — widget de upsell 1 clique: DESATIVADO (dormente).
-     Motivo: o widget injeta um iframe de pay.herospark.com cujos botões fazem
-     apenas  top.postMessage('upsell-accept/<id>', 'https://pay.herospark.com/').
-     Como esta página é servida por devocionalmaeserena.netlify.app, a janela
-     `top` tem outra origem e o navegador DESCARTA a mensagem em silêncio.
-     Resultado: os botões apareciam, eram clicáveis e não faziam absolutamente
-     nada — nem o aceite, nem a recusa (por isso o downsell ficou inalcançável).
-     Esse widget só funciona embutido numa página hospedada pela HeroSpark.
-     Se um dia eles liberarem cross-origin, reative a tag abaixo e devolva a
-     <div id="upsell-herospark"></div> no lugar dos links do corpo.
+<!-- HeroSpark — botões de upsell 1 clique (oferta R$69,90) -->
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
         data-upsell-id="e383387e-a96a-4af8-b905-fb608c6e5bdc"></script>
--->
 </head>
 <body>
 <main class="folha">
@@ -245,20 +235,18 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
   <div class="oferta">
     <p class="preco">R$ 69,90<small>pagamento único · sem assinatura</small></p>
 
-    <!-- Links reais. NÃO trocar por botão com JS: foi exatamente isso que
-         quebrou antes. O destino da recusa replica o que está no painel da
-         HeroSpark ("Se o cliente recusar a oferta?" -> /downsell). -->
-    <a class="cta" href="https://pay.herospark.com/devocional-da-mae-serena-os-3-primeiros-meses-537526">
-      Sim, quero levar os 3 meses</a>
+    <!-- Os botões de aceite e recusa são renderizados aqui pela HeroSpark.
+         Não criar botão nenhum manualmente: o destino da recusa é definido
+         no painel, em "Se o cliente recusar a oferta?". -->
+    <div id="upsell-herospark"></div>
 
+    <p class="umclique">Você não precisa preencher seus dados de novo.</p>
     <p class="selo">
-      Você confirma os dados no checkout seguro da HeroSpark.<br><br>
+      A cobrança usa os mesmos dados da compra que você acabou de fazer —
+      é só um clique no botão acima.<br><br>
       Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
       Acesso imediato no mesmo e-mail · 7 dias de garantia.
     </p>
-
-    <a class="recusa" href="https://devocionalmaeserena.netlify.app/downsell">
-      Não, quero só os 9 dias por enquanto</a>
   </div>
 
   <p class="orn" style="margin-top:46px">✦ ❖ ✦</p>

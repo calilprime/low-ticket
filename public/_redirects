@@ -1,0 +1,7 @@
+# URLs sem extensao usadas nos anuncios e no painel da HeroSpark.
+# A recusa do upsell aponta para /downsell — se isso 404, o downsell
+# fica inalcancavel de novo. Este arquivo e lido direto da pasta
+# publicada, entao funciona mesmo em deploy por --dir.
+/upsell     /upsell.html     200
+/downsell   /downsell.html   200
+/quiz       /quiz.html       200

@@ -1,5 +1,41 @@
+# ATENÇÃO: este arquivo é o interruptor entre a LP antiga e a nova.
+#
+# ANTES: publish = "." servia o index.html estático da raiz.
+# AGORA: roda o build do Next e serve out/, onde estão a LP nova
+#        (index.html gerado) E as páginas do funil, que foram movidas
+#        para public/ para sobreviverem ao export.
+#
+# Assim que este arquivo entrar na branch conectada à Netlify, o site troca.
+# Para reverter: `netlify.toml.antes-do-next` está do lado, é só renomear.
+#
+# Confira antes do primeiro deploy: em Site settings > Build & deploy, o
+# "Base directory" precisa apontar para ESTA pasta. Se estiver vazio
+# (= raiz do repositório), o build não acha o package.json e falha.
+
 [build]
-  # Site estatico: nao rodar o build do Next (o app/ do repo e outro produto).
-  command = "echo 'static site — no build step'"
-  publish = "."
+  command = "npm ci && npm run build"
+  publish = "out"
   functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Sem telemetria no CI.
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# O export gera arquivos .html; estes redirects garantem que as URLs sem
+# extensão que já estão nos anúncios e no painel da HeroSpark continuem
+# funcionando (/upsell, /downsell), inclusive a de recusa do upsell.
+[[redirects]]
+  from = "/upsell"
+  to = "/upsell.html"
+  status = 200
+
+[[redirects]]
+  from = "/downsell"
+  to = "/downsell.html"
+  status = 200
+
+[[redirects]]
+  from = "/quiz"
+  to = "/quiz.html"
+  status = 200
