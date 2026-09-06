@@ -68,15 +68,16 @@ h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:29px
   text-decoration:underline;text-underline-offset:3px}
 .recusa:hover{color:var(--tinta)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-offset:3px}
+/* plano B: so aparece se a HeroSpark nao renderizar (ver script no rodape) */
+#fallback{display:none}
 .rodape{margin:42px 0 0;font-size:12.5px;color:var(--lapis);text-align:center;line-height:1.65}
 </style>
-<!-- MODO 1 CLIQUE (desativado até existir o UUID desta oferta de downsell).
-     Se existir, descomente as 3 linhas abaixo, cole o data-upsell-id da oferta
-     "O Primeiro Mês" e troque o bloco do botão no corpo pela div #upsell-herospark.
+<!-- HeroSpark — 1 clique da oferta "O Primeiro Mês" (R$ 29,90).
+     Este UUID veio da configuração de upsell cujo produto ofertado é
+     "O Primeiro Mês" a R$ 29,90 — por isso ele vive nesta página, e não na /upsell. -->
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
-        data-upsell-id="COLE_O_UUID_DA_OFERTA_O_PRIMEIRO_MES"></script>
--->
+        data-upsell-id="2216f878-be63-43b3-9708-feb5bb4b2114"></script>
 </head>
 <body>
 <main class="folha">
@@ -132,24 +133,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
     <p class="antes">Fora daqui, R$ 69,90</p>
     <p class="preco">R$ 29,90<small>pagamento único · sem assinatura</small></p>
 
-    <!-- MODO CHECKOUT NORMAL (ativo). Funciona com certeza, mas pede os dados de novo.
-         Se o 1 clique estiver disponível, troque este bloco inteiro por:
-         <div id="upsell-herospark"></div>
-         e use o texto do selo comentado abaixo. -->
-    <a class="cta" href="COLE_O_LINK_DE_CHECKOUT_DO_PRIMEIRO_MES">
-      Sim, eu aceito o compromisso de 4 semanas</a>
+    <!-- MODO 1 CLIQUE: a HeroSpark renderiza os botões de aceite e recusa aqui. -->
+    <div id="upsell-herospark"></div>
 
-    <p class="selo">
+    <!-- Plano B: se o script da HeroSpark não carregar, a página não fica sem saída.
+         Revelado pelo script no fim do arquivo. -->
+    <div id="fallback">
+      <a class="cta" href="https://pay.herospark.com/o-primeiro-mes-540677">
+        Sim, eu aceito o compromisso de 4 semanas</a>
+      <a class="recusa" href="https://devocionalnaodesiste.vercel.app/">
+        Não, obrigada. Vou encerrar minha jornada no 9º dia.</a>
+    </div>
+
+    <p class="umclique" id="selo-1clique">Você não precisa preencher seus dados de novo.</p>
+    <p class="selo" id="selo-texto">
+      A cobrança usa os mesmos dados da compra que você acabou de fazer.<br><br>
       Arquivo digital em PDF · acesso imediato no mesmo e-mail · 7 dias de garantia.
     </p>
-    <!-- TEXTO DO SELO PARA O MODO 1 CLIQUE:
-      <p class="umclique">Você não precisa preencher seus dados de novo.</p>
-      <p class="selo">A cobrança usa os mesmos dados da compra que você acabou de fazer.<br><br>
-      Arquivo digital em PDF · acesso imediato no mesmo e-mail · 7 dias de garantia.</p>
-    -->
-
-    <a class="recusa" href="https://devocionalnaodesiste.vercel.app/">
-      Não, obrigada. Vou encerrar minha jornada no 9º dia.</a>
   </div>
 
   <p class="orn" style="margin-top:44px">✦ ❖ ✦</p>
@@ -159,5 +159,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
   </p>
 
 </main>
+
+<script>
+// A HeroSpark injeta um IFRAME em #upsell-herospark com os dois botões.
+// Se o UUID estiver vazio/errado ou o script não carregar, mostramos o plano B
+// para a página nunca ficar sem caminho de compra nem de recusa.
+(function () {
+  var tag = document.getElementById('upsell-cta-script');
+  var box = document.getElementById('upsell-herospark');
+  var uuid = tag ? tag.getAttribute('data-upsell-id') : '';
+
+  function planoB() {
+    if (box) box.style.display = 'none';
+    document.getElementById('fallback').style.display = 'block';
+    // Sem 1 clique o checkout pede os dados de novo — o selo não pode mentir.
+    var s1 = document.getElementById('selo-1clique');
+    if (s1) s1.style.display = 'none';
+    var st = document.getElementById('selo-texto');
+    if (st) {
+      st.innerHTML = 'Arquivo digital em PDF · acesso imediato no mesmo e-mail · 7 dias de garantia.';
+    }
+  }
+
+  if (!uuid || uuid.indexOf('COLE_') === 0) { planoB(); return; }
+  setTimeout(function () {
+    if (box && box.children.length === 0) planoB();
+  }, 4000);
+})();
+</script>
 </body>
 </html>

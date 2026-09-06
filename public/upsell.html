@@ -130,12 +130,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
 #fallback{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-<!-- HeroSpark — botões de upsell 1 clique (oferta R$69,90).
-     ATENÇÃO: troque o data-upsell-id abaixo pelo UUID da oferta de upsell
-     do "Devocional da Mãe que Não Desiste" (painel HeroSpark > Upsell). -->
+<!-- HeroSpark — 1 clique da oferta "Os Três Primeiros Meses" (R$ 69,90 · oferta 541301).
+     PENDENTE: o único UUID disponível hoje (2216f878-...) pertence à configuração
+     cujo produto ofertado é "O Primeiro Mês" a R$ 29,90 — usá-lo aqui cobraria o
+     produto e o valor errados. Crie no painel uma configuração de upsell com
+     produto ofertado "Os Três Primeiros Meses" (R$ 69,90), cole o UUID dela abaixo
+     e descomente as 3 linhas. Até lá a página usa o checkout normal (plano B).
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
-        data-upsell-id="COLE_O_UUID_DA_OFERTA_UPSELL_NAO_DESISTE"></script>
+        data-upsell-id="COLE_O_UUID_DA_OFERTA_541301"></script>
+-->
 </head>
 <body>
 <main class="folha">
@@ -246,14 +250,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
     <!-- Plano B: se o script da HeroSpark não carregar ou o UUID estiver errado,
          a página não fica sem saída. Revelado pelo script no fim do arquivo. -->
     <div id="fallback">
-      <a class="cta" href="COLE_O_LINK_DE_CHECKOUT_DO_UPSELL">
+      <a class="cta" href="https://pay.herospark.com/os-tres-primeiros-meses-541301">
         Sim, quero garantir a direção para os próximos 3 meses</a>
       <a class="recusa" href="/downsell">
         Não, vou tentar sustentar a oração sozinha após os 9 dias</a>
     </div>
 
-    <p class="umclique">Você não precisa preencher seus dados de novo.</p>
-    <p class="selo">
+    <p class="umclique" id="selo-1clique">Você não precisa preencher seus dados de novo.</p>
+    <p class="selo" id="selo-texto">
       A cobrança usa os mesmos dados da compra que você acabou de fazer —
       é só um clique no botão acima.<br><br>
       Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
@@ -284,6 +288,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
   function planoB() {
     if (box) box.style.display = 'none';
     document.getElementById('fallback').style.display = 'block';
+    // Sem 1 clique o checkout pede os dados de novo — o selo não pode mentir.
+    var s1 = document.getElementById('selo-1clique');
+    if (s1) s1.style.display = 'none';
+    var st = document.getElementById('selo-texto');
+    if (st) {
+      st.innerHTML = 'Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>' +
+                     'Acesso imediato no mesmo e-mail · 7 dias de garantia.';
+    }
   }
 
   if (semUuid) {
