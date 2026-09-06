@@ -5,6 +5,7 @@ import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 
 const PIXEL_ID = '1380514643999534'
+const UTMIFY_PIXEL_ID = '6a96ff68a90cb454027c5cc4'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -68,6 +69,22 @@ export default function RootLayout({
             src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
+
+        {/* UTMify — captura os UTMs do anúncio e casa a venda que chega pelo
+            webhook da HeroSpark com o clique que a originou. É esta camada que
+            reporta Purchase ao Meta pelo servidor, o que o pixel de navegador
+            não consegue fazer quando a compra é no Pix (a confirmação chega
+            depois que a compradora já fechou o navegador).
+            Equivalente literal ao snippet ofuscado do painel: ele só define
+            window.pixelId e carrega o pixel.js. */}
+        <Script id="utmify-pixel-id" strategy="afterInteractive">
+          {`window.pixelId = "${UTMIFY_PIXEL_ID}";`}
+        </Script>
+        <Script
+          id="utmify-pixel"
+          src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"
+          strategy="afterInteractive"
+        />
 
         <Analytics />
       </body>

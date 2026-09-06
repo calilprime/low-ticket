@@ -72,6 +72,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
 #fallback{display:none}
 .rodape{margin:42px 0 0;font-size:12.5px;color:var(--lapis);text-align:center;line-height:1.65}
 </style>
+<!-- Meta Pixel + UTMify: sem eles, a venda do downsell não é atribuída ao anúncio
+     que trouxe a compradora. Mesma configuração da landing page. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1380514643999534');fbq('track','PageView');
+</script>
+<script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
+<script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
+
 <!-- HeroSpark — 1 clique da oferta "O Primeiro Mês" (R$ 29,90).
      Este UUID veio da configuração de upsell cujo produto ofertado é
      "O Primeiro Mês" a R$ 29,90 — por isso ele vive nesta página, e não na /upsell. -->

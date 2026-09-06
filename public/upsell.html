@@ -130,6 +130,19 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-of
 #fallback{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
+<!-- Meta Pixel + UTMify: sem eles, a venda do upsell não é atribuída ao anúncio
+     que trouxe a compradora. Mesma configuração da landing page. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1380514643999534');fbq('track','PageView');
+</script>
+<script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
+<script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
+
 <!-- HeroSpark — 1 clique da oferta "Os Três Primeiros Meses" (R$ 69,90 · oferta 541301).
      PENDENTE: o único UUID disponível hoje (2216f878-...) pertence à configuração
      cujo produto ofertado é "O Primeiro Mês" a R$ 29,90 — usá-lo aqui cobraria o
