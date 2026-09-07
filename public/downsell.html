@@ -24,10 +24,19 @@ fbq('init','1380514643999534');fbq('track','PageView');
 <script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
 <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
-<!-- HeroSpark — 1 clique da oferta "O Primeiro Mês" (R$ 29,90) -->
+<!-- 1 CLIQUE DESATIVADO DE PROPÓSITO.
+     O UUID 2216f878 renderizava "Os 3 Primeiros Meses — 1x R$ 69,90" nesta
+     página, que anuncia R$ 29,90: aquela configuração de upsell foi editada
+     para ofertar o produto de R$ 69,90 e deixou de servir aqui. Cobrar 69,90
+     numa página que promete 29,90 é propaganda enganosa, então a página volta
+     ao checkout normal, que leva à oferta certa (o-primeiro-mes-540677).
+     Para reativar: crie na HeroSpark uma configuração de upsell cujo produto
+     ofertado seja "O Primeiro Mês (R$ 29,90)", cole o UUID dela abaixo e
+     descomente as 3 linhas.
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
-        data-upsell-id="2216f878-be63-43b3-9708-feb5bb4b2114"></script>
+        data-upsell-id="COLE_O_UUID_DA_OFERTA_O_PRIMEIRO_MES"></script>
+-->
 </head>
 <body>
 
