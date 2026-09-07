@@ -4,132 +4,245 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Os 3 Primeiros Meses — Devocional da Mãe que Não Desiste</title>
+<meta name="theme-color" content="#FDFBF7">
+<title>Os Três Primeiros Meses — Devocional da Mãe que Não Desiste</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* Mesmos tokens da landing page (app/globals.css), para que a compradora
+   sinta que continua no mesmo lugar depois do checkout. */
 :root{
-  --creme:#F1EBDC;
-  --papel:#FBF8F1;
-  --oliva:#536B45;
-  --tinta:#2D3B22;
-  --dourado:#B8934A;
-  --dourado-claro:#C9A876;
-  --lapis:#6E6C5E;
-  --linha:rgba(45,59,34,.15);
+  --background:oklch(0.982 0.008 85);
+  --foreground:oklch(0.28 0.012 60);
+  --card:oklch(1 0.004 85);
+  --primary:oklch(0.58 0.13 45);
+  --primary-foreground:oklch(0.985 0.008 85);
+  --secondary:oklch(0.94 0.014 85);
+  --muted-foreground:oklch(0.5 0.02 70);
+  --gold:oklch(0.74 0.09 80);
+  --olive:oklch(0.34 0.03 135);
+  --olive-foreground:oklch(0.97 0.01 85);
+  --border:oklch(0.9 0.014 80);
+  --cta:oklch(0.723 0.192 149.58);
+  --cta-foreground:oklch(1 0 0);
+  --rose:oklch(0.78 0.055 20);
+  --sand:oklch(0.93 0.022 82);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;
-  background:
-    radial-gradient(1100px 460px at 50% -160px, rgba(83,107,69,.10), transparent 70%),
-    var(--creme);
-  color:var(--tinta);
-  font-family:'Karla',system-ui,sans-serif;
-  font-size:17px; line-height:1.63;
+  margin:0;background:var(--background);color:var(--foreground);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
-.folha{
-  max-width:640px; margin:0 auto; background:var(--papel);
-  padding:34px 26px 54px;
-  box-shadow:0 22px 60px -34px rgba(45,59,34,.5);
+img,svg{max-width:100%}
+h1,h2,h3{font-family:var(--serif);font-weight:700;margin:0;text-wrap:balance}
+p{margin:0}
+
+/* faixa de aviso — igual à da LP */
+.aviso{
+  position:sticky;top:0;z-index:40;background:var(--gold);
+  padding:10px 16px;text-align:center;
 }
-@media(min-width:700px){ .folha{margin:30px auto;padding:54px 62px 66px} }
+.aviso p{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;
+  line-height:1.35;color:oklch(0.25 0.02 60);
+}
+@media(min-width:640px){.aviso p{font-size:13.5px}}
 
-.marca{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--oliva);
-  text-align:center;font-weight:600;margin:0}
-.orn{text-align:center;color:var(--dourado);letter-spacing:1.1em;font-size:13px;
-  margin:15px 0 0;padding-left:1.1em}
-.corte{border:0;border-top:1.5px dashed var(--dourado-claro);margin:44px 0 0;position:relative}
-.corte::after{content:"✂";position:absolute;top:-13px;left:0;background:var(--papel);
-  padding-right:11px;color:var(--dourado-claro);font-size:16px;line-height:1}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.sec{padding:56px 0}
+@media(min-width:768px){.sec{padding:76px 0}}
+.faixa-clara{background:var(--secondary)}
 
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-  font-size:clamp(40px,10vw,62px);line-height:.98;margin:0;letter-spacing:-.015em}
-h1 .leve{display:block;font-style:italic;font-weight:400;color:var(--oliva);
-  font-size:.46em;letter-spacing:0;margin-bottom:8px}
-h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:31px;
-  line-height:1.12;margin:0 0 10px}
-.olho{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dourado);
-  font-weight:600;margin:0 0 6px}
-p{margin:0 0 17px}
-.lead{font-size:19.5px;line-height:1.55}
-em{font-style:italic} strong{font-weight:600}
-
+/* recibo */
 .recibo{
-  border:1px solid var(--linha);border-left:3px solid var(--oliva);
-  background:linear-gradient(180deg,#FDFBF6,#FBF8F1);
-  padding:15px 18px;margin:26px 0 34px;font-size:15.5px;color:var(--lapis);
+  display:flex;gap:14px;align-items:flex-start;
+  border-radius:20px;border:1px solid var(--border);border-left:4px solid var(--cta);
+  background:var(--card);padding:18px 20px;margin-top:36px;
 }
-.recibo strong{color:var(--tinta)}
+.recibo svg{flex:0 0 22px;color:var(--cta);margin-top:2px}
+.recibo p{font-size:14.5px;line-height:1.55;color:var(--muted-foreground)}
+.recibo strong{color:var(--foreground);font-weight:700}
 
-/* capa do PDF */
-.capa-wrap{margin:34px 0 0;text-align:center}
-.capa{
-  width:210px;display:inline-block;transform:rotate(-1.6deg);
-  box-shadow:0 20px 34px -20px rgba(45,59,34,.55), 0 0 0 1px rgba(45,59,34,.10);
+h1{font-size:clamp(30px,7.5vw,52px);line-height:1.1;letter-spacing:-.02em;margin-top:28px}
+h1 .leve{
+  display:block;font-style:italic;font-weight:400;color:var(--primary);
+  font-size:.44em;letter-spacing:0;margin-bottom:10px;line-height:1.25;
 }
-.capa svg{display:block;width:100%;height:auto}
-.capa-leg{margin:16px 0 0;font-size:13.5px;color:var(--lapis)}
+.lead{font-size:17px;line-height:1.62;color:var(--muted-foreground);margin-top:20px}
+@media(min-width:640px){.lead{font-size:19px}}
+.corpo{font-size:16px;line-height:1.68;color:var(--muted-foreground);margin-top:16px}
+.corpo strong{color:var(--foreground);font-weight:600}
+em{font-style:italic}
 
-.itens{list-style:none;padding:0;margin:22px 0 0}
-.itens li{display:flex;gap:14px;align-items:flex-start;padding:13px 0;
-  border-bottom:1px solid var(--linha);font-size:16px}
-.itens li:first-child{border-top:1px solid var(--linha)}
-.quad{flex:0 0 12px;height:12px;margin-top:7px;border:1.5px solid var(--dourado)}
-.itens b{font-weight:600;display:block}
-.itens .d{color:var(--lapis);font-size:14.5px;display:block}
-
-.versiculo{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-style:italic;
-  line-height:1.34;color:var(--tinta);margin:34px 0 6px;text-align:center}
-.ref{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dourado);
-  margin:0;text-align:center}
-
-.oferta{margin:32px 0 0;text-align:center}
-.preco{font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;line-height:1;
-  font-weight:600;margin:0}
-.preco small{display:block;font-family:'Karla',sans-serif;font-size:14px;font-weight:400;
-  color:var(--lapis);margin-top:10px;letter-spacing:.02em}
-.cta{display:block;width:100%;margin:24px 0 0;background:var(--oliva);color:var(--papel);
-  border:0;border-radius:2px;cursor:pointer;font-family:'Karla',sans-serif;font-size:17.5px;
-  font-weight:600;padding:21px 20px;text-decoration:none;letter-spacing:.01em;
-  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);transition:background .18s ease}
-.cta:hover,.cta:focus-visible{background:var(--tinta)}
-.umclique{margin:16px 0 0;font-size:15px;color:var(--tinta);font-weight:500}
-.selo{margin:9px 0 0;font-size:13.5px;color:var(--lapis);line-height:1.62}
-.recusa{display:block;text-align:center;margin:28px 0 0;font-size:14px;color:var(--lapis);
-  text-decoration:underline;text-underline-offset:3px}
-.recusa:hover{color:var(--tinta)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-offset:3px}
-.rodape{margin:46px 0 0;font-size:12.5px;color:var(--lapis);text-align:center;line-height:1.65}
-
-/* container dos botoes injetados pela HeroSpark — herda o visual da pagina */
-#upsell-herospark{margin:24px 0 0}
-#upsell-herospark:empty{min-height:0}
-#upsell-herospark a,#upsell-herospark button{
-  display:block!important;width:100%!important;margin:0 0 12px!important;
-  font-family:'Karla',system-ui,sans-serif!important;font-size:17px!important;
-  font-weight:600!important;padding:20px 18px!important;border-radius:2px!important;
-  text-decoration:none!important;cursor:pointer;line-height:1.3!important;
-  box-sizing:border-box;text-align:center!important;
+/* CTA verde, idêntico ao da LP */
+.cta{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;max-width:520px;margin:0 auto;
+  background:var(--cta);color:var(--cta-foreground);
+  border:0;border-radius:999px;padding:17px 22px;
+  font-family:var(--sans);font-size:15.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.02em;line-height:1.25;text-align:center;
+  text-decoration:none;cursor:pointer;
+  box-shadow:0 14px 30px -12px color-mix(in oklch,var(--cta) 55%,transparent);
+  animation:pulso 2s cubic-bezier(.4,0,.6,1) infinite;
+  transition:transform .18s ease,filter .18s ease;
 }
-/* primeiro botao = aceite */
-#upsell-herospark a:first-of-type,#upsell-herospark button:first-of-type{
-  background:var(--oliva)!important;color:var(--papel)!important;border:0!important;
-  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);
+.cta:hover{transform:scale(1.02);filter:brightness(1.06)}
+.cta:active{transform:translateY(1px)}
+.cta small{
+  display:block;margin-top:5px;font-size:12.5px;font-weight:700;
+  text-transform:none;letter-spacing:0;opacity:.95;
 }
-/* segundo botao = recusa, discreto */
-#upsell-herospark a:nth-of-type(2),#upsell-herospark button:nth-of-type(2){
-  background:transparent!important;color:var(--lapis)!important;border:0!important;
-  font-weight:400!important;font-size:14px!important;padding:10px 0!important;
-  text-decoration:underline!important;text-underline-offset:3px;box-shadow:none!important;
+@media(min-width:640px){.cta{font-size:17.5px}.cta small{font-size:14px}}
+@keyframes pulso{
+  0%,100%{box-shadow:0 0 0 0 color-mix(in oklch,var(--cta) 55%,transparent)}
+  50%{box-shadow:0 0 0 14px color-mix(in oklch,var(--cta) 0%,transparent)}
 }
-/* plano B: so aparece se a HeroSpark nao injetar os botoes (ver script no rodape) */
-#fallback{display:none}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.cta{animation:none}}
+.sob-cta{margin-top:12px;text-align:center;font-size:13.5px;color:var(--muted-foreground)}
+
+/* capa do PDF, no mesmo card do mockup da LP */
+.capa-card{
+  position:relative;margin:36px auto 0;max-width:340px;
+  border-radius:26px;padding:16px;
+  background:linear-gradient(to bottom,var(--sand),var(--card));
+  box-shadow:0 26px 50px -26px oklch(0.34 0.03 135/.4);
+  outline:1px solid color-mix(in oklch,var(--gold) 35%,transparent);
+}
+.capa-card svg{display:block;border-radius:16px}
+.tag{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--primary);color:var(--primary-foreground);
+  border-radius:999px;padding:5px 16px;white-space:nowrap;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  box-shadow:0 8px 18px -8px oklch(0.34 0.03 135/.6);
+}
+.capa-leg{margin-top:14px;text-align:center;font-size:13.5px;color:var(--muted-foreground)}
+
+.olho{
+  text-align:center;font-size:11.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.18em;color:var(--primary);
+}
+h2{font-size:clamp(23px,5vw,34px);line-height:1.18;text-align:center;margin-top:12px}
+.sub{margin:14px auto 0;max-width:600px;text-align:center;font-size:15.5px;
+  line-height:1.6;color:var(--muted-foreground)}
+
+/* entregáveis */
+.itens{list-style:none;padding:0;margin:36px 0 0;display:grid;gap:14px}
+.itens li{
+  display:flex;gap:14px;align-items:flex-start;
+  border-radius:20px;border:1px solid var(--border);background:var(--card);
+  padding:18px 20px;
+}
+.itens .mark{
+  flex:0 0 26px;height:26px;border-radius:9px;margin-top:1px;
+  background:color-mix(in oklch,var(--rose) 30%,transparent);
+  color:var(--primary);display:flex;align-items:center;justify-content:center;
+}
+.itens b{display:block;font-family:var(--serif);font-size:17.5px;font-weight:700}
+.itens .d{display:block;margin-top:5px;font-size:14.5px;line-height:1.55;
+  color:var(--muted-foreground)}
+
+/* as 12 semanas */
+.mes{margin-top:28px}
+.mes-tit{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--serif);font-size:19px;font-weight:700;
+}
+.mes-num{
+  flex:0 0 auto;background:var(--olive);color:var(--olive-foreground);
+  border-radius:999px;padding:4px 13px;
+  font-family:var(--sans);font-size:10.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.semanas{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:9px}
+@media(min-width:640px){.semanas{grid-template-columns:1fr 1fr}}
+.semanas li{
+  display:flex;gap:13px;align-items:center;
+  border-radius:16px;border:1px solid var(--border);background:var(--card);
+  padding:13px 15px;font-size:14.5px;
+}
+.semanas span{
+  flex:0 0 auto;font-family:var(--serif);font-weight:700;font-size:13px;
+  color:var(--primary);min-width:26px;
+}
+
+/* versículo */
+.versiculo{
+  margin:40px auto 0;max-width:640px;text-align:center;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:28px 8px;
+}
+.versiculo p{font-family:var(--serif);font-style:italic;font-size:20px;line-height:1.42}
+@media(min-width:640px){.versiculo p{font-size:23px}}
+.versiculo .ref{
+  margin-top:12px;font-family:var(--sans);font-style:normal;font-size:11px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--gold);
+}
+
+/* card da oferta, igual ao da LP */
+.oferta{
+  margin:0 auto;max-width:560px;border-radius:32px;overflow:hidden;
+  background:var(--olive);color:var(--olive-foreground);
+  box-shadow:0 28px 60px -28px oklch(0.34 0.03 135/.5);
+}
+.oferta-topo{background:var(--gold);padding:11px 20px;text-align:center}
+.oferta-topo p{
+  font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
+  color:oklch(0.25 0.02 60);
+}
+.oferta-corpo{padding:34px 22px 38px}
+@media(min-width:640px){.oferta-corpo{padding:40px 40px 44px}}
+.preco-bloco{text-align:center}
+.riscado{font-size:14.5px;color:color-mix(in oklch,var(--olive-foreground) 65%,transparent)}
+.riscado s{text-decoration-thickness:2px}
+.hoje{margin-top:12px;font-size:13px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--gold)}
+.preco{font-family:var(--serif);font-size:60px;font-weight:700;line-height:1;
+  color:var(--gold);margin-top:5px}
+@media(min-width:640px){.preco{font-size:70px}}
+.preco-nota{margin-top:11px;font-size:14px;
+  color:color-mix(in oklch,var(--olive-foreground) 80%,transparent)}
+.selo{margin-top:12px;text-align:center;font-size:12.5px;line-height:1.6;
+  color:color-mix(in oklch,var(--olive-foreground) 70%,transparent)}
+#upsell-herospark{margin-top:26px}
+#fallback{display:none;margin-top:26px}
+.recusa{
+  display:block;margin-top:22px;text-align:center;font-size:14px;
+  color:color-mix(in oklch,var(--olive-foreground) 72%,transparent);
+  text-decoration:underline;text-underline-offset:3px;
+}
+.recusa:hover{color:var(--olive-foreground)}
+
+/* garantia */
+.garantia{
+  display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;
+  margin:0 auto;max-width:660px;border-radius:32px;padding:28px 24px;
+  border:2px solid color-mix(in oklch,var(--gold) 40%,transparent);
+  background:color-mix(in oklch,var(--sand) 60%,transparent);
+}
+@media(min-width:768px){.garantia{flex-direction:row;text-align:left;padding:36px 40px;gap:24px}}
+.escudo{
+  flex:0 0 auto;width:72px;height:72px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;color:var(--cta);
+  background:color-mix(in oklch,var(--cta) 12%,transparent);
+  outline:4px solid color-mix(in oklch,var(--cta) 22%,transparent);
+}
+.garantia h2{font-size:20px;text-align:inherit;margin:0}
+@media(min-width:640px){.garantia h2{font-size:23px}}
+.garantia p{margin-top:10px;font-size:14.5px;line-height:1.6;color:var(--muted-foreground)}
+
+.rodape{padding:34px 0 44px;text-align:center;font-size:12px;line-height:1.7;
+  color:var(--muted-foreground)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cta);outline-offset:3px}
 </style>
+
 <!-- Meta Pixel + UTMify: sem eles, a venda do upsell não é atribuída ao anúncio
      que trouxe a compradora. Mesma configuração da landing page. -->
 <script>
@@ -144,178 +257,267 @@ fbq('init','1380514643999534');fbq('track','PageView');
 <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
 <!-- HeroSpark — 1 clique da oferta "Os Três Primeiros Meses" (R$ 69,90 · oferta 541301).
-     PENDENTE: o único UUID disponível hoje (2216f878-...) pertence à configuração
-     cujo produto ofertado é "O Primeiro Mês" a R$ 29,90 — usá-lo aqui cobraria o
-     produto e o valor errados. Crie no painel uma configuração de upsell com
-     produto ofertado "Os Três Primeiros Meses" (R$ 69,90), cole o UUID dela abaixo
-     e descomente as 3 linhas. Até lá a página usa o checkout normal (plano B).
+     PENDENTE: cole abaixo o data-upsell-id que aparece em "Copiar código" na
+     configuração de upsell dessa oferta e descomente as 3 linhas. Até lá a
+     página usa o checkout normal (plano B), que funciona mas redigita os dados.
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
         data-upsell-id="COLE_O_UUID_DA_OFERTA_541301"></script>
 -->
 </head>
 <body>
-<main class="folha">
 
-  <p class="marca">Devocional da Mãe que Não Desiste</p>
-  <p class="orn">✦ ❖ ✦</p>
+<div class="aviso">
+  <p>✅ Compra aprovada — seu devocional de 9 dias já está a caminho do seu e-mail</p>
+</div>
 
-  <p class="recibo">
-    <strong>Sua compra foi aprovada.</strong> O devocional de 9 dias já está no seu e-mail.
-    Mas preste muita atenção neste aviso antes de fechar a página.
-  </p>
+<section class="wrap" style="padding-bottom:8px">
+  <div class="recibo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <p>
+      <strong>Sua compra foi aprovada.</strong> O devocional de 9 dias já está no seu e-mail.
+      Mas preste muita atenção neste aviso antes de fechar a página.
+    </p>
+  </div>
 
   <h1><span class="leve">O grande perigo mora no</span>10º Dia.</h1>
 
-  <p class="lead" style="margin-top:28px">
+  <p class="lead">
     Nove dias têm uma enorme vantagem: eles terminam. A gente aguenta qualquer coisa quando
     enxerga o fim. Mas no 10º dia, não há mais página para abrir. A oração volta a depender
     da sua memória, e é exatamente aqui que a maioria das mães desiste.
   </p>
 
-  <p>O problema nunca foi o Dia 1.</p>
+  <p class="corpo">O problema nunca foi o Dia 1. É o dia seguinte ao último.</p>
 
-  <p>
-    É o dia seguinte ao último. Seu filho não muda em nove dias — e você sabe disso. A porta
-    dele pode continuar fechada no Dia 12, no Dia 40, no Dia 90. E quando a oração para
-    justamente aí, o que fica não é só o silêncio dele: é o cansaço de quem tentou e
-    <em>achou que não adiantou</em>.
+  <p class="corpo">
+    Seu filho não muda em nove dias — e você sabe disso. A porta dele pode continuar fechada
+    no Dia 12, no Dia 40, no Dia 90. E quando a oração para justamente aí, o que fica não é
+    só o silêncio dele: é o cansaço de quem tentou e <em>achou que não adiantou</em>.
   </p>
 
-  <hr class="corte">
-
-  <div class="capa-wrap">
-    <div class="capa">
-      <svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="Capa do PDF Os 3 Primeiros Meses">
-        <rect width="210" height="297" fill="#F5F0E4"/>
-        <text x="105" y="62" text-anchor="middle" fill="#B8934A" font-size="7"
-              letter-spacing="4" font-family="serif">✦ ❖ ✦</text>
-        <text x="105" y="80" text-anchor="middle" fill="#536B45" font-size="4.2"
-              letter-spacing="1.2" font-family="Karla,sans-serif" font-weight="600">A MÃE QUE NÃO DESISTE</text>
-        <text x="105" y="106" text-anchor="middle" fill="#2D3B22" font-size="21"
-              font-family="'Cormorant Garamond',serif" font-weight="600">Os 3 Primeiros Meses</text>
-        <text x="105" y="120" text-anchor="middle" fill="#536B45" font-size="8"
-              font-style="italic" font-family="'Cormorant Garamond',serif">o que vem depois do Dia 9</text>
-        <g stroke="rgba(45,59,34,.22)" stroke-width=".4">
-          <line x1="40" y1="176" x2="170" y2="176"/>
-          <line x1="40" y1="196" x2="170" y2="196"/>
-          <line x1="40" y1="216" x2="170" y2="216"/>
-          <line x1="40" y1="236" x2="170" y2="236"/>
-        </g>
-        <g font-family="'Cormorant Garamond',serif" font-size="9" fill="#2D3B22">
-          <text x="62" y="190">A Rotina que Sustenta</text>
-          <text x="62" y="210">A Convivência</text>
-          <text x="62" y="230">A Espera Longa</text>
-        </g>
-        <g font-family="Karla,sans-serif" font-size="3.4" fill="#B8934A"
-           letter-spacing="1.1" font-weight="600">
-          <text x="40" y="189">MÊS 1</text>
-          <text x="40" y="209">MÊS 2</text>
-          <text x="40" y="229">MÊS 3</text>
-        </g>
-        <text x="105" y="266" text-anchor="middle" fill="#B8934A" font-size="3.4"
-              letter-spacing="1.6" font-family="Karla,sans-serif" font-weight="600">ARQUIVO DIGITAL · PARA IMPRIMIR EM CASA</text>
-      </svg>
-    </div>
-    <p class="capa-leg">PDF no mesmo formato dos seus 9 dias, para ler no celular ou imprimir.</p>
+  <div class="capa-card">
+    <span class="tag">12 semanas · PDF</span>
+    <svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Capa do PDF Os Três Primeiros Meses">
+      <rect width="210" height="297" fill="#F5F0E4"/>
+      <text x="105" y="60" text-anchor="middle" fill="#B8934A" font-size="7"
+            letter-spacing="4" font-family="Georgia,serif">✦ ✶ ✦</text>
+      <text x="105" y="79" text-anchor="middle" fill="#536B45" font-size="4.4"
+            letter-spacing="1.2" font-family="Inter,sans-serif" font-weight="700">DEVOCIONAL DA MÃE QUE NÃO DESISTE</text>
+      <text x="105" y="107" text-anchor="middle" fill="#2D3B22" font-size="17"
+            font-family="'Playfair Display',Georgia,serif" font-weight="700">Os Três Primeiros Meses</text>
+      <text x="105" y="122" text-anchor="middle" fill="#536B45" font-size="7.6"
+            font-style="italic" font-family="'Playfair Display',Georgia,serif">o que fazer a partir do décimo dia</text>
+      <g stroke="rgba(45,59,34,.2)" stroke-width=".4">
+        <line x1="40" y1="176" x2="170" y2="176"/>
+        <line x1="40" y1="200" x2="170" y2="200"/>
+        <line x1="40" y1="224" x2="170" y2="224"/>
+      </g>
+      <g font-family="'Playfair Display',Georgia,serif" font-size="8.4" fill="#2D3B22">
+        <text x="62" y="192">A Rotina que Sustenta</text>
+        <text x="62" y="216">A Convivência</text>
+        <text x="62" y="240">A Espera Longa</text>
+      </g>
+      <g font-family="Inter,sans-serif" font-size="3.4" fill="#B8934A"
+         letter-spacing="1.1" font-weight="700">
+        <text x="40" y="191">MÊS 1</text>
+        <text x="40" y="215">MÊS 2</text>
+        <text x="40" y="239">MÊS 3</text>
+      </g>
+      <text x="105" y="268" text-anchor="middle" fill="#B8934A" font-size="3.4"
+            letter-spacing="1.6" font-family="Inter,sans-serif" font-weight="700">ARQUIVO DIGITAL · PARA IMPRIMIR EM CASA</text>
+    </svg>
   </div>
+  <p class="capa-leg">No mesmo formato dos seus 9 dias. Leia no celular ou imprima em casa.</p>
+</section>
 
-  <section style="margin-top:38px">
+<section class="sec faixa-clara">
+  <div class="wrap">
     <p class="olho">O que continua depois do Dia 9</p>
-    <h2>Os 3 Primeiros Meses: o que fazer a partir do décimo dia</h2>
-    <p>
+    <h2>Os Três Primeiros Meses: o que fazer a partir do décimo dia</h2>
+    <p class="sub">
       Um guia de <strong>12 semanas</strong> para você sustentar a oração por um tempo longo,
       sem se desgastar e sem endurecer. Um tema por semana, um passo prático, sem precisar
       recomeçar do zero.
     </p>
 
     <ul class="itens">
-      <li><span class="quad"></span><span><b>Mês 1 — A Rotina que Sustenta</b><span class="d">Como orar quando você não sente nada, e o que fazer no dia em que você falhar.</span></span></li>
-      <li><span class="quad"></span><span><b>Mês 2 — A Convivência</b><span class="d">A conversa curta que funciona e como reagir quando o filho testa os seus limites.</span></span></li>
-      <li><span class="quad"></span><span><b>Mês 3 — A Espera Longa</b><span class="d">Como lidar quando o tempo passa, nada muda, e como manter a porta aberta sem forçar.</span></span></li>
-      <li><span class="quad"></span><span><b>O Registro e a Entrega Renovada</b><span class="d">Ferramentas práticas para você enxergar as respostas pequenas de Deus — as que passam despercebidas.</span></span></li>
+      <li>
+        <span class="mark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span><b>Mês 1 — A Rotina que Sustenta</b>
+          <span class="d">Como orar quando você não sente nada, e o que fazer no dia em que você falhar.</span></span>
+      </li>
+      <li>
+        <span class="mark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span><b>Mês 2 — A Convivência</b>
+          <span class="d">A conversa curta que funciona e como reagir quando o filho testa os seus limites.</span></span>
+      </li>
+      <li>
+        <span class="mark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span><b>Mês 3 — A Espera Longa</b>
+          <span class="d">Como lidar quando o tempo passa, nada muda, e como manter a porta aberta sem forçar.</span></span>
+      </li>
+      <li>
+        <span class="mark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span><b>O Registro e a Entrega Renovada</b>
+          <span class="d">Ferramentas práticas para você enxergar as respostas pequenas de Deus — as que passam despercebidas.</span></span>
+      </li>
     </ul>
+  </div>
+</section>
 
-    <p style="margin-top:26px">
-      Cada semana abre retomando a anterior. Não é material novo a cada sete dias: é a mesma
-      oração ficando mais firme, enquanto você espera.
-    </p>
-  </section>
+<section class="sec">
+  <div class="wrap">
+    <p class="olho">Semana a semana</p>
+    <h2>As 12 semanas, uma de cada vez</h2>
+    <p class="sub">Cada semana abre retomando a anterior. Não é material novo a cada sete dias:
+      é a mesma oração ficando mais firme, enquanto você espera.</p>
 
-  <p class="versiculo">“E não nos cansemos de fazer o bem, porque a seu tempo<br>
-  ceifaremos, se não houvermos desfalecido.”</p>
-  <p class="ref">Gálatas 6.9 (ARC)</p>
-  <p style="margin-top:16px;color:var(--lapis);font-size:16px;text-align:center">
-    A colheita tem tempo próprio.<br>A única coisa que a impede é desfalecer antes dela.
-  </p>
-
-  <hr class="corte">
-
-  <div class="oferta">
-    <p class="preco">R$ 69,90<small>pagamento único · sem assinatura</small></p>
-
-    <!-- Os botões de aceite e recusa são renderizados aqui pela HeroSpark.
-         Não criar botão nenhum manualmente: o destino da recusa é definido
-         no painel, em "Se o cliente recusar a oferta?" — aponte para /downsell. -->
-    <div id="upsell-herospark"></div>
-
-    <!-- Plano B: se o script da HeroSpark não carregar ou o UUID estiver errado,
-         a página não fica sem saída. Revelado pelo script no fim do arquivo. -->
-    <div id="fallback">
-      <a class="cta" href="https://pay.herospark.com/os-tres-primeiros-meses-541301">
-        Sim, quero garantir a direção para os próximos 3 meses</a>
-      <a class="recusa" href="/downsell">
-        Não, vou tentar sustentar a oração sozinha após os 9 dias</a>
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 1</span> A Rotina que Sustenta</p>
+      <ul class="semanas">
+        <li><span>S1</span> O décimo dia</li>
+        <li><span>S2</span> Quando eu não sinto nada</li>
+        <li><span>S3</span> Quando eu falho</li>
+        <li><span>S4</span> O que já mudou em mim</li>
+      </ul>
     </div>
 
-    <p class="umclique" id="selo-1clique">Você não precisa preencher seus dados de novo.</p>
-    <p class="selo" id="selo-texto">
-      A cobrança usa os mesmos dados da compra que você acabou de fazer —
-      é só um clique no botão acima.<br><br>
-      Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
-      Acesso imediato no mesmo e-mail · 7 dias de garantia.
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 2</span> A Convivência</p>
+      <ul class="semanas">
+        <li><span>S5</span> A conversa curta que funciona</li>
+        <li><span>S6</span> Quando alguém pergunta por ele</li>
+        <li><span>S7</span> Quando ele testa</li>
+        <li><span>S8</span> A metade do caminho</li>
+      </ul>
+    </div>
+
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 3</span> A Espera Longa</p>
+      <ul class="semanas">
+        <li><span>S9</span> Quando o tempo passa e nada muda</li>
+        <li><span>S10</span> As respostas pequenas</li>
+        <li><span>S11</span> A porta continua aberta</li>
+        <li><span>S12</span> Entregar de novo</li>
+      </ul>
+    </div>
+
+    <div class="versiculo">
+      <p>“E não nos cansemos de fazer o bem, porque a seu tempo ceifaremos,
+        se não houvermos desfalecido.”</p>
+      <p class="ref">Gálatas 6.9 (ARC)</p>
+    </div>
+    <p class="sub" style="margin-top:18px">
+      A colheita tem tempo próprio. A única coisa que a impede é desfalecer antes dela.
     </p>
   </div>
+</section>
 
-  <p class="orn" style="margin-top:46px">✦ ❖ ✦</p>
-  <p class="rodape">
-    Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
-    © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
-  </p>
+<section class="sec faixa-clara">
+  <div class="wrap">
+    <div class="oferta">
+      <div class="oferta-topo">
+        <p>⚠️ Condição válida só nesta página</p>
+      </div>
 
-</main>
+      <div class="oferta-corpo">
+        <div class="preco-bloco">
+          <p class="riscado">Fora daqui, <s>R$ 97,00</s></p>
+          <p class="hoje">Agora, junto com a sua compra</p>
+          <p class="preco">R$ 69,90</p>
+          <p class="preco-nota">pagamento único · sem assinatura · acesso vitalício</p>
+        </div>
+
+        <!-- Os botões de aceite e recusa são renderizados aqui pela HeroSpark. -->
+        <div id="upsell-herospark"></div>
+
+        <!-- Plano B: se a HeroSpark não renderizar, a página não fica sem saída. -->
+        <div id="fallback">
+          <a class="cta" href="https://pay.herospark.com/os-tres-primeiros-meses-541301">
+            Sim, quero garantir a direção para os próximos 3 meses
+            <small>(R$ 69,90 · pagamento único)</small>
+          </a>
+          <a class="recusa" href="/downsell">
+            Não, vou tentar sustentar a oração sozinha após os 9 dias</a>
+        </div>
+
+        <p class="selo" id="selo-texto">
+          Você não precisa preencher seus dados de novo — a cobrança usa os mesmos dados
+          da compra que você acabou de fazer.<br><br>
+          Arquivo digital em PDF · acesso imediato no mesmo e-mail · 7 dias de garantia.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-bottom:8px">
+  <div class="garantia">
+    <span class="escudo">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+      </svg>
+    </span>
+    <div>
+      <h2>Garantia de 7 dias</h2>
+      <p>
+        Leia as doze semanas. Se dentro de 7 dias você achar que o material não te deu a
+        direção que procurava, basta mandar um e-mail e devolvemos 100% do seu dinheiro,
+        sem burocracia.
+      </p>
+    </div>
+  </div>
+</section>
+
+<p class="rodape">
+  Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
+  © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
+</p>
 
 <script>
-// A HeroSpark injeta um IFRAME dentro de #upsell-herospark com os dois botões.
-// Enquanto o data-upsell-id continuar com o valor de exemplo, esse iframe carrega
-// vazio — então escondemos ele e mostramos o plano B, para a página nunca ficar
-// sem caminho de compra nem de recusa. Assim que você colar o UUID real, o bloco
-// abaixo se desativa sozinho e o 1 clique volta a ser o caminho principal.
+// A HeroSpark injeta um IFRAME em #upsell-herospark com os dois botões.
+// Enquanto o UUID não estiver preenchido, o iframe carrega vazio — então
+// escondemos ele e mostramos o plano B, para a página nunca ficar sem
+// caminho de compra nem de recusa.
 (function () {
   var tag = document.getElementById('upsell-cta-script');
   var box = document.getElementById('upsell-herospark');
   var uuid = tag ? tag.getAttribute('data-upsell-id') : '';
-  var semUuid = !uuid || uuid.indexOf('COLE_') === 0;
 
   function planoB() {
     if (box) box.style.display = 'none';
     document.getElementById('fallback').style.display = 'block';
     // Sem 1 clique o checkout pede os dados de novo — o selo não pode mentir.
-    var s1 = document.getElementById('selo-1clique');
-    if (s1) s1.style.display = 'none';
     var st = document.getElementById('selo-texto');
     if (st) {
-      st.innerHTML = 'Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>' +
-                     'Acesso imediato no mesmo e-mail · 7 dias de garantia.';
+      st.innerHTML = 'Arquivo digital em PDF · acesso imediato no mesmo e-mail · ' +
+                     '7 dias de garantia.';
     }
   }
 
-  if (semUuid) {
-    planoB();
-    return;
-  }
-  // UUID preenchido: se mesmo assim nada renderizar em 4s, cai no plano B.
+  if (!uuid || uuid.indexOf('COLE_') === 0) { planoB(); return; }
   setTimeout(function () {
     if (box && box.children.length === 0) planoB();
   }, 4000);
