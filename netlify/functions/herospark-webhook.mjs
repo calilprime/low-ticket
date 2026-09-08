@@ -9,6 +9,9 @@
 //   SUPABASE_URL         -> https://xxxx.supabase.co
 //   SUPABASE_SERVICE_KEY -> service_role key (NUNCA no front-end)
 //   WEBHOOK_SECRET       -> string aleatória que você inventa, usada na URL
+//   UTMIFY_API_TOKEN     -> token da credencial "API Devocional" (UTMify >
+//                           Integrações > Credenciais de API). Sem ele a venda
+//                           não aparece no painel da UTMify.
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
@@ -69,6 +72,121 @@ async function saveToSupabase(row) {
   }
 }
 
+/**
+ * Envia a venda para a UTMify.
+ *
+ * A UTMify não tem integração nativa com a HeroSpark — ela não aparece na
+ * lista de plataformas do painel de webhooks. O caminho suportado nesse caso
+ * é a API de credenciais: esta função traduz o payload da HeroSpark para o
+ * schema da UTMify e posta com o token da credencial.
+ *
+ * É isto que faz a venda no Pix ser contabilizada. O pixel de navegador não
+ * consegue: no Pix a confirmação chega minutos depois, com a compradora já
+ * fora da página, e o evento Purchase nunca dispara. Aqui quem reporta é o
+ * servidor, quando a HeroSpark avisa que aprovou.
+ */
+const UTMIFY_TOKEN = process.env.UTMIFY_API_TOKEN;
+
+// "YYYY-MM-DD HH:MM:SS" em UTC — formato exigido pela UTMify.
+function dataUtmify(valor) {
+  const d = valor ? new Date(valor) : new Date();
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toISOString().slice(0, 19).replace("T", " ");
+}
+
+function statusUtmify(status) {
+  const s = String(status || "").toLowerCase();
+  if (/aprov|paid|approved|complet/.test(s)) return "paid";
+  if (/pend|aguard|waiting|generated/.test(s)) return "waiting_payment";
+  if (/refund|estorn|reembols/.test(s)) return "refunded";
+  if (/chargeback|chargedback/.test(s)) return "chargedback";
+  if (/recus|refus|declin|cancel/.test(s)) return "refused";
+  return "waiting_payment";
+}
+
+function metodoUtmify(metodo) {
+  const m = String(metodo || "").toLowerCase();
+  if (/pix/.test(m)) return "pix";
+  if (/boleto|billet/.test(m)) return "billet";
+  return "credit_card";
+}
+
+const centavos = (v) => Math.round(Number(v || 0) * 100);
+
+async function sendToUtmify(v) {
+  if (!UTMIFY_TOKEN) {
+    console.warn("UTMify não configurada (falta UTMIFY_API_TOKEN), pulando");
+    return;
+  }
+
+  const status = statusUtmify(v.status);
+  const total = centavos(v.valor);
+  const taxa = centavos(v.taxa);
+
+  const corpo = {
+    orderId: String(v.venda_id || `hs-${Date.now()}`),
+    platform: "HeroSpark",
+    paymentMethod: metodoUtmify(v.metodo),
+    status,
+    createdAt: dataUtmify(v.criado_originalmente_em),
+    approvedDate: status === "paid" ? dataUtmify(v.aprovado_em) : null,
+    refundedAt: status === "refunded" ? dataUtmify(null) : null,
+    customer: {
+      name: v.nome || "Não informado",
+      email: v.email || "nao-informado@exemplo.com",
+      phone: v.telefone || null,
+      document: v.documento || null,
+      country: "BR",
+      ip: v.ip || null,
+    },
+    products: [
+      {
+        id: String(v.venda_id || "produto"),
+        name: v.produto,
+        planId: null,
+        planName: null,
+        quantity: 1,
+        priceInCents: total,
+      },
+    ],
+    // É por aqui que a UTMify liga a venda ao anúncio. Os UTMs chegam porque
+    // lib/checkout.ts os propaga da landing page até o checkout da HeroSpark.
+    trackingParameters: {
+      src: null,
+      sck: null,
+      utm_source: v.utm_source,
+      utm_campaign: v.utm_campaign,
+      utm_medium: v.utm_medium,
+      utm_content: v.utm_content,
+      utm_term: v.utm_term,
+    },
+    commission: {
+      totalPriceInCents: total,
+      gatewayFeeInCents: taxa,
+      userCommissionInCents: total - taxa,
+    },
+    isTest: false,
+  };
+
+  const res = await fetch("https://api.utmify.com.br/api-credentials/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-api-token": UTMIFY_TOKEN,
+    },
+    body: JSON.stringify(corpo),
+  });
+
+  if (!res.ok) {
+    // Logar o corpo é o que permite ajustar o schema sem adivinhar:
+    // a UTMify responde dizendo qual campo recusou.
+    console.error("Erro UTMify:", res.status, await res.text());
+    console.error("Corpo enviado:", JSON.stringify(corpo));
+  } else {
+    console.log("UTMify OK:", corpo.orderId, corpo.status);
+  }
+}
+
 // Normaliza o payload da HeroSpark. Os nomes de campo variam conforme o
 // gatilho — por isso o fallback em cadeia. Ajuste depois de ver 1 payload real.
 function parsePayload(body) {
@@ -90,7 +208,14 @@ function parsePayload(body) {
     // UTMs: chegam aqui se você propagar da LP -> checkout
     utm_source: p.utm_source || p.src || null,
     utm_campaign: p.utm_campaign || null,
+    utm_medium: p.utm_medium || null,
     utm_content: p.utm_content || null, // use isso pra identificar o anúncio
+    utm_term: p.utm_term || null,
+    documento: buyer.document || buyer.cpf || p.buyer_document || null,
+    ip: buyer.ip || p.ip || null,
+    criado_originalmente_em: p.created_at || p.createdAt || p.data_criacao || null,
+    aprovado_em: p.approved_at || p.approvedAt || p.paid_at || null,
+    taxa: p.fee || p.gateway_fee || p.taxa || 0,
     raw: p,
     criado_em: new Date().toISOString(),
   };
@@ -150,10 +275,18 @@ export async function handler(event) {
   const venda = parsePayload(body);
 
   try {
-    await Promise.all([
+    // allSettled: uma falha na UTMify não pode derrubar a notificação do
+    // Telegram nem a gravação no Supabase, e vice-versa.
+    const r = await Promise.allSettled([
       saveToSupabase(venda),
       sendTelegram(montarMensagem(venda)),
+      sendToUtmify(venda),
     ]);
+    r.forEach((x, i) => {
+      if (x.status === "rejected") {
+        console.error(`Etapa ${["supabase", "telegram", "utmify"][i]} falhou:`, x.reason);
+      }
+    });
   } catch (err) {
     console.error("Erro no processamento:", err);
     // Retorna 200 mesmo assim: se retornar erro, a HeroSpark pode
