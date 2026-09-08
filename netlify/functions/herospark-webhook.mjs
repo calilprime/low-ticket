@@ -75,17 +75,21 @@ async function saveToSupabase(row) {
 /**
  * Envia a venda para a UTMify.
  *
- * A UTMify não tem integração nativa com a HeroSpark — ela não aparece na
- * lista de plataformas do painel de webhooks. O caminho suportado nesse caso
- * é a API de credenciais: esta função traduz o payload da HeroSpark para o
- * schema da UTMify e posta com o token da credencial.
+ * Traduz o payload da HeroSpark para o schema da UTMify e posta com o token
+ * da credencial de API. Serve para o caso em que a venda precisa ser reportada
+ * pelo servidor — o pixel de navegador não dá conta do Pix, porque a
+ * confirmação chega com a compradora já fora da página.
  *
- * É isto que faz a venda no Pix ser contabilizada. O pixel de navegador não
- * consegue: no Pix a confirmação chega minutos depois, com a compradora já
- * fora da página, e o evento Purchase nunca dispara. Aqui quem reporta é o
- * servidor, quando a HeroSpark avisa que aprovou.
+ * DESLIGADA POR PADRÃO desde 08/09/2026. A HeroSpark passou a ter integração
+ * nativa com a UTMify (painel > Integrações > Utmify, gatilho "Pagamento
+ * confirmado"), e ela já posta a venda direto. Se esta function postar também,
+ * o mesmo pedido entra duas vezes e o faturamento no painel dobra.
+ *
+ * Só ligue isto — com UTMIFY_ENVIO=1 — se a integração nativa da HeroSpark for
+ * desativada ou parar de entregar. Ter o token sozinho não basta, de propósito.
  */
 const UTMIFY_TOKEN = process.env.UTMIFY_API_TOKEN;
+const UTMIFY_ENVIO_LIGADO = process.env.UTMIFY_ENVIO === "1";
 
 // "YYYY-MM-DD HH:MM:SS" em UTC — formato exigido pela UTMify.
 function dataUtmify(valor) {
@@ -114,6 +118,13 @@ function metodoUtmify(metodo) {
 const centavos = (v) => Math.round(Number(v || 0) * 100);
 
 async function sendToUtmify(v) {
+  if (!UTMIFY_ENVIO_LIGADO) {
+    console.log(
+      "UTMify: envio desligado (a integração nativa da HeroSpark é quem posta). " +
+        "Para assumir aqui, defina UTMIFY_ENVIO=1."
+    );
+    return;
+  }
   if (!UTMIFY_TOKEN) {
     console.warn("UTMify não configurada (falta UTMIFY_API_TOKEN), pulando");
     return;
