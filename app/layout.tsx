@@ -6,6 +6,7 @@ import './globals.css'
 
 const PIXEL_ID = '1380514643999534'
 const UTMIFY_PIXEL_ID = '6a96ff68a90cb454027c5cc4'
+const CLARITY_ID = 'yfpyp5xcpn'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -85,6 +86,20 @@ export default function RootLayout({
           src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"
           strategy="afterInteractive"
         />
+
+        {/* Microsoft Clarity — replay de sessao, mapa de calor, rage click e
+            dead click. Gratuito e ilimitado. Carrega depois da hidratacao para
+            nao competir com o first paint: a gravacao comeca alguns
+            milissegundos depois, o que nao atrapalha a leitura do funil. */}
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${CLARITY_ID}");
+          `}
+        </Script>
 
         <Analytics />
       </body>
