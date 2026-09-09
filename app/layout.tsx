@@ -8,6 +8,7 @@ import './globals.css'
 // produto, é só trocar aqui — e lembrar de trocar também no painel da
 // HeroSpark, senão o checkout dispara para a conta errada.
 const PIXEL_ID = '1380514643999534'
+const CLARITY_ID = 'yfpyp5xcpn'
 
 const SITE_URL = 'https://devocionalmaeserena.netlify.app'
 
@@ -97,6 +98,20 @@ export default function RootLayout({
             src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
+
+        {/* Microsoft Clarity — replay de sessao, mapa de calor, rage click e
+            dead click. Mesmo projeto da LP do Nao Desiste: para separar os dois
+            produtos, filtre por Page URL no painel. Carrega com afterInteractive
+            para nao competir com o first paint. */}
+        <Script id="ms-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${CLARITY_ID}");
+          `}
+        </Script>
       </body>
     </html>
   )
