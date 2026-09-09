@@ -131,8 +131,10 @@ async function sendToUtmify(v) {
   }
 
   const status = statusUtmify(v.status);
-  const total = centavos(v.valor);
-  const taxa = centavos(v.taxa);
+  // Prefere os centavos que a HeroSpark já manda inteiros; só converte de
+  // reais quando eles não vierem (payload nativo antigo).
+  const total = v.total_centavos ?? centavos(v.valor);
+  const taxa = v.taxa_centavos ?? centavos(v.taxa);
 
   const corpo = {
     orderId: String(v.venda_id || `hs-${Date.now()}`),
@@ -141,7 +143,7 @@ async function sendToUtmify(v) {
     status,
     createdAt: dataUtmify(v.criado_originalmente_em),
     approvedDate: status === "paid" ? dataUtmify(v.aprovado_em) : null,
-    refundedAt: status === "refunded" ? dataUtmify(null) : null,
+    refundedAt: status === "refunded" ? dataUtmify(v.estornado_em) : null,
     customer: {
       name: v.nome || "Não informado",
       email: v.email || "nao-informado@exemplo.com",
@@ -163,7 +165,7 @@ async function sendToUtmify(v) {
     // É por aqui que a UTMify liga a venda ao anúncio. Os UTMs chegam porque
     // lib/checkout.ts os propaga da landing page até o checkout da HeroSpark.
     trackingParameters: {
-      src: null,
+      src: v.src,
       sck: null,
       utm_source: v.utm_source,
       utm_campaign: v.utm_campaign,
@@ -198,35 +200,87 @@ async function sendToUtmify(v) {
   }
 }
 
-// Normaliza o payload da HeroSpark. Os nomes de campo variam conforme o
-// gatilho — por isso o fallback em cadeia. Ajuste depois de ver 1 payload real.
+// Converte para número aceitando "3490", 3490, "34,90", "R$ 34,90" e vazio.
+// A vírgula importa: Number("34,90") é NaN, e isso zeraria o registro.
+function num(v) {
+  if (v === null || v === undefined || v === "") return null;
+  if (typeof v === "number") return Number.isFinite(v) ? v : null;
+  const limpo = String(v)
+    .replace(/[R$\s]/gi, "")
+    .replace(/\.(?=\d{3}\b)/g, "") // separador de milhar
+    .replace(",", ".");
+  const n = Number(limpo);
+  return Number.isFinite(n) ? n : null;
+}
+
+/**
+ * Normaliza o payload da HeroSpark.
+ *
+ * Os nomes vêm do webhook personalizado (Automações > Gerar um Webhook), cuja
+ * lista de variáveis foi conferida no painel em 09/09/2026. Dois detalhes que
+ * já causaram erro:
+ *
+ * - NÃO existe `order_id`. O identificador bom é `item_id`, que a HeroSpark
+ *   documenta como "mesmo ID na confirmação e no estorno" — é ele que permite
+ *   casar um reembolso com a venda original.
+ * - `offer_price`, `payment_value`, `net_value_cents` e `purchase_total_value`
+ *   vêm todos EM CENTAVOS. Tratar como reais multiplicaria o valor por 100.
+ *
+ * Os fallbacks em cadeia continuam para o caso de o payload nativo (não o
+ * personalizado) chegar aqui algum dia.
+ */
 function parsePayload(body) {
   const p = body || {};
   const buyer = p.buyer || p.customer || p.cliente || {};
   const product = p.product || p.produto || {};
 
+  // Centavos são inteiros: sem vírgula, sem locale, sem arredondamento.
+  const pagoCent = num(p.payment_value) ?? num(p.offer_price);
+  const liquidoCent = num(p.net_value_cents);
+  const totalCent = num(p.purchase_total_value) ?? pagoCent;
+
+  // A HeroSpark não expõe a taxa direto; ela é a diferença entre o que o
+  // comprador pagou e o que caiu para você.
+  const taxaCent =
+    totalCent !== null && liquidoCent !== null ? totalCent - liquidoCent : null;
+
+  const emReais = (c) => (c === null ? null : c / 100);
+
   return {
-    venda_id: p.id || p.order_id || p.sale_id || p.transaction_id || null,
-    status: p.status || p.payment_status || p.situacao || "desconhecido",
+    venda_id:
+      p.item_id || p.payment_id || p.id || p.order_id || p.transaction_id || null,
+    status: p.payment_status || p.status || p.situacao || "desconhecido",
     produto: product.name || product.title || p.product_name || "Devocional",
-    valor: p.amount || p.value || p.total || p.valor || 0,
-    valor_liquido: p.net_amount || p.valor_liquido || null,
+    oferta: p.offer_title || null,
+    oferta_id: p.offer_id || null,
+    valor: emReais(pagoCent) ?? num(p.amount) ?? num(p.valor) ?? 0,
+    valor_liquido: emReais(liquidoCent),
+    valor_total: emReais(totalCent),
+    valor_centavos: pagoCent,
+    liquido_centavos: liquidoCent,
+    total_centavos: totalCent,
     metodo: p.payment_method || p.metodo_pagamento || null,
-    nome: buyer.name || buyer.nome || p.buyer_name || null,
-    email: buyer.email || p.buyer_email || null,
-    telefone: buyer.phone || buyer.telefone || p.buyer_phone || null,
+    nome: p.buyer_name || buyer.name || buyer.nome || null,
+    email: p.buyer_email || buyer.email || null,
+    telefone: p.buyer_phone_raw || p.buyer_phone || buyer.phone || null,
+    // `upsell` chega como a string "true"/"false" do Liquid, não como boolean.
+    upsell: String(p.upsell).toLowerCase() === "true",
     order_bump: Boolean(p.order_bump || p.bump || p.has_bump),
-    // UTMs: chegam aqui se você propagar da LP -> checkout
-    utm_source: p.utm_source || p.src || null,
+    // UTMs: chegam aqui porque lib/checkout.ts as propaga da LP até o checkout.
+    utm_source: p.utm_source || p.cart_src || null,
     utm_campaign: p.utm_campaign || null,
     utm_medium: p.utm_medium || null,
     utm_content: p.utm_content || null, // use isso pra identificar o anúncio
     utm_term: p.utm_term || null,
-    documento: buyer.document || buyer.cpf || p.buyer_document || null,
+    utm_id: p.utm_id || null,
+    src: p.cart_src || null,
+    documento: p.buyer_document_id || buyer.document || buyer.cpf || null,
     ip: buyer.ip || p.ip || null,
-    criado_originalmente_em: p.created_at || p.createdAt || p.data_criacao || null,
-    aprovado_em: p.approved_at || p.approvedAt || p.paid_at || null,
-    taxa: p.fee || p.gateway_fee || p.taxa || 0,
+    criado_originalmente_em: p.created_at || p.createdAt || null,
+    aprovado_em: p.payment_date || p.approved_at || p.paid_at || null,
+    estornado_em: p.refunded_at || null,
+    taxa: emReais(taxaCent) ?? 0,
+    taxa_centavos: taxaCent,
     raw: p,
     criado_em: new Date().toISOString(),
   };
