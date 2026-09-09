@@ -241,8 +241,24 @@ function parsePayload(body) {
 
   // A HeroSpark não expõe a taxa direto; ela é a diferença entre o que o
   // comprador pagou e o que caiu para você.
-  const taxaCent =
-    totalCent !== null && liquidoCent !== null ? totalCent - liquidoCent : null;
+  //
+  // Guarda de unidade: o líquido nunca pode passar do bruto. Quando passa, os
+  // dois campos vieram em unidades diferentes e a conta produziria lixo — o
+  // payload de teste da HeroSpark manda payment_value=1111 com
+  // net_value_cents=111100, o que dava uma taxa de -R$ 1.099,89. Nesse caso
+  // preferimos não afirmar nada a afirmar errado.
+  const unidadeCoerente =
+    totalCent !== null && liquidoCent !== null && liquidoCent <= totalCent;
+
+  if (totalCent !== null && liquidoCent !== null && !unidadeCoerente) {
+    console.warn(
+      `Valores incoerentes: liquido ${liquidoCent} > bruto ${totalCent} (centavos). ` +
+        "Taxa e valor líquido descartados neste evento."
+    );
+  }
+
+  const taxaCent = unidadeCoerente ? totalCent - liquidoCent : null;
+  const liquidoConfiavel = unidadeCoerente ? liquidoCent : null;
 
   const emReais = (c) => (c === null ? null : c / 100);
 
@@ -254,10 +270,10 @@ function parsePayload(body) {
     oferta: p.offer_title || null,
     oferta_id: p.offer_id || null,
     valor: emReais(pagoCent) ?? num(p.amount) ?? num(p.valor) ?? 0,
-    valor_liquido: emReais(liquidoCent),
+    valor_liquido: emReais(liquidoConfiavel),
     valor_total: emReais(totalCent),
     valor_centavos: pagoCent,
-    liquido_centavos: liquidoCent,
+    liquido_centavos: liquidoConfiavel,
     total_centavos: totalCent,
     metodo: p.payment_method || p.metodo_pagamento || null,
     nome: p.buyer_name || buyer.name || buyer.nome || null,
