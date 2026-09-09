@@ -4,269 +4,276 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#FDFBF7">
 <title>Os 3 Primeiros Meses — Devocional da Mãe Serena</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --creme:#F1EBDC;
-  --papel:#FBF8F1;
-  --oliva:#536B45;
-  --tinta:#2D3B22;
-  --dourado:#B8934A;
-  --dourado-claro:#C9A876;
-  --lapis:#6E6C5E;
-  --linha:rgba(45,59,34,.15);
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:
-    radial-gradient(1100px 460px at 50% -160px, rgba(83,107,69,.10), transparent 70%),
-    var(--creme);
-  color:var(--tinta);
-  font-family:'Karla',system-ui,sans-serif;
-  font-size:17px; line-height:1.63;
-  -webkit-font-smoothing:antialiased;
-}
-.folha{
-  max-width:640px; margin:0 auto; background:var(--papel);
-  padding:34px 26px 54px;
-  box-shadow:0 22px 60px -34px rgba(45,59,34,.5);
-}
-@media(min-width:700px){ .folha{margin:30px auto;padding:54px 62px 66px} }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/funil.css">
 
-.marca{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--oliva);
-  text-align:center;font-weight:600;margin:0}
-.orn{text-align:center;color:var(--dourado);letter-spacing:1.1em;font-size:13px;
-  margin:15px 0 0;padding-left:1.1em}
-.corte{border:0;border-top:1.5px dashed var(--dourado-claro);margin:44px 0 0;position:relative}
-.corte::after{content:"✂";position:absolute;top:-13px;left:0;background:var(--papel);
-  padding-right:11px;color:var(--dourado-claro);font-size:16px;line-height:1}
+<!-- Meta Pixel + UTMify: sem eles, a venda do upsell não é atribuída ao anúncio.
+     Esta página estava SEM os dois — todo upsell vendido aqui era invisível para
+     a Meta, e o CPA do produto parecia pior do que é. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1380514643999534');fbq('track','PageView');
+</script>
+<script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
+<script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
-h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
-  font-size:clamp(40px,10vw,62px);line-height:.98;margin:0;letter-spacing:-.015em}
-h1 .leve{display:block;font-style:italic;font-weight:400;color:var(--oliva);
-  font-size:.46em;letter-spacing:0;margin-bottom:8px}
-h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:31px;
-  line-height:1.12;margin:0 0 10px}
-.olho{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dourado);
-  font-weight:600;margin:0 0 6px}
-p{margin:0 0 17px}
-.lead{font-size:19.5px;line-height:1.55}
-em{font-style:italic} strong{font-weight:600}
-
-.recibo{
-  border:1px solid var(--linha);border-left:3px solid var(--oliva);
-  background:linear-gradient(180deg,#FDFBF6,#FBF8F1);
-  padding:15px 18px;margin:26px 0 34px;font-size:15.5px;color:var(--lapis);
-}
-.recibo strong{color:var(--tinta)}
-
-/* capa do PDF */
-.capa-wrap{margin:34px 0 0;text-align:center}
-.capa{
-  width:210px;display:inline-block;transform:rotate(-1.6deg);
-  box-shadow:0 20px 34px -20px rgba(45,59,34,.55), 0 0 0 1px rgba(45,59,34,.10);
-}
-.capa svg{display:block;width:100%;height:auto}
-.capa-leg{margin:16px 0 0;font-size:13.5px;color:var(--lapis)}
-
-.itens{list-style:none;padding:0;margin:22px 0 0}
-.itens li{display:flex;gap:14px;align-items:flex-start;padding:13px 0;
-  border-bottom:1px solid var(--linha);font-size:16px}
-.itens li:first-child{border-top:1px solid var(--linha)}
-.quad{flex:0 0 12px;height:12px;margin-top:7px;border:1.5px solid var(--dourado)}
-.itens b{font-weight:600;display:block}
-.itens .d{color:var(--lapis);font-size:14.5px;display:block}
-
-.versiculo{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-style:italic;
-  line-height:1.34;color:var(--tinta);margin:34px 0 6px;text-align:center}
-.ref{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dourado);
-  margin:0;text-align:center}
-
-.oferta{margin:32px 0 0;text-align:center}
-.preco{font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;line-height:1;
-  font-weight:600;margin:0}
-.preco small{display:block;font-family:'Karla',sans-serif;font-size:14px;font-weight:400;
-  color:var(--lapis);margin-top:10px;letter-spacing:.02em}
-.cta{display:block;width:100%;margin:24px 0 0;background:var(--oliva);color:var(--papel);
-  border:0;border-radius:2px;cursor:pointer;font-family:'Karla',sans-serif;font-size:17.5px;
-  font-weight:600;padding:21px 20px;text-decoration:none;letter-spacing:.01em;
-  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);transition:background .18s ease}
-.cta:hover,.cta:focus-visible{background:var(--tinta)}
-.umclique{margin:16px 0 0;font-size:15px;color:var(--tinta);font-weight:500}
-.selo{margin:9px 0 0;font-size:13.5px;color:var(--lapis);line-height:1.62}
-.recusa{display:block;text-align:center;margin:28px 0 0;font-size:14px;color:var(--lapis);
-  text-decoration:underline;text-underline-offset:3px}
-.recusa:hover{color:var(--tinta)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--dourado);outline-offset:3px}
-.rodape{margin:46px 0 0;font-size:12.5px;color:var(--lapis);text-align:center;line-height:1.65}
-
-/* container dos botoes injetados pela HeroSpark — herda o visual da pagina */
-#upsell-herospark{margin:24px 0 0}
-#upsell-herospark:empty{min-height:0}
-#upsell-herospark a,#upsell-herospark button{
-  display:block!important;width:100%!important;margin:0 0 12px!important;
-  font-family:'Karla',system-ui,sans-serif!important;font-size:17px!important;
-  font-weight:600!important;padding:20px 18px!important;border-radius:2px!important;
-  text-decoration:none!important;cursor:pointer;line-height:1.3!important;
-  box-sizing:border-box;text-align:center!important;
-}
-/* primeiro botao = aceite */
-#upsell-herospark a:first-of-type,#upsell-herospark button:first-of-type{
-  background:var(--oliva)!important;color:var(--papel)!important;border:0!important;
-  box-shadow:0 12px 24px -14px rgba(45,59,34,.75);
-}
-/* segundo botao = recusa, discreto */
-#upsell-herospark a:nth-of-type(2),#upsell-herospark button:nth-of-type(2){
-  background:transparent!important;color:var(--lapis)!important;border:0!important;
-  font-weight:400!important;font-size:14px!important;padding:10px 0!important;
-  text-decoration:underline!important;text-underline-offset:3px;box-shadow:none!important;
-}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
-</style>
-<!-- HeroSpark — widget de upsell 1 clique: DESATIVADO (dormente).
-     Motivo: o widget injeta um iframe de pay.herospark.com cujos botões fazem
-     apenas  top.postMessage('upsell-accept/<id>', 'https://pay.herospark.com/').
-     Como esta página é servida por devocionalmaeserena.netlify.app, a janela
-     `top` tem outra origem e o navegador DESCARTA a mensagem em silêncio.
-     Resultado: os botões apareciam, eram clicáveis e não faziam absolutamente
-     nada — nem o aceite, nem a recusa (por isso o downsell ficou inalcançável).
-     Esse widget só funciona embutido numa página hospedada pela HeroSpark.
-     Se um dia eles liberarem cross-origin, reative a tag abaixo e devolva a
-     <div id="upsell-herospark"></div> no lugar dos links do corpo.
+<!-- HeroSpark — widget de 1 clique DESATIVADO (oferta 537526, R$ 69,90).
+     Ele não funciona fora de um domínio da HeroSpark. O iframe injetado faz:
+         top.postMessage(`upsell-accept/${id}`, 'https://pay.herospark.com/')
+     Como esta página é servida por devocionalmaeserena.netlify.app, a origem
+     de `top` não bate com nenhuma das permitidas e o navegador DESCARTA a
+     mensagem em silêncio. Os botões apareciam, eram clicáveis e não faziam
+     nada — nem aceitar, nem recusar (foi assim que o downsell ficou
+     inalcançável). Enquanto isso, a página usa o checkout normal.
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
         data-upsell-id="e383387e-a96a-4af8-b905-fb608c6e5bdc"></script>
 -->
 </head>
 <body>
-<main class="folha">
 
-  <p class="marca">Devocional da Mãe Serena</p>
-  <p class="orn">✦ ❖ ✦</p>
+<div class="aviso">
+  <p>✅ Compra aprovada — seu devocional já está a caminho do e-mail</p>
+</div>
 
-  <p class="recibo">
-    <strong>Sua compra foi aprovada.</strong> O devocional de 9 dias já está indo para o seu
-    e-mail — ele é seu, não depende de mais nada. Só peço um minuto para falar de uma coisa.
-  </p>
+<section class="wrap" id="hero">
+  <div class="recibo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <p><strong>Seus 9 dias já estão garantidos.</strong> Antes de fechar, leia isto.</p>
+  </div>
 
   <h1><span class="leve">Ninguém fala do</span>Dia 10.</h1>
 
-  <p class="lead" style="margin-top:28px">
-    Os nove dias são curtos de propósito. Cabem numa semana difícil, e são longos o bastante
-    para você descobrir que dá — que existe um jeito de abrir a Bíblia num dia comum, com
-    barulho na casa, sem esperar a vida ficar organizada primeiro.
+  <p class="lead">
+    Os nove dias são curtos de propósito. Cabem numa semana difícil. O problema nunca foi
+    o Dia 1 — <strong>é o Dia 10, quando não tem mais folha para abrir.</strong>
   </p>
 
-  <p>O problema nunca foi o Dia 1.</p>
+  <ul class="badges">
+    <li>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>3 meses</span>
+    </li>
+    <li>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>100% Bíblico</span>
+    </li>
+    <li>
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+      <span>Chega no e-mail</span>
+    </li>
+  </ul>
 
-  <p>
-    É o Dia 10. No Dia 10 não tem mais folha. Quem fez nove dias seguidos volta a não fazer
-    nenhum — não porque desistiu, mas porque acabou. E quando tenta retomar sozinha, quase
-    sempre tenta retomar <em>maior</em>: ler mais, orar mais, se organizar melhor. Aí trava.
-  </p>
-
-  <hr class="corte">
-
-  <div class="capa-wrap">
-    <div class="capa">
-      <svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"
-           aria-label="Capa do PDF Os 3 Primeiros Meses">
-        <rect width="210" height="297" fill="#F5F0E4"/>
-        <text x="105" y="62" text-anchor="middle" fill="#B8934A" font-size="7"
-              letter-spacing="4" font-family="serif">✦ ❖ ✦</text>
-        <text x="105" y="80" text-anchor="middle" fill="#536B45" font-size="4.6"
-              letter-spacing="1.5" font-family="Karla,sans-serif" font-weight="600">DEVOCIONAL DA MÃE SERENA</text>
-        <text x="105" y="106" text-anchor="middle" fill="#2D3B22" font-size="21"
-              font-family="'Cormorant Garamond',serif" font-weight="600">Os 3 Primeiros Meses</text>
-        <text x="105" y="120" text-anchor="middle" fill="#536B45" font-size="8"
-              font-style="italic" font-family="'Cormorant Garamond',serif">o que vem depois do Dia 9</text>
-        <g stroke="rgba(45,59,34,.22)" stroke-width=".4">
-          <line x1="40" y1="176" x2="170" y2="176"/>
-          <line x1="40" y1="196" x2="170" y2="196"/>
-          <line x1="40" y1="216" x2="170" y2="216"/>
-          <line x1="40" y1="236" x2="170" y2="236"/>
-        </g>
-        <g font-family="'Cormorant Garamond',serif" font-size="9" fill="#2D3B22">
-          <text x="62" y="190">Recomeço</text>
-          <text x="62" y="210">Rotina</text>
-          <text x="62" y="230">Paciência</text>
-        </g>
-        <g font-family="Karla,sans-serif" font-size="3.4" fill="#B8934A"
-           letter-spacing="1.1" font-weight="600">
-          <text x="40" y="189">MÊS 1</text>
-          <text x="40" y="209">MÊS 2</text>
-          <text x="40" y="229">MÊS 3</text>
-        </g>
-        <text x="105" y="266" text-anchor="middle" fill="#B8934A" font-size="3.4"
-              letter-spacing="1.6" font-family="Karla,sans-serif" font-weight="600">ARQUIVO DIGITAL · PARA IMPRIMIR EM CASA</text>
-      </svg>
-    </div>
-    <p class="capa-leg">PDF de 28 páginas, no mesmo formato dos seus 9 dias.</p>
+  <div class="capa-card">
+    <span class="tag">PDF · 28 páginas</span>
+    <svg viewBox="0 0 210 297" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Capa do PDF Os 3 Primeiros Meses">
+      <rect width="210" height="297" fill="#F5F0E4"/>
+      <text x="105" y="60" text-anchor="middle" fill="#B8934A" font-size="7"
+            letter-spacing="4" font-family="Georgia,serif">✦ ❖ ✦</text>
+      <text x="105" y="79" text-anchor="middle" fill="#536B45" font-size="4.4"
+            letter-spacing="1.2" font-family="Inter,sans-serif" font-weight="700">DEVOCIONAL DA MÃE SERENA</text>
+      <text x="105" y="107" text-anchor="middle" fill="#2D3B22" font-size="17"
+            font-family="'Playfair Display',Georgia,serif" font-weight="700">Os 3 Primeiros Meses</text>
+      <text x="105" y="122" text-anchor="middle" fill="#536B45" font-size="7.6"
+            font-style="italic" font-family="'Playfair Display',Georgia,serif">o que vem depois do Dia 9</text>
+      <g stroke="rgba(45,59,34,.2)" stroke-width=".4">
+        <line x1="40" y1="176" x2="170" y2="176"/>
+        <line x1="40" y1="200" x2="170" y2="200"/>
+        <line x1="40" y1="224" x2="170" y2="224"/>
+      </g>
+      <g font-family="'Playfair Display',Georgia,serif" font-size="8.4" fill="#2D3B22">
+        <text x="62" y="192">Recomeço</text>
+        <text x="62" y="216">Rotina</text>
+        <text x="62" y="240">Paciência</text>
+      </g>
+      <g font-family="Inter,sans-serif" font-size="3.4" fill="#B8934A"
+         letter-spacing="1.1" font-weight="700">
+        <text x="40" y="191">MÊS 1</text>
+        <text x="40" y="215">MÊS 2</text>
+        <text x="40" y="239">MÊS 3</text>
+      </g>
+      <text x="105" y="268" text-anchor="middle" fill="#B8934A" font-size="3.4"
+            letter-spacing="1.6" font-family="Inter,sans-serif" font-weight="700">ARQUIVO DIGITAL · PARA IMPRIMIR EM CASA</text>
+    </svg>
   </div>
+</section>
 
-  <section style="margin-top:38px">
+<!-- O conteudo vem ANTES da oferta: a leitora precisa saber o que sao os 3 meses
+     para o preco significar alguma coisa. Quem ja decidiu nao perde nada — a barra
+     fixa aparece assim que o hero sai da tela e leva direto pra oferta. -->
+<section class="sec">
+  <div class="wrap">
     <p class="olho">O que continua depois do Dia 9</p>
-    <h2>Os 3 Primeiros Meses</h2>
-    <p>
-      Não é mais do mesmo em maior quantidade. É mais devagar. Onde os nove dias pediam um
-      hábito por dia, aqui é <strong>um hábito por mês</strong>. Um só, repetido até parar de
-      exigir esforço.
-    </p>
+    <h2>Um hábito por mês, não um por dia</h2>
+    <p class="sub">Não é mais do mesmo em maior quantidade. É mais devagar. Onde os nove
+      dias pediam um hábito por dia, aqui é um só por mês — repetido até parar de exigir
+      esforço.</p>
+
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 1</span> Recomeço</p>
+      <ul class="semanas">
+        <li><span>S1</span> O décimo dia</li>
+        <li><span>S2</span> Uma coisa por dia, sem lista</li>
+        <li><span>S3</span> Quando eu falho</li>
+        <li><span>S4</span> O que já mudou em mim</li>
+      </ul>
+    </div>
+
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 2</span> Rotina</p>
+      <ul class="semanas">
+        <li><span>S5</span> Um horário fixo só seu</li>
+        <li><span>S6</span> O lugar marcado</li>
+        <li><span>S7</span> Quando a casa atrapalha</li>
+        <li><span>S8</span> A metade do caminho</li>
+      </ul>
+    </div>
+
+    <div class="mes">
+      <p class="mes-tit"><span class="mes-num">Mês 3</span> Paciência</p>
+      <ul class="semanas">
+        <li><span>S9</span> Dez minutos, um filho por vez</li>
+        <li><span>S10</span> Quando eu perco a paciência</li>
+        <li><span>S11</span> O lar como refúgio</li>
+        <li><span>S12</span> Entregar de novo</li>
+      </ul>
+    </div>
 
     <ul class="itens">
-      <li><span class="quad"></span><span><b>Mês 1 — Recomeço</b><span class="d">Uma coisa por dia, sem lista.</span></span></li>
-      <li><span class="quad"></span><span><b>Mês 2 — Rotina</b><span class="d">Um horário fixo só seu, com lugar marcado.</span></span></li>
-      <li><span class="quad"></span><span><b>Mês 3 — Paciência</b><span class="d">Dez minutos por dia, um filho por vez.</span></span></li>
-      <li><span class="quad"></span><span><b>12 devocionais, um por semana</b><span class="d">Versículo em ARC, reflexão, oração e o hábito da semana com o tempo declarado.</span></span></li>
-      <li><span class="quad"></span><span><b>A página do dia em que não deu</b><span class="d">Uma por mês. O que fazer quando você falhar — porque você vai falhar, e é aí que quase todo mundo larga.</span></span></li>
+      <li><span class="mark"></span><span><b>12 devocionais, um por semana</b>
+        <span class="d">Versículo em ARC, reflexão, oração e o hábito da semana com o
+          tempo declarado.</span></span></li>
+      <li><span class="mark"></span><span><b>A página do dia em que não deu</b>
+        <span class="d">Uma por mês. O que fazer quando você falhar — porque você vai
+          falhar, e é aí que quase todo mundo larga.</span></span></li>
+      <li><span class="mark"></span><span><b>Cada mês retoma o anterior</b>
+        <span class="d">Não é material novo a cada 30 dias: é a mesma coisa ficando mais
+          fácil.</span></span></li>
     </ul>
 
-    <p style="margin-top:26px">
-      Cada mês abre retomando o hábito do mês anterior. Não é um material novo a cada 30
-      dias: é a mesma coisa ficando mais fácil.
-    </p>
-  </section>
+    <div class="versiculo">
+      <p>“Mas os que esperam no Senhor renovarão as suas forças (…)
+        caminharão e não se fatigarão.”</p>
+      <p class="ref">Isaías 40.31 (ARC)</p>
+    </div>
 
-  <p class="versiculo">“Mas os que esperam no Senhor renovarão as suas forças (…)<br>
-  caminharão e não se fatigarão.”</p>
-  <p class="ref">Isaías 40.31 (ARC)</p>
-  <p style="margin-top:16px;color:var(--lapis);font-size:16px;text-align:center">
-    A promessa maior não é sobre voar. É sobre caminhar —<br>que é o que a rotina exige
-    todo dia, sem plateia.
-  </p>
-
-  <hr class="corte">
-
-  <div class="oferta">
-    <p class="preco">R$ 69,90<small>pagamento único · sem assinatura</small></p>
-
-    <!-- Links reais. NÃO trocar por botão com JS: foi exatamente isso que
-         quebrou antes. O destino da recusa replica o que está no painel da
-         HeroSpark ("Se o cliente recusar a oferta?" -> /downsell). -->
-    <a class="cta" href="https://pay.herospark.com/devocional-da-mae-serena-os-3-primeiros-meses-537526">
-      Sim, quero levar os 3 meses</a>
-
-    <p class="selo">
-      Você confirma os dados no checkout seguro da HeroSpark.<br><br>
-      Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
-      Acesso imediato no mesmo e-mail · 7 dias de garantia.
-    </p>
-
-    <a class="recusa" href="https://devocionalmaeserena.netlify.app/downsell">
-      Não, quero só os 9 dias por enquanto</a>
+    <p class="sub" style="margin-top:22px">A promessa maior não é sobre voar. É sobre
+      caminhar — que é o que a rotina exige todo dia, sem plateia.</p>
   </div>
+</section>
 
-  <p class="orn" style="margin-top:46px">✦ ❖ ✦</p>
-  <p class="rodape">
-    Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
-    © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
-  </p>
+<section class="sec faixa-clara" id="oferta">
+  <div class="wrap">
+    <div class="oferta">
+      <div class="oferta-topo"><p>⚠️ Condição válida só nesta página</p></div>
 
-</main>
+      <div class="oferta-corpo">
+        <p class="riscado">Fora daqui, <s>R$ 97,00</s></p>
+        <p class="hoje">Agora, junto com a sua compra</p>
+        <p class="preco">R$ 69,90</p>
+        <p class="preco-nota">pagamento único · sem assinatura</p>
+
+        <!-- Links reais. NAO trocar por botao com JS: foi exatamente isso que
+             quebrou antes. O destino da recusa replica o que esta no painel da
+             HeroSpark ("Se o cliente recusar a oferta?" -> /downsell). -->
+        <a class="cta" href="https://pay.herospark.com/devocional-da-mae-serena-os-3-primeiros-meses-537526">
+          Sim, quero levar os 3 meses
+          <small>(R$ 69,90 · pagamento único)</small>
+        </a>
+        <a class="recusa" href="/downsell">
+          Não, quero só os 9 dias por enquanto</a>
+
+        <p class="selo">
+          Você confirma os dados no checkout seguro da HeroSpark.<br>
+          Arquivo digital em PDF, para ler no celular ou imprimir em casa.<br>
+          Acesso imediato no mesmo e-mail · 7 dias de garantia.
+        </p>
+      </div>
+    </div>
+
+    <div class="garantia">
+      <span class="escudo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Garantia de 7 dias</h2>
+        <p>Se não te der a direção que procurava, mande um e-mail e devolvemos 100%,
+          sem burocracia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="rodape">
+  Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
+  © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
+</p>
+
+<div class="barra" id="barra" hidden>
+  <a href="#oferta">Quero os 3 meses — R$ 69,90</a>
+</div>
+
+<script>
+// Barra fixa: aparece depois do hero e some quando a oferta esta na tela,
+// para nunca competir com o botao real de compra.
+// IntersectionObserver em vez de listener de scroll: nao roda em cada quadro
+// da rolagem e nao depende de ler scrollY.
+(function () {
+  var barra = document.getElementById('barra');
+  var oferta = document.getElementById('oferta');
+  var hero = document.getElementById('hero');
+  if (!barra || !oferta || !hero) return;
+
+  function naTela(el) {
+    var r = el.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  }
+
+  var agendado = false;
+  function atualizar() {
+    agendado = false;
+    barra.hidden = naTela(hero) || naTela(oferta);
+  }
+  function agendar() {
+    if (agendado) return;
+    agendado = true;
+    requestAnimationFrame(atualizar);
+  }
+
+  atualizar();
+  // Dois gatilhos independentes de proposito: o IntersectionObserver evita
+  // trabalho a cada quadro, e o listener de scroll cobre o caso de o
+  // observer nao disparar. Ambos caem na mesma funcao idempotente.
+  window.addEventListener('scroll', agendar, { passive: true });
+  window.addEventListener('resize', agendar);
+  if (window.IntersectionObserver) {
+    var io = new IntersectionObserver(agendar);
+    io.observe(hero);
+    io.observe(oferta);
+  }
+})();
+</script>
 </body>
 </html>

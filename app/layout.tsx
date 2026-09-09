@@ -8,7 +8,8 @@ import './globals.css'
 // produto, é só trocar aqui — e lembrar de trocar também no painel da
 // HeroSpark, senão o checkout dispara para a conta errada.
 const PIXEL_ID = '1380514643999534'
-const CLARITY_ID = 'yfpyp5xcpn'
+const UTMIFY_PIXEL_ID = '6a96ff68a90cb454027c5cc4'
+const CLARITY_ID = 'yfr5x008zd'
 
 const SITE_URL = 'https://devocionalmaeserena.netlify.app'
 
@@ -99,10 +100,24 @@ export default function RootLayout({
           />
         </noscript>
 
+        {/* UTMify — captura os UTMs do anuncio e casa a venda que chega pelo
+            webhook da HeroSpark com o clique que a originou. Desde que a API de
+            Conversoes da HeroSpark foi desligada (ela duplicava o Purchase), esta
+            e a UNICA fonte server-side de Purchase deste produto. O script tem que
+            estar na pagina: e dele que sai o _fbp/_fbc que sustenta a qualidade
+            de correspondencia do evento. */}
+        <Script id="utmify-pixel-id" strategy="afterInteractive">
+          {`window.pixelId = "${UTMIFY_PIXEL_ID}";`}
+        </Script>
+        <Script
+          id="utmify-pixel"
+          src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"
+          strategy="afterInteractive"
+        />
+
         {/* Microsoft Clarity — replay de sessao, mapa de calor, rage click e
-            dead click. Mesmo projeto da LP do Nao Desiste: para separar os dois
-            produtos, filtre por Page URL no painel. Carrega com afterInteractive
-            para nao competir com o first paint. */}
+            dead click. Projeto proprio do Mae Serena, separado do Nao Desiste.
+            Carrega com afterInteractive para nao competir com o first paint. */}
         <Script id="ms-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
