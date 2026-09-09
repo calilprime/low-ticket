@@ -24,10 +24,20 @@ fbq('init','1380514643999534');fbq('track','PageView');
 <script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
 <script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
 
-<!-- HeroSpark — 1 clique da oferta "Os Três Primeiros Meses" (R$ 69,90 · oferta 541301) -->
+<!-- HeroSpark — widget de 1 clique DESATIVADO (oferta 541301, R$ 69,90).
+     Ele não funciona fora de um domínio da HeroSpark. O iframe injetado faz:
+         top.postMessage(`upsell-accept/${id}`, 'https://pay.herospark.com/')
+     O terceiro argumento é o targetOrigin. Como esta página é servida por
+     devocionalnaodesiste.vercel.app, a origem de `top` não bate com nenhuma
+     das três permitidas (pay, pay-v2, checkoutpay.entregadigital) e o
+     navegador DESCARTA a mensagem em silêncio. Os botões apareciam,
+     eram clicáveis e não faziam nada — nem aceitar, nem recusar. Verificado
+     em 09/09/2026 lendo upsell-iframe-production.html.
+     Enquanto isso, a página usa o checkout normal, que funciona sempre.
 <script id="upsell-cta-script"
         src="https://pay.herospark.com/scripts/upsell-cta-script-production.js"
         data-upsell-id="5f473628-e93c-49c9-9b1b-3cd972bd2b33"></script>
+-->
 </head>
 <body>
 
