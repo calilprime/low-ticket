@@ -9,6 +9,7 @@ import { GuaranteeSection } from "@/components/guarantee-section"
 import { FaqSection } from "@/components/faq-section"
 import { SiteFooter } from "@/components/site-footer"
 import { StickyCta } from "@/components/sticky-cta"
+import { ClarityTags } from "@/components/clarity-tags"
 
 export default function Page() {
   return (
@@ -24,6 +25,7 @@ export default function Page() {
       <FaqSection />
       <SiteFooter />
       <StickyCta />
+      <ClarityTags />
     </main>
   )
 }

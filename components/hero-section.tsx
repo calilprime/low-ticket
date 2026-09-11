@@ -18,10 +18,15 @@ export function HeroSection() {
             <h1 className="text-balance font-serif text-[1.75rem] font-bold leading-[1.15] text-foreground sm:text-4xl md:text-5xl">
               O Que Orar Quando Seu Filho Fecha a Porta e Se Afasta de Você?
             </h1>
+            {/* Versao anterior abria com "clamar pela vida do seu filho", que em
+                registro evangelico soa como filho em risco de morte — alarme que
+                a oferta nao paga — e prometia "resgatar a paz na sua casa", um
+                resultado que depende do filho e nao dela. O "2 a 10 minutos"
+                saiu daqui porque ja esta no badge logo abaixo. */}
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg lg:mx-0">
-              Mesmo que ele não queira conversar ou se feche no quarto. Em apenas 9 dias, aprenda como usar orações
-              diárias de <strong className="font-semibold text-foreground">2 a 10 minutos</strong> para clamar pela
-              vida do seu filho e resgatar a paz na sua casa — sem brigar ou se desesperar.
+              Para a mãe que já não sabe o que orar pelo filho que se afastou. 9 dias,{" "}
+              <strong className="font-semibold text-foreground">uma oração pronta por dia</strong>, sem brigar e sem
+              se desesperar.
             </p>
 
             {/* Mockup do produto — antes do CTA no mobile, ao lado no desktop */}
@@ -30,7 +35,10 @@ export function HeroSection() {
             </div>
 
             <div className="mt-10 flex flex-col items-center gap-3 lg:items-start">
-              <CtaButton>Quero Começar o Dia 1 Agora</CtaButton>
+              {/* Sem o preco: os anuncios ja trazem R$ 34,90 na copy, e repetir
+                  no primeiro botao antecipa a objecao antes da oferta. O valor
+                  continua na secao de oferta e na barra fixa. */}
+              <CtaButton price={null} origin="hero">Quero Começar o Dia 1 Agora</CtaButton>
               <p className="text-sm font-medium text-muted-foreground">
                 ⚡ Acesso imediato no e-mail • 🔒 Garantia de 7 dias
               </p>

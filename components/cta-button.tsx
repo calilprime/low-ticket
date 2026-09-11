@@ -20,11 +20,13 @@ export function CtaButton({
   price = "Apenas R$ 34,90",
   className,
   pulse = true,
+  origin = 'cta',
 }: {
   children: React.ReactNode
   price?: string | null
   className?: string
   pulse?: boolean
+  origin?: string
 }) {
   return (
     <a
@@ -33,7 +35,7 @@ export function CtaButton({
         // Deixa passar o comportamento nativo de "abrir em nova aba".
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
         e.preventDefault()
-        goToCheckout()
+        goToCheckout(origin)
       }}
       // Enriquece o href com os UTMs assim que o componente monta, para que
       // até um "abrir em nova aba" carregue a atribuição.

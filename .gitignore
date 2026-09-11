@@ -8,3 +8,8 @@ out/
 # Produtos pagos - nunca versionar
 Nao desiste/
 *.pdf
+
+# Painel do Clarity - token e dados puxados da API
+.clarity-token
+data/clarity/
+painel-clarity.html

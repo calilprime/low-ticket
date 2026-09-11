@@ -23,7 +23,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Devocional da Mãe que Não Desiste | O Que Orar Quando Seu Filho Se Afasta',
   description:
-    'Para a mãe cujo filho fechou a porta e não conversa mais. 9 dias de orações de 2 a 10 minutos para clamar pela vida dele e resgatar a paz na sua casa, sem brigar ou se desesperar.',
+    'Para a mãe que já não sabe o que orar pelo filho que se afastou. 9 dias, uma oração pronta por dia, sem brigar e sem se desesperar.',
   icons: {
     icon: [
       { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },

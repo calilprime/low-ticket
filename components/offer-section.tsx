@@ -88,7 +88,7 @@ export function OfferSection() {
             </div>
 
             <div className="mt-8 flex flex-col items-center gap-3">
-              <CtaButton>Quero Começar o Dia 1 Agora</CtaButton>
+              <CtaButton origin="oferta">Quero Começar o Dia 1 Agora</CtaButton>
               <p className="text-xs text-olive-foreground/70">
                 Compra 100% segura • Entrega automática no seu e-mail
               </p>

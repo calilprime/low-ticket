@@ -35,12 +35,27 @@ export function buildCheckoutUrl(search?: string) {
   return url.toString()
 }
 
-export function goToCheckout() {
+/**
+ * @param origin qual botao originou o clique ('hero', 'oferta', 'sticky').
+ *   Vira tag no Clarity, para comparar qual CTA da pagina realmente leva ao
+ *   checkout — o Meta so reporta o total.
+ */
+export function goToCheckout(origin = 'cta') {
   if (typeof window === 'undefined') return
   if (redirecting) return
   redirecting = true
 
   const w = window as any
+
+  // Clarity: o evento vira Smart Event no painel (recorte de quem clicou vs
+  // quem nao clicou), e o upgrade prioriza a gravacao desta sessao caso o
+  // projeto entre em amostragem. Ambos sao no-op se o script nao carregou.
+  if (typeof w.clarity === 'function') {
+    w.clarity('set', 'cta_origin', origin)
+    w.clarity('event', 'cta_click')
+    w.clarity('upgrade', 'cta_click')
+  }
+
   if (typeof w.fbq === 'function') {
     w.fbq('track', 'InitiateCheckout', {
       value: 34.9,
