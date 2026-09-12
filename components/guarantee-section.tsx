@@ -4,7 +4,8 @@ export function GuaranteeSection() {
   return (
     <section className="bg-background px-5 pb-16 md:pb-24">
       <div className="mx-auto max-w-3xl">
-        <div className="flex flex-col items-center gap-6 rounded-[2rem] border-2 border-gold/40 bg-sand/60 p-7 text-center md:flex-row md:p-10 md:text-left">
+        <div className="flex flex-col items-center gap-6 rounded-[2rem] border-2 border-cta/45 bg-[linear-gradient(135deg,color-mix(in_oklab,var(--cta)_10%,var(--sand)),var(--sand))] p-7 text-center md:flex-row md:p-10 md:text-left"
+          data-reveal>
           <span className="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-cta/12 ring-4 ring-cta/25">
             <ShieldCheck className="h-10 w-10 text-cta" aria-hidden="true" />
           </span>

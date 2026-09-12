@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "Como recebo o PDF?",
+    q: "Como recebo?",
     a: "Assim que o pagamento no PIX ou no cartão for confirmado, o devocional e os 3 bônus chegam automaticamente no e-mail que você cadastrar na compra — normalmente em menos de 2 minutos. É tudo digital, em PDF, com acesso vitalício.",
   },
   {
@@ -10,16 +10,8 @@ const faqs = [
     a: "Ele não precisa participar de nada — nem saber que você tem o devocional. Este material é para VOCÊ orar por ele. Cada dia é uma reflexão, um versículo e uma oração feitas para a mãe, não para o filho. Nenhuma conversa, nenhuma cobrança e nenhuma exigência da parte dele.",
   },
   {
-    q: "Preciso imprimir?",
-    a: "Não precisa. Você pode ler direto no celular, no tablet ou no computador. Mas se você gosta de escrever à mão, o material foi diagramado para ficar bonito impresso em folha A4 comum — inclusive o Planner e o Cartão de Entrega a Deus.",
-  },
-  {
-    q: "Quanto tempo leva por dia?",
-    a: "Entre 2 e 10 minutos. Dá para fazer de manhã antes de todo mundo acordar, na fila da escola ou à noite antes de dormir. Foi feito para caber na rotina de quem já está cansada.",
-  },
-  {
     q: "E se eu não gostar?",
-    a: "Você tem 7 dias de garantia incondicional. Basta pedir o reembolso e devolvemos 100% do valor, sem perguntas.",
+    a: "Você tem 7 dias de garantia. Basta mandar um e-mail pedindo o reembolso e devolvemos 100% do valor, sem burocracia.",
   },
 ]
 
@@ -31,7 +23,7 @@ export function FaqSection() {
           Perguntas frequentes
         </h2>
 
-        <Accordion className="mt-10 w-full gap-3">
+        <Accordion className="mt-10 w-full gap-3" data-reveal>
           {faqs.map(({ q, a }) => (
             <AccordionItem
               key={q}

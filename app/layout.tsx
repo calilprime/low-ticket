@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Playfair_Display, Inter, Caveat } from 'next/font/google'
 import './globals.css'
 
 const PIXEL_ID = '1380514643999534'
@@ -17,6 +17,15 @@ const playfair = Playfair_Display({
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+})
+
+// Só os balões de margem usam esta face. Peso 700 apenas: um balão manuscrito
+// em peso normal some no meio do texto e deixa de ler como recado.
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: '700',
+  variable: '--font-caveat',
   display: 'swap',
 })
 
@@ -43,7 +52,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`bg-background ${playfair.variable} ${inter.variable}`}>
+    <html lang="pt-BR" className={`bg-background ${playfair.variable} ${inter.variable} ${caveat.variable}`}>
       <body className="font-sans antialiased">
         {children}
 

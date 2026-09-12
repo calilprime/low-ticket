@@ -46,6 +46,7 @@
   --animate-cta-pulse: cta-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
+  --font-hand: var(--font-caveat);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -163,5 +164,108 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Camada de persuasão: grifo, balão e animação de rolagem.
+
+   Fica fora de @layer base de propósito — CSS sem camada vence @layer, então
+   estas três não competem com os utilitários do Tailwind nos componentes.
+   -------------------------------------------------------------------------- */
+
+/* Grifo: marca-texto sob a linha que carrega o argumento. Gradiente em vez de
+   background sólido para não empastelar o texto — a tinta começa em 52% da
+   altura da linha, como uma canetada por baixo das letras. */
+.grifo {
+  background: linear-gradient(
+    to bottom,
+    transparent 52%,
+    color-mix(in oklab, var(--gold) 58%, transparent) 52%
+  );
+  padding: 0 0.12em;
+  border-radius: 0.1em;
+}
+
+/* Balão: a voz da margem, não a da página. Manuscrito e levemente torto para
+   ler como recado de alguém, e não como mais um bloco do anúncio. */
+.balao {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-hand), "Segoe Script", cursive;
+  font-weight: 700;
+  font-size: 1.12rem;
+  line-height: 1.25;
+  color: oklch(0.46 0.12 42);
+  background: color-mix(in oklab, var(--rose) 34%, var(--card));
+  border: 1.5px solid color-mix(in oklab, var(--primary) 32%, transparent);
+  border-radius: 1.1rem;
+  padding: 0.5rem 0.9rem;
+  rotate: -1.4deg;
+}
+
+.balao::after {
+  content: "";
+  position: absolute;
+  left: 1.6rem;
+  bottom: -0.5rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  rotate: 45deg;
+  background: color-mix(in oklab, var(--rose) 34%, var(--card));
+  border-right: 1.5px solid color-mix(in oklab, var(--primary) 32%, transparent);
+  border-bottom: 1.5px solid color-mix(in oklab, var(--primary) 32%, transparent);
+}
+
+/* Bico para cima, quando o balão comenta o que está acima dele. */
+.balao-cima {
+  rotate: 1.2deg;
+}
+
+.balao-cima::after {
+  top: -0.5rem;
+  bottom: auto;
+  left: auto;
+  right: 1.6rem;
+  rotate: 225deg;
+}
+
+/* Sobre o oliva da seção de oferta, o rosa some. */
+.balao-escuro {
+  color: var(--olive);
+  background: var(--gold);
+  border-color: color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+
+.balao-escuro::after {
+  background: var(--gold);
+  border-color: color-mix(in oklab, var(--foreground) 30%, transparent);
+}
+
+/* Animação de rolagem.
+
+   O estado escondido só entra via `reveal-armado`, que o ScrollReveal aplica
+   em JS e apenas ao que nasce ABAIXO da primeira dobra. Sem isso a primeira
+   tela — a única que 80% do tráfego vê, pelo scroll depth do Clarity — ficaria
+   em opacity:0 esperando um observer, e sem JS a página inteira sumiria. */
+[data-reveal].reveal-armado {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+[data-reveal].reveal-armado.reveal-visivel {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal].reveal-armado,
+  [data-reveal].reveal-armado.reveal-visivel {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
