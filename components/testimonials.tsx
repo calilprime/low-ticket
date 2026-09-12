@@ -4,8 +4,8 @@ const testimonials = [
   {
     quote:
       "Meu filho de 16 anos mal falava comigo. No dia 4 eu chorei orando, e naquela semana ele me procurou para conversar pela primeira vez em meses. Não foi mágica, foi Deus agindo na minha oração.",
-    name: "Cláudia M.",
-    role: "Mãe de um adolescente, 47 anos",
+    name: "Juliana M.",
+    role: "Mãe de um adolescente, 48 anos",
   },
   {
     quote:
