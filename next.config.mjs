@@ -11,6 +11,9 @@ const nextConfig = {
     return [
       { source: '/upsell', destination: '/upsell.html' },
       { source: '/downsell', destination: '/downsell.html' },
+      // Quiz para o tráfego das imagens, e o painel dele.
+      { source: '/quiz', destination: '/quiz.html' },
+      { source: '/banco-quiz', destination: '/banco-quiz.html' },
     ]
   },
 }
