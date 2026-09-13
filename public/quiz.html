@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#FDFBF7">
 <title>Qual oração falta para você? — Devocional da Mãe que Não Desiste</title>
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="/quiz-capa.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
@@ -20,8 +21,8 @@
   pergunta → 37 resultados → 7 checkouts.
 
   1. A abertura era uma tela com capa, texto, versículo e botão "Começar", e
-     66% saíam ali sem tocar em nada. Aqui a 1ª pergunta É a abertura: o
-     primeiro toque já é uma resposta.
+     66% saíam ali sem tocar em nada. Aqui a 1ª pergunta É a abertura: a
+     imagem fica, mas curta (16:9), e o primeiro toque já é uma resposta.
   2. O perfil `filhos` tinha uma única resposta dando ponto e nunca venceu
      (0 sessões). Aqui cada perfil recebe 3 respostas, e o empate tem regra.
   3. `resultado` e `minilp` eram gravados no mesmo instante, então a etapa
@@ -32,12 +33,28 @@
   5. O quiz antigo não disparava InitiateCheckout porque a HeroSpark o fazia.
      Desde 09/09 o pixel da HeroSpark está desligado (duplicava eventos), então
      sem o fbq daqui o anúncio do quiz ficaria com IC = 0 no Gerenciador.
-  6. O quiz recomendava "por qual dia começar". O PDF diz, na página 2, "não
-     adiante os dias". Aqui o resultado aponta o dia que mais fala com ela, e
-     diz que ela começa pelo Dia 1.
+  6. O resultado NÃO mostra nenhuma página do devocional (decisão do Calil,
+     13/09): mostrar um dia específico fazia o material parecer pouco e fazia
+     os outros oito dias parecerem desnecessários. O resultado devolve o que
+     ela respondeu e mostra o devocional INTEIRO como feito para esse momento.
 
-  Todo texto de dia, versículo e passo é literal do PDF (ARC).
+  Imagem da abertura: metade "antes" da arte do anúncio Jantar (Teste 4),
+  recortada abaixo do texto sobreposto — a mesma cena que ela acabou de ver
+  no anúncio, sem a frase de depoimento.
+
+  PRÉ-VISUALIZAÇÃO — abre cada resultado sem responder o quiz e sem gravar
+  nada (Supabase, pixel, UTMify e eventos do Clarity ficam desligados):
+    /quiz?preview=silencio
+    /quiz?preview=cobranca
+    /quiz?preview=controle
+    /quiz?preview=culpa
+    /quiz?preview=persistir
+  Opcional: &compromisso=hoje | amanha | ver_antes  (muda o botão e o eco)
 -->
+
+<!-- Pré-visualização não pode sujar o Meta nem a UTMify: os pixels só carregam
+     fora dela. A checagem roda antes de qualquer script de terceiro. -->
+<script>window.__ND_PREVIEW = /[?&]preview=/.test(location.search);</script>
 
 <style>
 :root{
@@ -78,15 +95,15 @@ p{margin:0}
 button{font:inherit}
 :focus-visible{outline:2px solid var(--cta);outline-offset:3px}
 
-.palco{max-width:520px;margin:0 auto;padding:22px 0 56px}
+.palco{max-width:520px;margin:0 auto;padding:16px 0 56px}
 
 /* topo: marca + progresso */
-.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;min-height:28px}
+.topo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;min-height:28px}
 .marca{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--olive);letter-spacing:.01em}
 .voltar{background:none;border:0;padding:6px 2px;color:var(--muted);font-size:14px;font-weight:600;cursor:pointer}
 .voltar:hover{color:var(--foreground)}
 .voltar[hidden]{display:none}
-.progresso{display:flex;gap:5px;margin-bottom:26px}
+.progresso{display:flex;gap:5px;margin-bottom:18px}
 .progresso[hidden]{display:none}
 .progresso span{flex:1;height:6px;border-radius:99px;background:color-mix(in oklab,var(--gold) 22%,var(--secondary));transition:background .35s ease}
 .progresso span.feito{background:linear-gradient(90deg,var(--gold),var(--primary))}
@@ -96,43 +113,50 @@ button{font:inherit}
 .tela.ativa{display:block;animation:entra .45s cubic-bezier(.2,.8,.2,1) both}
 @keyframes entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-.olho{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:12px}
-h1{font-size:clamp(28px,7.4vw,36px);line-height:1.14;letter-spacing:-.015em}
-h2{font-size:clamp(24px,6.4vw,29px);line-height:1.2}
-.apoio{color:var(--muted);font-size:16px;margin-top:12px}
+/* capa da abertura — curta de propósito: a 1ª pergunta tem que caber na tela.
+   height:auto é obrigatório: sem ele, o atributo height="405" da tag vira
+   altura fixa, vence o aspect-ratio e empurra 2 das 4 respostas para baixo
+   da dobra no celular (medido: 4ª resposta a 930px numa tela de 812). */
+.capa{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center 40%;
+  border-radius:16px;margin-bottom:16px;background:oklch(0.55 0.03 250);
+  box-shadow:0 16px 34px -22px rgba(20,30,50,.55)}
+
+.olho{display:block;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--primary);margin-bottom:8px}
+h1{font-size:clamp(26px,7vw,34px);line-height:1.14;letter-spacing:-.015em}
+h2{font-size:clamp(23px,6.2vw,28px);line-height:1.2}
+.apoio{color:var(--muted);font-size:15.5px;margin-top:8px}
 .apoio strong{color:var(--foreground);font-weight:600}
 
 /* opções */
-.opcoes{display:grid;gap:10px;margin-top:22px}
+.opcoes{display:grid;gap:9px;margin-top:16px}
 .opcao{
-  display:flex;align-items:center;gap:14px;width:100%;min-height:62px;
+  display:flex;align-items:center;gap:13px;width:100%;min-height:56px;
   text-align:left;cursor:pointer;
   background:var(--card);color:var(--foreground);
-  border:1.5px solid var(--border);border-radius:16px;padding:12px 16px;
-  font-size:16px;font-weight:600;line-height:1.35;
+  border:1.5px solid var(--border);border-radius:15px;padding:10px 15px;
+  font-size:15.5px;font-weight:600;line-height:1.3;
   box-shadow:0 1px 2px rgba(0,0,0,.03);
   transition:border-color .15s ease,background .15s ease,transform .1s ease;
 }
 .opcao .marcador{
   flex:0 0 22px;height:22px;border-radius:50%;
   border:2px solid color-mix(in oklab,var(--gold) 70%,var(--border));
-  display:grid;place-items:center;transition:all .15s ease;
+  transition:all .15s ease;
 }
 .opcao:hover{border-color:var(--gold)}
 .opcao:active{transform:scale(.985)}
 .opcao.escolhida{border-color:var(--cta);background:color-mix(in oklab,var(--cta) 9%,var(--card))}
 .opcao.escolhida .marcador{border-color:var(--cta);background:var(--cta);box-shadow:inset 0 0 0 4px var(--card)}
 
-.rodape-tela{margin-top:18px;text-align:center;font-size:13px;color:var(--muted)}
+.rodape-tela{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
 
-/* trecho do PDF usado como alívio entre perguntas */
+/* trecho usado como alívio entre perguntas */
 .trecho{
-  margin:0 0 22px;padding:14px 16px;border-radius:0 14px 14px 0;
+  margin:0 0 20px;padding:14px 16px;border-radius:0 14px 14px 0;
   background:color-mix(in oklab,var(--gold) 13%,var(--card));
   border-left:4px solid var(--gold);
   font-family:var(--serif);font-size:16px;font-weight:700;line-height:1.45;
 }
-.trecho small{display:block;margin-top:6px;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 
 /* calculando */
 .calc{text-align:center;padding:70px 0 40px}
@@ -145,50 +169,48 @@ h2{font-size:clamp(24px,6.4vw,29px);line-height:1.2}
 .calc li.ok{opacity:1;color:var(--foreground)}
 .calc li::before{content:"✓ ";color:var(--cta);font-weight:800}
 
-/* resultado */
-.selo-dia{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;
-  background:var(--olive);color:var(--olive-fg);border-radius:99px;padding:6px 14px 6px 6px;
-  font-size:12px;font-weight:700;letter-spacing:.04em}
-.selo-dia b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
-  background:var(--gold);color:var(--olive);font-family:var(--serif);font-size:14px}
+/* ---------------- resultado ---------------- */
+.selo{display:inline-flex;align-items:center;gap:8px;margin-bottom:12px;
+  background:var(--olive);color:var(--olive-fg);border-radius:99px;padding:6px 14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.selo::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cta);box-shadow:0 0 0 3px color-mix(in oklab,var(--cta) 30%,transparent)}
+
+.leitura{margin-top:14px;font-size:16px;line-height:1.65;color:var(--foreground)}
+.eco{margin-top:18px;padding:16px;border-radius:16px;background:var(--card);border:1px solid var(--border);font-size:16px;line-height:1.6}
+.grifo{background:linear-gradient(to bottom,transparent 52%,color-mix(in oklab,var(--gold) 58%,transparent) 52%);padding:0 .12em}
+
+/* espelho: o que ela respondeu → o que o devocional traz para isso */
+.espelho{margin-top:26px}
+.espelho h2{font-size:clamp(22px,6vw,26px)}
+.espelho .sub{margin-top:6px;font-size:14.5px;color:var(--muted)}
+.pares{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
+.par{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--card)}
+.par .disse{padding:11px 14px;background:color-mix(in oklab,var(--rose) 18%,var(--card));font-size:14.5px;font-style:italic;color:var(--foreground)}
+.par .disse small{display:block;font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-deep);margin-bottom:2px}
+.par .traz{display:grid;grid-template-columns:20px 1fr;gap:8px;padding:11px 14px;font-size:15px;font-weight:600;line-height:1.4}
+.par .traz::before{content:"✓";color:var(--cta-deep);font-weight:800}
 
 .versiculo{
-  margin:22px 0;padding:18px 18px 16px;border-radius:16px;
-  background:var(--card);border:1px solid var(--border);border-top:4px solid var(--gold);
-  font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;
-  box-shadow:0 14px 30px -22px color-mix(in oklab,var(--olive) 60%,transparent);
+  margin:24px 0 0;padding:18px 18px 16px;border-radius:16px;
+  background:color-mix(in oklab,var(--gold) 10%,var(--card));border-left:4px solid var(--gold);
+  font-family:var(--serif);font-size:17.5px;font-style:italic;line-height:1.45;
 }
 .versiculo cite{display:block;margin-top:10px;font-family:var(--sans);font-style:normal;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
 
-.citacao{margin:18px 0 0;padding-left:14px;border-left:3px solid var(--rose);color:var(--foreground);font-size:15.5px;font-style:italic}
-.citacao small{display:block;margin-top:6px;font-style:normal;font-size:12px;color:var(--muted)}
+/* contagem — combate o "é pouca coisa" sem mostrar nenhuma página */
+.contagem{margin-top:26px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center}
+.contagem div{padding:10px 2px;border-radius:12px;background:var(--secondary)}
+.contagem b{display:block;font-family:var(--serif);font-size:24px;line-height:1;color:var(--olive);font-variant-numeric:tabular-nums}
+.contagem span{display:block;margin-top:4px;font-size:10.5px;font-weight:700;line-height:1.2;color:var(--muted)}
+.contagem-nota{margin-top:8px;text-align:center;font-size:13px;color:var(--muted)}
 
-.passo{
-  margin:24px 0 0;padding:18px;border-radius:18px;
-  background:linear-gradient(135deg,color-mix(in oklab,var(--cta) 12%,var(--card)),var(--card));
-  border:1.5px solid color-mix(in oklab,var(--cta) 40%,transparent);
-}
-.passo .rotulo{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--cta-deep)}
-.passo h3{font-size:20px;margin-top:6px}
-.passo .tempo{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;color:var(--olive);
-  background:color-mix(in oklab,var(--gold) 25%,transparent);border-radius:99px;padding:2px 10px}
-.passo p{margin-top:10px;font-size:15px;color:var(--foreground)}
-
-.eco{margin:26px 0 0;font-size:16px;line-height:1.6}
-.grifo{background:linear-gradient(to bottom,transparent 52%,color-mix(in oklab,var(--gold) 58%,transparent) 52%);padding:0 .12em}
-
-.divisor{display:flex;align-items:center;gap:12px;margin:34px 0 18px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-.divisor::before,.divisor::after{content:"";flex:1;height:1px;background:var(--border)}
-
-.ordem{padding:12px 14px;border-radius:14px;background:var(--secondary);font-size:14px;color:var(--muted)}
-.ordem strong{color:var(--foreground)}
-
-.oferta{margin-top:18px;border-radius:26px;overflow:hidden;color:var(--olive-fg);
+.oferta{margin-top:22px;border-radius:26px;overflow:hidden;color:var(--olive-fg);
   background:radial-gradient(90% 40% at 50% 0%,color-mix(in oklab,var(--gold) 22%,transparent),transparent 65%),var(--olive);
   box-shadow:0 24px 50px -26px color-mix(in oklab,var(--olive) 80%,transparent)}
 .oferta .faixa{background:var(--gold);color:var(--gold-ink);text-align:center;padding:9px 12px;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .oferta .miolo{padding:22px 18px 24px}
-.itens{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.oferta h3{color:var(--olive-fg);text-align:center;font-size:21px}
+.itens{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
 .itens li{display:grid;grid-template-columns:18px 1fr;gap:10px;padding:11px 12px;border-radius:14px;
   background:color-mix(in oklab,var(--olive-fg) 7%,transparent);
   border:1px solid color-mix(in oklab,var(--olive-fg) 12%,transparent);font-size:14px;line-height:1.4}
@@ -215,10 +237,10 @@ h2{font-size:clamp(24px,6.4vw,29px);line-height:1.2}
   font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;line-height:1.2;
   box-shadow:0 14px 28px -10px color-mix(in oklab,var(--cta) 75%,transparent);animation:pulsa 2.2s ease-in-out infinite}
 .cta small{display:block;margin-top:3px;font-size:12px;font-weight:700;text-transform:none;letter-spacing:0;opacity:.95}
-@keyframes pulsa{50%{box-shadow:0 14px 28px -10px color-mix(in oklab,var(--cta) 75%,transparent),0 0 0 10px color-mix(in oklab,var(--cta) 0%,transparent)}0%{box-shadow:0 14px 28px -10px color-mix(in oklab,var(--cta) 75%,transparent),0 0 0 0 color-mix(in oklab,var(--cta) 45%,transparent)}}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
 .garantias{margin-top:10px;text-align:center;font-size:12.5px;color:color-mix(in oklab,var(--olive-fg) 80%,transparent)}
 
-.honesto{margin-top:26px;padding:16px;border-radius:16px;border:1px dashed var(--border);font-size:14.5px;color:var(--muted)}
+.honesto{margin-top:24px;padding:16px;border-radius:16px;border:1px dashed var(--border);font-size:14.5px;color:var(--muted)}
 .honesto strong{color:var(--foreground)}
 
 .garantia{margin-top:14px;display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:18px;
@@ -232,8 +254,15 @@ h2{font-size:clamp(24px,6.4vw,29px);line-height:1.2}
 .depoimento p{font-size:15px;font-style:italic}
 .depoimento cite{display:block;margin-top:6px;font-size:12.5px;font-style:normal;color:var(--muted)}
 
-.link-lp{display:block;margin:28px auto 0;text-align:center;color:var(--muted);font-size:14px;text-decoration:underline;text-underline-offset:3px;background:none;border:0;cursor:pointer}
+.link-lp{display:block;margin:28px auto 0;text-align:center;color:var(--muted);font-size:14px;text-decoration:underline;text-underline-offset:3px}
 .fim{margin-top:30px;text-align:center;font-size:12px;color:var(--muted)}
+
+/* barra da pré-visualização — só aparece com ?preview= */
+.previa{position:sticky;top:0;z-index:50;margin:0 -20px 12px;padding:9px 14px;
+  background:oklch(0.25 0.02 60);color:oklch(0.97 0.01 85);font-size:12px;line-height:1.5}
+.previa b{color:var(--gold)}
+.previa a{color:oklch(0.97 0.01 85);margin-right:10px;white-space:nowrap}
+.previa a[aria-current="true"]{color:var(--gold);font-weight:700;text-decoration:none}
 
 @media (prefers-reduced-motion:reduce){
   .tela.ativa,.cta,.calc .anel{animation:none}
@@ -243,17 +272,26 @@ h2{font-size:clamp(24px,6.4vw,29px);line-height:1.2}
 
 <!-- Meta Pixel — PageView aqui; IC no clique do checkout (ver nota 5 acima). -->
 <script>
+if (!window.__ND_PREVIEW) {
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1380514643999534');fbq('track','PageView');
+}
 </script>
 <!-- UTMify — mesmo pixel da LP. É ele que reporta a compra ao Meta pelo servidor. -->
-<script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
-<script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
-<!-- Clarity — mesmo projeto da LP, sessão marcada com pagina=quiz. -->
+<script>
+if (!window.__ND_PREVIEW) {
+  window.pixelId = "6a96ff68a90cb454027c5cc4";
+  var u = document.createElement("script");
+  u.async = true; u.defer = true;
+  u.src = "https://cdn.utmify.com.br/scripts/pixel/pixel.js";
+  document.head.appendChild(u);
+}
+</script>
+<!-- Clarity — mesmo projeto da LP (mesmo domínio), sessão marcada com pagina=quiz. -->
 <script>
 (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
 t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -262,6 +300,8 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 </head>
 <body>
 <main class="palco">
+
+  <div class="previa" id="previa" hidden></div>
 
   <div class="topo">
     <button class="voltar" id="voltar" type="button" hidden>← Voltar</button>
@@ -273,9 +313,11 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 
   <!-- P1 · é também a abertura -->
   <section class="tela ativa" data-etapa="p1" data-ordem="1" aria-labelledby="t-p1">
+    <img class="capa" src="/quiz-capa.webp" width="720" height="405" fetchpriority="high"
+         alt="Uma mãe jantando sozinha à mesa, com um prato intocado e a cadeira ao lado vazia">
     <span class="olho">5 perguntas · menos de 1 minuto</span>
     <h1 id="t-p1">Como está a conversa com o seu filho hoje?</h1>
-    <p class="apoio">Toque na resposta mais perto da sua. No fim, você recebe <strong>o versículo e o primeiro passo de oração</strong> para o que respondeu.</p>
+    <p class="apoio">No fim, você recebe um resultado <strong>feito para o que você respondeu</strong>.</p>
     <div class="opcoes">
       <button class="opcao" type="button" data-resposta="curta" data-perfil="silencio"><span class="marcador"></span>Curta. Ele responde com uma palavra só</button>
       <button class="opcao" type="button" data-resposta="briga" data-perfil="cobranca"><span class="marcador"></span>Toda conversa acaba em briga ou cobrança</button>
@@ -312,10 +354,10 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     </div>
   </section>
 
-  <!-- P4 — o trecho do Dia 5 entra aqui como alívio, sem tela extra -->
+  <!-- P4 — alívio no topo, sem tela extra -->
   <section class="tela" data-etapa="p4" data-ordem="4" aria-labelledby="t-p4">
     <span class="olho">4 de 5</span>
-    <p class="trecho">“A ausência de resposta não é ausência de movimento.”<small>Do Dia 5 do devocional</small></p>
+    <p class="trecho">A ausência de resposta não é ausência de movimento.</p>
     <h2 id="t-p4">Você já tentou resolver conversando com ele?</h2>
     <div class="opcoes">
       <button class="opcao" type="button" data-resposta="piorou" data-perfil="cobranca"><span class="marcador"></span>Várias vezes. Só piorou</button>
@@ -340,45 +382,49 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   <section class="tela" data-etapa="calculando" aria-live="polite">
     <div class="calc">
       <div class="anel" aria-hidden="true"></div>
-      <h2>Separando o seu versículo…</h2>
+      <h2>Preparando o seu resultado…</h2>
       <ul>
         <li>Lendo as suas respostas</li>
-        <li>Encontrando o dia que fala com você</li>
-        <li>Separando o primeiro passo de oração</li>
+        <li>Entendendo o seu momento</li>
+        <li>Separando o que foi feito para você</li>
       </ul>
     </div>
   </section>
 
   <!-- Resultado + oferta -->
   <section class="tela" data-etapa="resultado" data-ordem="6" aria-live="polite">
-    <span class="selo-dia"><b id="r-num">2</b><span id="r-dia">DIA 2 · O SILÊNCIO QUE DÓI</span></span>
+    <span class="selo">Seu resultado</span>
     <h1 id="r-titulo"></h1>
-    <p class="apoio" id="r-texto"></p>
-    <p class="citacao" id="r-citacao"></p>
-
-    <div class="versiculo" id="r-versiculo"></div>
-
-    <div class="passo">
-      <span class="rotulo">Seu primeiro passo · pode fazer ainda hoje</span>
-      <h3 id="r-passo-titulo"></h3>
-      <span class="tempo" id="r-passo-tempo"></span>
-      <p id="r-passo-texto"></p>
-    </div>
+    <p class="leitura" id="r-leitura"></p>
 
     <p class="eco" id="r-eco"></p>
 
-    <div class="divisor">O devocional completo</div>
+    <div class="espelho">
+      <h2>O que você respondeu — e o que foi feito para isso</h2>
+      <p class="sub">Cada resposta sua tem um lugar dentro do devocional.</p>
+      <ul class="pares" id="r-pares"></ul>
+    </div>
 
-    <p class="ordem" id="r-ordem"></p>
+    <div class="versiculo" id="r-versiculo"></div>
+
+    <div class="contagem" aria-label="O que vem no devocional">
+      <div><b>9</b><span>orações prontas</span></div>
+      <div><b>9</b><span>versículos</span></div>
+      <div><b>9</b><span>reflexões</span></div>
+      <div><b>9</b><span>passos de oração</span></div>
+      <div><b>3</b><span>bônus</span></div>
+    </div>
+    <p class="contagem-nota">Nove dias, um depois do outro — cada um constrói o seguinte.</p>
 
     <div class="oferta">
       <div class="faixa">Pagamento único · Acesso vitalício</div>
       <div class="miolo">
+        <h3 id="r-oferta-titulo">Feito para a mãe que está exatamente aqui</h3>
         <ul class="itens">
-          <li><div><b>Devocional da Mãe que Não Desiste</b><span>Os 9 dias: versículo, reflexão, oração pronta e um passo por dia.</span></div></li>
+          <li><div><b>Devocional da Mãe que Não Desiste</b><span>9 dias de oração pelo coração do seu filho.</span></div></li>
           <li><div><b>Bônus 1 · Checklist dos 9 Dias</b><span>Se falhar um dia, você continua de onde parou.</span></div></li>
           <li><div><b>Bônus 2 · Quadro de Orações Respondidas</b><span>Inclusive as respostas pequenas, que a memória apaga.</span></div></li>
-          <li><div><b>Bônus 3 · Cartão de Entrega</b><span>Você escreve o nome dele, dobra e guarda.</span></div></li>
+          <li><div><b>Bônus 3 · Cartão de Entrega</b><span>Um lugar concreto para deixar o que não cabe mais em você.</span></div></li>
         </ul>
 
         <div class="preco" id="oferta-preco">
@@ -390,7 +436,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
         <p class="balao-wrap"><span class="balao">é menos que um lanche</span></p>
 
         <a class="cta" id="ir-checkout" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247">
-          <span id="cta-texto">Quero fazer o Dia 1 hoje</span>
+          <span id="cta-texto">Quero fazer a primeira oração hoje</span>
           <small>(R$ 34,90 — pagamento único)</small>
         </a>
         <p class="garantias">⚡ Chega no e-mail em até 2 minutos · 🔒 7 dias de garantia</p>
@@ -430,6 +476,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   };
 
   var url = new URLSearchParams(location.search);
+  var PREVIEW = window.__ND_PREVIEW === true;
   var UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "fbclid"];
 
   // ?dev=1 marca este navegador como teste; o painel exclui essas sessões.
@@ -472,6 +519,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   };
 
   function registrar(etapa, ordem, extra) {
+    if (PREVIEW) return;
     var linha = Object.assign({ sessao: sessao, etapa: etapa, ordem: ordem }, base, extra || {});
     if (CONFIG.DEBUG) console.log("[quiz]", linha);
     try {
@@ -489,11 +537,12 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     } catch (e) {}
   }
 
-  function fb() { if (typeof window.fbq === "function") window.fbq.apply(null, arguments); }
+  function fb() { if (!PREVIEW && typeof window.fbq === "function") window.fbq.apply(null, arguments); }
   function cl() { if (typeof window.clarity === "function") window.clarity.apply(null, arguments); }
+  function clEvento() { if (!PREVIEW) cl.apply(null, arguments); }
 
   // Clarity: mesmas tags da LP, para filtrar gravação do quiz por anúncio.
-  cl("set", "pagina", "quiz");
+  cl("set", "pagina", PREVIEW ? "quiz_preview" : "quiz");
   ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (k) {
     var v = url.get(k); if (v) cl("set", k, v);
   });
@@ -505,61 +554,60 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     return u.toString();
   }
 
-  /* ---------------- Perfis — tudo literal do PDF (ARC) ---------------- */
+  /* ---------------- Perfis ----------------
+     Nenhum texto aqui aponta para um dia do devocional nem reproduz uma
+     página dele. A leitura é uma paráfrase do tema; o versículo é só Bíblia. */
   var PERFIS = {
     controle: {
-      n: 1, dia: "O que eu não posso controlar",
-      titulo: "O que não está nas suas mãos nunca esteve",
-      texto: "O Dia 1 foi escrito para o que você respondeu: a oração que nasce do medo e tenta decidir pelo coração de outra pessoa.",
-      citacao: "Hoje não é sobre desistir. É sobre soltar o peso de achar que tudo depende de você. Porque nunca dependeu.",
-      versiculo: "“Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.”", ref: "1 Pedro 5.7 (ARC)",
-      passo: "Escreva o nome dele", tempo: "5 minutos",
-      passoTexto: "Pegue um papel e escreva só o nome do seu filho. Nada mais — sem pedidos, sem listas, sem cobranças. Deixe esse papel em um lugar que você olha todos os dias."
+      titulo: "Para a mãe que ora com medo do caminho do filho",
+      leitura: "Quando a oração nasce do medo, ela tenta decidir pelo coração de outra pessoa — e cansa. O que muda não é orar mais. É orar de outro jeito: entregando o que nunca esteve nas suas mãos, sem desistir dele.",
+      versiculo: "“Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.”", ref: "1 Pedro 5.7 (ARC)"
     },
     silencio: {
-      n: 2, dia: "O silêncio que dói",
-      titulo: "O silêncio dele não é o fim da conversa",
-      texto: "O Dia 2 foi escrito para o que você respondeu: a conversa que ficou curta e a porta que fecha devagar.",
-      citacao: "O filho que não fala não está necessariamente longe — pode estar apenas sem palavras.",
-      versiculo: "“O Senhor está perto dos que têm o coração quebrantado e salva os contritos de espírito.”", ref: "Salmo 34.18 (ARC)",
-      passo: "Uma mensagem sem pergunta", tempo: "2 minutos",
-      passoTexto: "Envie ao seu filho uma mensagem curta que não exija resposta e não contenha nenhuma pergunta. Algo como “lembrei de você hoje” ou “tô aqui, viu”. Sem cobrança. Só presença."
+      titulo: "Para a mãe que vive o silêncio dentro de casa",
+      leitura: "Silêncio nem sempre é rejeição. Muitas vezes é vergonha, medo de julgamento, ou uma fase em que ele não sabe nomear o que sente. No silêncio, o caminho não é forçar a fala — é continuar perto sem pressionar, e orar pelo que você não vê.",
+      versiculo: "“O Senhor está perto dos que têm o coração quebrantado e salva os contritos de espírito.”", ref: "Salmo 34.18 (ARC)"
     },
     cobranca: {
-      n: 3, dia: "Orar em vez de cobrar",
-      titulo: "A conversa precisa mudar de endereço",
-      texto: "O Dia 3 foi escrito para o que você respondeu: a frase que ia ser conselho e sai como cobrança.",
-      citacao: "Existe um caminho para essa preocupação, e não é a boca do filho. É a oração.",
-      versiculo: "“Não estejais inquietos por coisa alguma; antes, as vossas petições sejam em tudo conhecidas diante de Deus.”", ref: "Filipenses 4.6 (ARC)",
-      passo: "A lista que vira oração", tempo: "10 minutos",
-      passoTexto: "Escreva tudo o que você gostaria de dizer ao seu filho — sem filtro, só para você. Depois leia em voz alta como oração, entregando cada item. Ao final, rasgue o papel."
+      titulo: "Para a mãe que tem tanto a dizer — e toda conversa vira cobrança",
+      leitura: "A frase que ia ser conselho sai como cobrança. Não por falta de amor: por excesso de preocupação sem lugar para ir. Existe um lugar para ela antes da conversa — e quando ela passa por ali primeiro, o que sobra para dizer é menor e melhor.",
+      versiculo: "“Não estejais inquietos por coisa alguma; antes, as vossas petições sejam em tudo conhecidas diante de Deus.”", ref: "Filipenses 4.6 (ARC)"
     },
     culpa: {
-      n: 4, dia: "A culpa que não me pertence",
-      titulo: "Nem tudo é falha sua",
-      texto: "O Dia 4 foi escrito para o que você respondeu: a mãe que revisita conversas antigas procurando onde errou.",
-      citacao: "Assumir a responsabilidade inteira pelas escolhas de outra pessoa não é humildade, é um peso que não foi feito para os seus ombros.",
-      versiculo: "“Portanto, agora, nenhuma condenação há para os que estão em Cristo Jesus.”", ref: "Romanos 8.1 (ARC)",
-      passo: "Separar o que é meu", tempo: "10 minutos",
-      passoTexto: "Divida uma folha em duas colunas: “o que foi minha responsabilidade” e “o que foi escolha dele”. Do lado esquerdo, escolha uma coisa para levar a Deus. Do lado direito, entregue tudo."
+      titulo: "Para a mãe que se pergunta onde foi que errou",
+      leitura: "Nenhuma mãe acerta tudo, e reconhecer um erro abre espaço para o perdão. Mas carregar sozinha as escolhas de outra pessoa não é humildade — é um peso que não foi feito para os seus ombros.",
+      versiculo: "“Portanto, agora, nenhuma condenação há para os que estão em Cristo Jesus.”", ref: "Romanos 8.1 (ARC)"
     },
     persistir: {
-      n: 7, dia: "Persistir sem forçar",
-      titulo: "Persistir não é forçar",
-      texto: "O Dia 7 foi escrito para o que você respondeu: continuar orando quando não há sinal nenhum.",
-      citacao: "Forçar cansa a relação. Persistir sustenta a mãe.",
-      versiculo: "“E disse-lhes também uma parábola sobre o dever de orar sempre e nunca desfalecer.”", ref: "Lucas 18.1 (ARC)",
-      passo: "O compromisso de oração", tempo: "5 minutos",
-      passoTexto: "Escolha um horário fixo do dia — o mesmo, todos os dias — para orar por ele. Um minuto basta. Constância vale mais que intensidade."
+      titulo: "Para a mãe que continua orando sem ver sinal",
+      leitura: "Persistir e forçar parecem a mesma coisa, mas são opostos. Forçar é insistir com ele, e cansa a relação. Persistir é insistir com Deus — e é isso que sustenta a mãe enquanto nada muda no que se vê.",
+      versiculo: "“E disse-lhes também uma parábola sobre o dever de orar sempre e nunca desfalecer.”", ref: "Lucas 18.1 (ARC)"
     }
   };
 
-  // Devolve à mãe o que ela mesma respondeu na P3 — a dor que o produto resolve.
+  // O que o devocional traz para cada resposta. Frase de benefício, nunca
+  // conteúdo de página: ela vê que tem lugar para a dor dela, não o texto.
+  var TRAZ = {
+    curta: "Como continuar perto quando a conversa fica curta — sem forçar a fala",
+    briga: "O que fazer com tudo o que você queria dizer, antes que vire cobrança",
+    nao_fala: "Como orar pelo que acontece no silêncio, onde você não alcança",
+    outro_caminho: "Como entregar o caminho dele a Deus sem desistir de orar",
+    medo: "Como trocar a oração com medo por uma oração de confiança",
+    culpa: "Como separar o que foi erro seu do que foi escolha dele",
+    saudade: "Como manter a porta aberta para quando ele quiser voltar a conversar",
+    engasgado: "Onde colocar o que fica engasgado — primeiro diante de Deus",
+    piorou: "A palavra certa na hora certa: falar pouco e falar bem",
+    medo_afastar: "Passos pequenos de reaproximação, sem confronto e sem cobrança",
+    desisti_falar: "Como persistir sem forçar, mesmo quando você parou de tentar",
+    pedi_desculpas: "Como soltar a culpa que não te pertence"
+  };
+
+  // Devolve à mãe o que ela respondeu na P3 — a dor que o produto resolve.
   var ECO_P3 = {
-    palavras: "Você contou que, na hora de orar, <span class=\"grifo\">as palavras somem</span>. É para esse momento que cada um dos 9 dias traz a oração já escrita.",
-    ansiedade: "Você contou que <span class=\"grifo\">ora com ansiedade</span>. Cada dia traz uma oração pronta que troca o pedido aflito por entrega.",
+    palavras: "Você contou que, na hora de orar, <span class=\"grifo\">as palavras somem</span>. É exatamente para esse momento que o devocional foi escrito: a oração já vem pronta, uma por dia.",
+    ansiedade: "Você contou que <span class=\"grifo\">ora com ansiedade</span>. O devocional foi escrito para trocar o pedido aflito por entrega — uma oração pronta por dia.",
     choro: "Você contou que <span class=\"grifo\">chora mais do que ora</span>. Nos dias em que faltam palavras, a oração pronta ora por você.",
-    sem_sinal: "Você contou que <span class=\"grifo\">ora todo dia e não vê sinal</span>. O devocional dá a essa constância uma direção, dia após dia."
+    sem_sinal: "Você contou que <span class=\"grifo\">ora todo dia e não vê sinal</span>. O devocional dá a essa constância uma direção, um dia depois do outro."
   };
   var ECO_COMPROMISSO = {
     hoje: " E você disse que faria a primeira <strong>ainda hoje</strong>.",
@@ -567,9 +615,19 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     ver_antes: ""
   };
   var CTA_TEXTO = {
-    hoje: "Quero fazer o Dia 1 hoje",
+    hoje: "Quero fazer a primeira oração hoje",
     amanha: "Quero começar amanhã cedo",
     ver_antes: "Quero receber o devocional"
+  };
+
+  // Respostas-exemplo de cada perfil para a pré-visualização. São também os
+  // caminhos naturais que levam a cada resultado respondendo o quiz.
+  var CAMINHOS = {
+    silencio:  { p1: "curta",         p2: "saudade",   p3: "palavras",  p4: "medo_afastar" },
+    cobranca:  { p1: "briga",         p2: "engasgado", p3: "palavras",  p4: "piorou" },
+    controle:  { p1: "outro_caminho", p2: "medo",      p3: "ansiedade", p4: "piorou" },
+    culpa:     { p1: "nao_fala",      p2: "culpa",     p3: "choro",     p4: "pedi_desculpas" },
+    persistir: { p1: "nao_fala",      p2: "saudade",   p3: "sem_sinal", p4: "desisti_falar" }
   };
 
   /* ---------------- Navegação ---------------- */
@@ -578,11 +636,16 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   var pontos = Array.prototype.slice.call(document.querySelectorAll("#progresso span"));
   var barra = document.getElementById("progresso");
   var btnVoltar = document.getElementById("voltar");
-  var respostas = {};   // etapa -> { resposta, perfil }
+  var respostas = {};   // etapa -> { resposta, perfil, texto }
   var atual = 0;
   var perfilFinal = null;
 
   function idx(etapa) { return telas.findIndex(function (t) { return t.dataset.etapa === etapa; }); }
+
+  function opcao(etapa, resposta) {
+    return telas[idx(etapa)].querySelector('.opcao[data-resposta="' + resposta + '"]');
+  }
+  function textoDe(b) { return b ? b.textContent.replace(/\s+/g, " ").trim() : ""; }
 
   function mostrar(i) {
     telas[atual].classList.remove("ativa");
@@ -595,7 +658,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     pontos.forEach(function (s, k) { s.classList.toggle("feito", p === -1 ? true : k < p); });
     btnVoltar.hidden = !(p > 0);
     window.scrollTo(0, 0);
-    // Marca visualmente a resposta já dada, se ela voltou.
     var r = respostas[etapa];
     t.querySelectorAll(".opcao").forEach(function (b) {
       b.classList.toggle("escolhida", !!r && b.dataset.resposta === r.resposta);
@@ -632,28 +694,39 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     return emp[0];
   }
 
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
+  }
+  function escHtml(s) { return String(s).replace(/[<>&"]/g, function (c) { return { "<": "&lt;", ">": "&gt;", "&": "&amp;", '"': "&quot;" }[c]; }); }
+
   function preencherResultado(chave) {
     var p = PERFIS[chave];
     var comp = (respostas.compromisso || {}).resposta || "ver_antes";
     var p3 = (respostas.p3 || {}).resposta || "palavras";
 
-    document.getElementById("r-num").textContent = p.n;
-    document.getElementById("r-dia").textContent = ("Dia " + p.n + " · " + p.dia).toUpperCase();
     document.getElementById("r-titulo").textContent = p.titulo;
-    document.getElementById("r-texto").textContent = p.texto;
-    document.getElementById("r-citacao").innerHTML = "“" + p.citacao + "”<small>Do Dia " + p.n + " do devocional</small>";
-    document.getElementById("r-versiculo").innerHTML = p.versiculo + "<cite>" + p.ref + "</cite>";
-    document.getElementById("r-passo-titulo").textContent = p.passo;
-    document.getElementById("r-passo-tempo").textContent = p.tempo;
-    document.getElementById("r-passo-texto").textContent = p.passoTexto;
+    document.getElementById("r-leitura").textContent = p.leitura;
     document.getElementById("r-eco").innerHTML = (ECO_P3[p3] || ECO_P3.palavras) + (ECO_COMPROMISSO[comp] || "");
-    document.getElementById("r-ordem").innerHTML = p.n === 1
-      ? "Os dias são feitos para seguir em ordem — e o <strong>Dia 1 é justamente o seu</strong>."
-      : "Os dias são feitos para seguir em ordem: você começa pelo Dia 1. <strong>O Dia " + p.n + " vai estar esperando por você.</strong>";
-    document.getElementById("cta-texto").textContent = CTA_TEXTO[comp] || CTA_TEXTO.ver_antes;
+    document.getElementById("r-versiculo").innerHTML = p.versiculo + "<cite>" + p.ref + "</cite>";
 
-    var ck = document.getElementById("ir-checkout");
-    ck.href = comUtms(CONFIG.CHECKOUT_URL);
+    // Espelho: as respostas de P1, P2 e P4 com o que o devocional traz para
+    // cada uma. A P3 já aparece no eco acima; repetir soaria como formulário.
+    var lista = document.getElementById("r-pares");
+    lista.innerHTML = "";
+    [["p1", "Sobre a conversa"], ["p2", "O que aperta"], ["p4", "Quando tentou conversar"]].forEach(function (par) {
+      var r = respostas[par[0]];
+      if (!r || !TRAZ[r.resposta]) return;
+      var li = el("li", "par");
+      li.appendChild(el("div", "disse", "<small>" + par[1] + ", você disse</small>“" + escHtml(r.texto) + "”"));
+      li.appendChild(el("div", "traz", escHtml(TRAZ[r.resposta])));
+      lista.appendChild(li);
+    });
+
+    document.getElementById("cta-texto").textContent = CTA_TEXTO[comp] || CTA_TEXTO.ver_antes;
+    document.getElementById("ir-checkout").href = comUtms(CONFIG.CHECKOUT_URL);
     document.getElementById("ver-lp").href = comUtms("/");
   }
 
@@ -672,20 +745,20 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
       registrar("resultado", 6, { perfil: perfilFinal });
       fb("track", "ViewContent", { content_name: "Quiz Nao Desiste - resultado", content_category: perfilFinal });
       cl("set", "perfil", perfilFinal);
-      cl("event", "quiz_resultado");
+      clEvento("event", "quiz_resultado");
       observarOferta();
     }, reduzido ? 150 : 1800);
   }
 
   var ofertaRegistrada = false;
   function observarOferta() {
-    if (ofertaRegistrada) return;
+    if (ofertaRegistrada || PREVIEW) return;
     var alvo = document.getElementById("oferta-preco");
     function marcar() {
       if (ofertaRegistrada) return;
       ofertaRegistrada = true;
       registrar("oferta_vista", 7, { perfil: perfilFinal });
-      cl("event", "quiz_oferta_vista");
+      clEvento("event", "quiz_oferta_vista");
     }
     if (!("IntersectionObserver" in window)) return marcar();
     var io = new IntersectionObserver(function (es) {
@@ -700,7 +773,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
       var etapa = tela.dataset.etapa;
       tela.querySelectorAll(".opcao").forEach(function (x) { x.classList.remove("escolhida"); });
       b.classList.add("escolhida");
-      respostas[etapa] = { resposta: b.dataset.resposta, perfil: b.dataset.perfil || null };
+      respostas[etapa] = { resposta: b.dataset.resposta, perfil: b.dataset.perfil || null, texto: textoDe(b) };
       registrar(etapa, Number(tela.dataset.ordem), { resposta: b.dataset.resposta });
       fb("trackCustom", "QuizEtapa", { etapa: etapa });
 
@@ -719,6 +792,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 
   var indo = false;
   document.getElementById("ir-checkout").addEventListener("click", function (e) {
+    if (PREVIEW) { e.preventDefault(); return; }
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
     if (indo) return;
@@ -727,17 +801,51 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     registrar("checkout", 8, { perfil: perfilFinal, resposta: (respostas.compromisso || {}).resposta || null });
     fb("track", "InitiateCheckout", { value: 34.9, currency: "BRL", content_name: "Devocional da Mãe que Não Desiste" });
     cl("set", "cta_origin", "quiz");
-    cl("event", "cta_click");
-    cl("upgrade", "cta_click");
+    clEvento("event", "cta_click");
+    clEvento("upgrade", "cta_click");
     setTimeout(function () { location.href = destino; }, 180);
   });
 
   document.getElementById("ver-lp").addEventListener("click", function (e) {
+    if (PREVIEW) { e.preventDefault(); return; }
     e.preventDefault();
     registrar("para_lp", 9, { perfil: perfilFinal });
     var destino = comUtms("/");
     setTimeout(function () { location.href = destino; }, 150);
   });
+
+  /* ---------------- Pré-visualização ---------------- */
+  if (PREVIEW) {
+    var chave = url.get("preview");
+    if (!PERFIS[chave]) chave = "silencio";
+    var comp = url.get("compromisso");
+    if (!CTA_TEXTO[comp]) comp = "hoje";
+
+    var cam = CAMINHOS[chave];
+    ["p1", "p2", "p3", "p4"].forEach(function (et) {
+      var b = opcao(et, cam[et]);
+      respostas[et] = { resposta: cam[et], perfil: b ? (b.dataset.perfil || null) : null, texto: textoDe(b) };
+    });
+    respostas.compromisso = { resposta: comp, perfil: null, texto: textoDe(opcao("compromisso", comp)) };
+
+    perfilFinal = chave;
+    preencherResultado(chave);
+    mostrar(idx("resultado"));
+
+    var barraPrevia = document.getElementById("previa");
+    var nomes = { silencio: "Silêncio", cobranca: "Cobrança", controle: "Medo/controle", culpa: "Culpa", persistir: "Sem sinal" };
+    var html = "<b>PRÉ-VISUALIZAÇÃO</b> · nada é gravado · perfil: ";
+    Object.keys(nomes).forEach(function (k) {
+      html += '<a href="?preview=' + k + "&compromisso=" + comp + '"' + (k === chave ? ' aria-current="true"' : "") + ">" + nomes[k] + "</a>";
+    });
+    html += "<br>botão: ";
+    ["hoje", "amanha", "ver_antes"].forEach(function (c) {
+      html += '<a href="?preview=' + chave + "&compromisso=" + c + '"' + (c === comp ? ' aria-current="true"' : "") + ">" + c + "</a>";
+    });
+    barraPrevia.innerHTML = html;
+    barraPrevia.hidden = false;
+    return;
+  }
 
   if (sessaoNova) {
     registrar("abertura", 0);

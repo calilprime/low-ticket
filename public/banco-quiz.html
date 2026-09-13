@@ -175,7 +175,8 @@ var RESPOSTAS = {
   piorou:"Várias vezes, piorou", medo_afastar:"Medo de afastar mais", desisti_falar:"Parei de tentar", pedi_desculpas:"Pedi desculpas, nada mudou",
   hoje:"Hoje, antes de dormir", amanha:"Amanhã cedo", ver_antes:"Quero entender melhor"
 };
-var PERFIL_NOME = {controle:"Dia 1 · controle", silencio:"Dia 2 · silêncio", cobranca:"Dia 3 · cobrança", culpa:"Dia 4 · culpa", persistir:"Dia 7 · persistir"};
+// O resultado deixou de apontar um dia do devocional (13/09): os nomes descrevem o perfil, não uma página.
+var PERFIL_NOME = {controle:"Medo do caminho dele", silencio:"Silêncio em casa", cobranca:"Conversa que vira cobrança", culpa:"Culpa", persistir:"Ora sem ver sinal"};
 
 var esc = function(s){ return String(s == null ? "—" : s).replace(/[<>&"]/g,function(c){return {"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c];}); };
 var pct = function(a,b){ return b ? a/b*100 : 0; };
