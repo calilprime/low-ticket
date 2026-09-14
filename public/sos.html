@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FDFBF7">
+<title>Protocolo SOS — Devocional da Mãe que Não Desiste</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/funil.css">
+
+<!--
+  UPSELL — Protocolo SOS (R$ 29,90). Substitui "Os Três Primeiros Meses".
+
+  O que esta página NÃO faz, de propósito (travas do briefing de copy):
+  - Sem preço riscado. A página antiga tinha "Fora daqui, R$ 97,00" — o SOS
+    nunca foi vendido por outro valor.
+  - Sem "condição válida só nesta página". Urgência falsa.
+  - Não promete como o filho vai reagir. O protocolo é sobre o que ELA faz
+    no primeiro minuto.
+  - Sem 1 clique. O widget da HeroSpark não funciona fora de um domínio dela
+    (verificado em 09/09 no upsell.html). O botão abre o checkout normal, e o
+    selo não diz que ela não precisa preencher os dados de novo.
+
+  CHECKOUT: preencha CONFIG.CHECKOUT_URL com o link da oferta na HeroSpark.
+  Enquanto estiver vazio, o botão aparece desativado com "Checkout em
+  configuração" — a página nunca manda a compradora para um link morto.
+-->
+<script>
+window.SOS_CONFIG = {
+  CHECKOUT_URL: "",           // ex.: https://pay.herospark.com/protocolo-sos-XXXXXX
+  RECUSA_URL: "/sos-express",
+  PRECO: 29.9,
+  PRODUTO: "Protocolo SOS"
+};
+</script>
+
+<!-- Meta Pixel + UTMify: sem eles, a venda do upsell não é atribuída ao anúncio. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1380514643999534');fbq('track','PageView');
+</script>
+<script>window.pixelId = "6a96ff68a90cb454027c5cc4";</script>
+<script async defer src="https://cdn.utmify.com.br/scripts/pixel/pixel.js"></script>
+<!-- Clarity: o upsell antigo nunca vendeu e nunca teve gravação. Este tem. -->
+<script>
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yfpyp5xcpn");
+window.clarity("set","pagina","sos");
+</script>
+
+<style>
+/* Só o que o funil.css não tem. Cores e fontes vêm de lá. */
+.pop-demo{margin:28px auto 0;max-width:420px;border-radius:24px;background:var(--card);
+  border:1px solid var(--border);box-shadow:0 24px 46px -26px oklch(0.34 0.03 135/.45);overflow:hidden;text-align:left}
+.pop-demo .cab{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--olive);color:var(--olive-foreground)}
+.pop-demo .cab b{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.pop-demo .cab span{font-size:11px;opacity:.75}
+.pop-demo .corpo{padding:16px 18px 18px}
+.pop-demo h3{font-size:20px;line-height:1.2}
+.pop-demo .r{margin-top:14px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.pop-demo .r.n{color:oklch(0.45 0.15 30)}
+.pop-demo .r.f{color:var(--olive)}
+.pop-demo .r.o{color:oklch(0.55 0.09 80)}
+.pop-demo .t{margin-top:5px;font-size:14.5px;line-height:1.5}
+.pop-demo .t.frase{font-family:var(--serif);font-weight:700;font-size:16px;border-left:3px solid var(--olive);padding-left:10px}
+.pop-demo .t.ora{font-family:var(--serif);font-style:italic;font-size:15.5px;background:color-mix(in oklch,var(--gold) 16%,transparent);border-radius:10px;padding:8px 11px}
+.pop-demo .rodape-demo{margin-top:12px;font-size:12px;color:var(--muted-foreground)}
+
+.crises{list-style:none;padding:0;margin:26px auto 0;max-width:600px;display:grid;gap:8px}
+@media(min-width:640px){.crises{grid-template-columns:1fr 1fr}}
+.crises li{display:flex;gap:12px;align-items:center;border-radius:14px;border:1px solid var(--border);background:var(--card);padding:11px 14px;font-size:14.5px;font-weight:600;line-height:1.3}
+.crises span{flex:0 0 auto;font-family:var(--serif);font-weight:700;font-size:13px;color:var(--primary);min-width:22px}
+
+.fatos{list-style:none;padding:0;margin:24px auto 0;max-width:600px;display:grid;gap:10px}
+.fatos li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.5}
+.fatos li::before{content:"";flex:0 0 9px;height:9px;margin-top:7px;border-radius:50%;background:var(--gold)}
+.fatos b{color:var(--foreground)}
+
+.honesto{margin:26px auto 0;max-width:600px;border:1px dashed var(--border);border-radius:18px;padding:16px 18px;font-size:14.5px;line-height:1.55;color:var(--muted-foreground)}
+.honesto strong{color:var(--foreground)}
+
+.cta[aria-disabled="true"]{background:color-mix(in oklch,var(--olive-foreground) 30%,transparent);animation:none;cursor:not-allowed;box-shadow:none}
+</style>
+</head>
+<body>
+
+<div class="aviso">
+  <p>Compra aprovada — seu devocional já está a caminho do e-mail</p>
+</div>
+
+<section class="wrap" id="hero">
+  <div class="recibo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+    </svg>
+    <p><strong>Seus 9 dias já estão garantidos.</strong> Antes de fechar, uma pergunta.</p>
+  </div>
+
+  <h1><span class="leve">O devocional cuida da oração.</span>E quando a briga estoura na sala?</h1>
+
+  <p class="lead">
+    Uma discussão não espera a oração da manhã. Ela começa num grito, numa porta batida,
+    num almoço de domingo — e <strong>a frase que sai no primeiro minuto é a que depois não tem volta</strong>.
+  </p>
+  <p class="lead">
+    O <strong>Protocolo SOS</strong> é o guia de bolso para esse minuto: você abre no celular,
+    toca na situação, e sabe o que não fazer, o que dizer e o que orar.
+  </p>
+
+  <div class="pop-demo" aria-label="Exemplo de um procedimento do Protocolo SOS">
+    <div class="cab"><b>POP 02</b><span>‹ índice</span></div>
+    <div class="corpo">
+      <h3>O silêncio de muro</h3>
+      <p class="r n">Nunca nos primeiros 60 segundos</p>
+      <p class="t">Bater na porta sem parar ou ameaçar abrir à força.</p>
+      <p class="r f">Frase de desarme</p>
+      <p class="t frase">“Não vou forçar. Estou aqui quando você quiser.”</p>
+      <p class="r o">Oração de guerra em sussurro</p>
+      <p class="t ora">“Senhor, entra onde eu não posso entrar.”</p>
+      <p class="rodape-demo">Um dos 10 procedimentos · uma página para cada crise</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec faixa-clara">
+  <div class="wrap">
+    <p class="olho">Os 10 procedimentos</p>
+    <h2>Uma página para cada crise</h2>
+    <p class="sub">Cada uma com o que nunca fazer nos primeiros 60 segundos, a frase exata
+      para baixar a tensão e uma oração curta para dizer em silêncio.</p>
+
+    <ul class="crises">
+      <li><span>01</span> O filho gritou ou desrespeitou</li>
+      <li><span>02</span> O silêncio de muro, com a porta trancada</li>
+      <li><span>03</span> A ameaça de sair de casa</li>
+      <li><span>04</span> O ataque de culpa, às vezes em público</li>
+      <li><span>05</span> Ele chegou sob efeito de álcool ou drogas</li>
+      <li><span>06</span> Ele atacou a sua fé</li>
+      <li><span>07</span> Influências perigosas</li>
+      <li><span>08</span> Explosão em público</li>
+      <li><span>09</span> Ele largou os estudos ou o trabalho</li>
+      <li><span>10</span> A família contra você</li>
+    </ul>
+
+    <ul class="fatos">
+      <li><div><b>Feito para ler no celular:</b> página no formato da tela e índice clicável — toque na situação e ela abre direto.</div></li>
+      <li><div><b>Quando é caso de pedir ajuda:</b> nas situações de risco, o procedimento traz os números certos — SAMU, polícia, CVV, Ligue 180.</div></li>
+      <li><div><b>Coerente com o seu devocional:</b> nada de manipular ou controlar. A oração é sobre a sua paz, não sobre dominar ninguém.</div></li>
+      <li><div><b>Arquivo digital para imprimir em casa</b>, ou para deixar salvo no celular.</div></li>
+    </ul>
+
+    <div class="versiculo">
+      <p>“A resposta branda desvia o furor, mas a palavra dura suscita a ira.”</p>
+      <p class="ref">Provérbios 15.1 (ARC)</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="oferta">
+  <div class="wrap">
+    <div class="oferta">
+      <div class="oferta-topo"><p>Complemento do seu devocional</p></div>
+
+      <div class="oferta-corpo">
+        <p class="hoje">Protocolo SOS · 10 procedimentos</p>
+        <p class="preco">R$ 29,90</p>
+        <p class="preco-nota">pagamento único · acesso imediato no mesmo e-mail</p>
+
+        <div style="margin-top:22px">
+          <a class="cta" id="aceitar" href="#oferta">
+            Sim, quero o Protocolo SOS
+            <small>(R$ 29,90 · pagamento único)</small>
+          </a>
+          <a class="recusa" id="recusar" href="/sos-express">Não, obrigada</a>
+        </div>
+
+        <p class="selo">Acesso imediato no mesmo e-mail · 7 dias de garantia.</p>
+      </div>
+    </div>
+
+    <p class="honesto"><strong>Uma coisa honesta:</strong> nenhum guia garante como ele vai reagir.
+      O protocolo existe para você não agir no pior impulso — e para saber quando a situação
+      pede ajuda de fora.</p>
+
+    <div class="garantia">
+      <span class="escudo">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </span>
+      <div>
+        <h2>Garantia de 7 dias</h2>
+        <p>Se não for útil para você, mande um e-mail e devolvemos 100%, sem burocracia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="rodape">
+  Citações bíblicas extraídas da Almeida Revista e Corrigida (ARC),<br>
+  © 2009 Sociedade Bíblica do Brasil. Texto utilizado com autorização.
+</p>
+
+<div class="barra" id="barra" hidden>
+  <a href="#oferta">Quero o Protocolo SOS — R$ 29,90</a>
+</div>
+
+<script>
+(function () {
+  var C = window.SOS_CONFIG;
+  var url = new URLSearchParams(location.search);
+  var CHAVES = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","utm_id","fbclid"];
+
+  function comParametros(destino) {
+    var u = new URL(destino, location.origin);
+    CHAVES.forEach(function (k) { var v = url.get(k); if (v) u.searchParams.set(k, v); });
+    return u.toString();
+  }
+
+  var aceitar = document.getElementById("aceitar");
+  var recusar = document.getElementById("recusar");
+  recusar.href = comParametros(C.RECUSA_URL);
+
+  if (!C.CHECKOUT_URL) {
+    // Sem link da oferta, o botão não finge que funciona.
+    aceitar.setAttribute("aria-disabled", "true");
+    aceitar.removeAttribute("href");
+    aceitar.firstChild.textContent = "Checkout em configuração ";
+    if (window.console) console.warn("[SOS] CHECKOUT_URL vazio: preencha window.SOS_CONFIG.");
+  } else {
+    aceitar.href = comParametros(C.CHECKOUT_URL);
+    aceitar.addEventListener("click", function () {
+      // O pixel da HeroSpark está desligado desde 09/09: sem isto, o IC do
+      // upsell não aparece no Gerenciador.
+      if (typeof window.fbq === "function") fbq("track", "InitiateCheckout", { value: C.PRECO, currency: "BRL", content_name: C.PRODUTO });
+      if (typeof window.clarity === "function") { clarity("event", "sos_aceitar"); clarity("upgrade", "sos_aceitar"); }
+    });
+  }
+  recusar.addEventListener("click", function () {
+    if (typeof window.clarity === "function") clarity("event", "sos_recusar");
+  });
+})();
+
+// Barra fixa: aparece depois do hero e some quando a oferta está na tela.
+(function () {
+  var barra = document.getElementById("barra");
+  var oferta = document.getElementById("oferta");
+  var hero = document.getElementById("hero");
+  if (!barra || !oferta || !hero) return;
+  function naTela(el) { var r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }
+  var agendado = false;
+  function atualizar() { agendado = false; barra.hidden = naTela(hero) || naTela(oferta); }
+  function agendar() { if (agendado) return; agendado = true; requestAnimationFrame(atualizar); }
+  atualizar();
+  addEventListener("scroll", agendar, { passive: true });
+  addEventListener("resize", agendar);
+})();
+</script>
+</body>
+</html>
