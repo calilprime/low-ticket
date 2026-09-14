@@ -59,21 +59,10 @@ window.clarity("set","pagina","sos");
 
 <style>
 /* Só o que o funil.css não tem. Cores e fontes vêm de lá. */
-.pop-demo{margin:28px auto 0;max-width:420px;border-radius:24px;background:var(--card);
+.capa-sos{margin:30px auto 0;max-width:230px;text-align:center}
+.capa-sos svg{display:block;width:100%;height:auto;filter:drop-shadow(0 26px 34px oklch(0.34 0.03 135/.35))}
+.capa-sos figcaption{margin-top:14px;font-size:13px;color:var(--muted-foreground)}
   border:1px solid var(--border);box-shadow:0 24px 46px -26px oklch(0.34 0.03 135/.45);overflow:hidden;text-align:left}
-.pop-demo .cab{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--olive);color:var(--olive-foreground)}
-.pop-demo .cab b{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.pop-demo .cab span{font-size:11px;opacity:.75}
-.pop-demo .corpo{padding:16px 18px 18px}
-.pop-demo h3{font-size:20px;line-height:1.2}
-.pop-demo .r{margin-top:14px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.pop-demo .r.n{color:oklch(0.45 0.15 30)}
-.pop-demo .r.f{color:var(--olive)}
-.pop-demo .r.o{color:oklch(0.55 0.09 80)}
-.pop-demo .t{margin-top:5px;font-size:14.5px;line-height:1.5}
-.pop-demo .t.frase{font-family:var(--serif);font-weight:700;font-size:16px;border-left:3px solid var(--olive);padding-left:10px}
-.pop-demo .t.ora{font-family:var(--serif);font-style:italic;font-size:15.5px;background:color-mix(in oklch,var(--gold) 16%,transparent);border-radius:10px;padding:8px 11px}
-.pop-demo .rodape-demo{margin-top:12px;font-size:12px;color:var(--muted-foreground)}
 
 .crises{list-style:none;padding:0;margin:26px auto 0;max-width:600px;display:grid;gap:8px}
 @media(min-width:640px){.crises{grid-template-columns:1fr 1fr}}
@@ -117,19 +106,34 @@ window.clarity("set","pagina","sos");
     toca na situação, e sabe o que não fazer, o que dizer e o que orar.
   </p>
 
-  <div class="pop-demo" aria-label="Exemplo de um procedimento do Protocolo SOS">
-    <div class="cab"><b>POP 02</b><span>‹ índice</span></div>
-    <div class="corpo">
-      <h3>O silêncio de muro</h3>
-      <p class="r n">Nunca nos primeiros 60 segundos</p>
-      <p class="t">Bater na porta sem parar ou ameaçar abrir à força.</p>
-      <p class="r f">Frase de desarme</p>
-      <p class="t frase">“Não vou forçar. Estou aqui quando você quiser.”</p>
-      <p class="r o">Oração de guerra em sussurro</p>
-      <p class="t ora">“Senhor, entra onde eu não posso entrar.”</p>
-      <p class="rodape-demo">Um dos 10 procedimentos · uma página para cada crise</p>
-    </div>
-  </div>
+  <!-- Capa do PDF, não o conteúdo. Decisão do Calil (13/09): nenhuma página
+       mostra parte do produto — nem a LP, nem o quiz, nem o upsell. A capa
+       prova que é um arquivo real sem entregar nenhum procedimento. -->
+  <figure class="capa-sos">
+    <svg viewBox="0 0 220 400" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Capa do PDF Protocolo SOS aberta na tela de um celular">
+      <rect x="4" y="4" width="212" height="392" rx="30" fill="#1F241B"/>
+      <rect x="13" y="13" width="194" height="374" rx="22" fill="#3A4331"/>
+      <rect x="84" y="21" width="52" height="7" rx="3.5" fill="#1F241B"/>
+      <text x="30" y="62" fill="#CDAE6B" font-size="6" letter-spacing="1.6"
+            font-family="Inter,sans-serif" font-weight="700">DEVOCIONAL DA MÃE QUE NÃO DESISTE</text>
+      <text x="26" y="150" fill="#CDAE6B" font-size="74" font-weight="800"
+            font-family="'Playfair Display',Georgia,serif">SOS</text>
+      <text x="30" y="186" fill="#F7F3EA" font-size="21" font-weight="700"
+            font-family="'Playfair Display',Georgia,serif">Protocolo SOS</text>
+      <text x="30" y="206" fill="#E4DCCB" font-size="9.5" font-style="italic"
+            font-family="'Playfair Display',Georgia,serif">Guia de intervenção de emergência</text>
+      <line x1="30" y1="226" x2="190" y2="226" stroke="#CDAE6B" stroke-opacity=".45"/>
+      <g font-family="Inter,sans-serif" font-size="8.2" fill="#EFE8D9">
+        <text x="30" y="250"><tspan fill="#CDAE6B" font-weight="700">10</tspan> crises reais</text>
+        <text x="30" y="268"><tspan fill="#CDAE6B" font-weight="700">60 segundos</tspan> para agir</text>
+        <text x="30" y="286">Índice clicável no celular</text>
+      </g>
+      <text x="30" y="362" fill="#CDAE6B" font-size="5.6" letter-spacing="1.3"
+            font-family="Inter,sans-serif" font-weight="700">LEIA NO CELULAR OU IMPRIMA EM CASA</text>
+    </svg>
+    <figcaption>PDF no formato da tela do celular · 10 procedimentos</figcaption>
+  </figure>
 </section>
 
 <section class="sec faixa-clara">
