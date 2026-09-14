@@ -53,11 +53,21 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className={`bg-background ${playfair.variable} ${inter.variable} ${caveat.variable}`}>
-      <body className="font-sans antialiased">
-        {children}
-
-        <Script id="fb-pixel" strategy="afterInteractive">
-          {`
+      <head>
+        {/* Meta Pixel no <head>, fora do next/script.
+            Com strategy="afterInteractive" ele só era baixado depois da
+            hidratação do React. Medido em 13/09 num Chrome simulando celular
+            com 4G fraco (150 ms RTT, 1,6 Mbps, CPU 4x): a página pintava em
+            2,0 s e o PageView só saía em 4,5 s. Todo clique que desistia nesse
+            intervalo virava clique sem LPV no Gerenciador.
+            Aqui o snippet roda enquanto o HTML é lido. Ele não bloqueia nada:
+            o fbevents.js continua sendo carregado com async. */}
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
+        <script
+          id="fb-pixel"
+          dangerouslySetInnerHTML={{
+            __html: `
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -68,8 +78,24 @@ export default function RootLayout({
             'https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '${PIXEL_ID}');
             fbq('track', 'PageView');
-          `}
-        </Script>
+          `,
+          }}
+        />
+
+        {/* Fila do Clarity. Precisa existir antes da hidratação: o ClarityTags
+            chama window.clarity('set', ...) no mount e o goToCheckout chama
+            window.clarity('event', ...). O snippet lazyOnload lá embaixo
+            reaproveita esta fila (c[a] = c[a] || ...) e a esvazia ao carregar. */}
+        <script
+          id="clarity-fila"
+          dangerouslySetInnerHTML={{
+            __html: `window.clarity=window.clarity||function(){(window.clarity.q=window.clarity.q||[]).push(arguments)};`,
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased">
+        {children}
+
         <noscript>
           <img
             height="1"
@@ -97,10 +123,14 @@ export default function RootLayout({
         />
 
         {/* Microsoft Clarity — replay de sessao, mapa de calor, rage click e
-            dead click. Gratuito e ilimitado. Carrega depois da hidratacao para
-            nao competir com o first paint: a gravacao comeca alguns
-            milissegundos depois, o que nao atrapalha a leitura do funil. */}
-        <Script id="ms-clarity" strategy="afterInteractive">
+            dead click. Gratuito e ilimitado.
+            lazyOnload (13/09): a cascata medida num Chrome simulando celular
+            com 4G fraco mostrou o Clarity fazendo 5 requisições exatamente na
+            janela em que o pixel da Meta baixa o signals/config — o último
+            passo antes do PageView, que é o que vira LPV. Agora ele só carrega
+            depois do load. A fila window.clarity está no <head>, então as
+            tags de UTM do ClarityTags e o cta_click continuam registrados. */}
+        <Script id="ms-clarity" strategy="lazyOnload">
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
