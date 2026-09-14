@@ -38,19 +38,6 @@ window.SOS_CONFIG = {
 };
 </script>
 
-<!-- HeroSpark — script de incorporação do upsell (oferta Protocolo-SOS).
-     Adicionado a pedido do Calil em 13/09, com 1 clique DESLIGADO no painel.
-
-     ATENÇÃO: lido em 13/09, o upsell-iframe-production.html continua enviando
-     o aceite e a recusa com targetOrigin fixo:
-         top.postMessage(`upsell-accept/${id}`, 'https://pay.herospark.com/')
-     (e o mesmo para pay-v2.herospark.com e checkoutpay.entregadigital.app.br).
-     Fora desses domínios o navegador descarta a mensagem — foi o que parou o
-     upsell antigo em 09/09. Por isso os botões próprios da página, que levam
-     direto ao checkout, CONTINUAM logo acima do widget: a compradora sempre
-     tem um caminho que funciona. -->
-<script id="upsell-cta-script" src="https://pay.herospark.com/scripts/upsell-cta-script-production.js" data-upsell-id="5cab92ce-770f-4b77-9d48-ee9ef355ec9d"></script>
-
 <!-- Meta Pixel + UTMify: sem eles, a venda do upsell não é atribuída ao anúncio. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -201,9 +188,6 @@ window.clarity("set","pagina","sos");
           <a class="recusa" id="recusar" href="/sos-express">Não, obrigada</a>
         </div>
 
-        <!-- Botões renderizados pela HeroSpark (iframe). O funil.css já dá a eles
-             o painel claro de que precisam sobre o card oliva. -->
-        <div id="upsell-herospark"></div>
 
         <p class="selo">Acesso imediato no mesmo e-mail · 7 dias de garantia.</p>
       </div>
