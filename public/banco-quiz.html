@@ -299,7 +299,8 @@ function carregar(){
       '<div class="kpi"><span>Preço → checkout</span><b>'+pct(ck,ofe).toFixed(0)+'%</b><small>'+ck+' de '+ofe+' que viram o preço</small></div>'+
       '<div class="kpi destaque"><span>Ponta a ponta</span><b>'+pct(ck,topo).toFixed(1)+'%</b><small>abertura → checkout</small></div>'+
       '<div class="kpi"><span>Tempo até resultado</span><b>'+fmtSeg(tempo.mediana_resultado_s)+'</b><small>mediana · decisão '+fmtSeg(tempo.mediana_decisao_s)+'</small></div>'+
-      '<div class="kpi"><span>Foram para a LP</span><b>'+lp+'</b><small>preferiram a página completa</small></div>';
+      '<div class="kpi"><span>Foram para a LP</span><b>'+lp+'</b><small>preferiram a página completa</small></div>'+
+      '<div class="kpi"><span>Erros de JS</span><b>'+(m.erro_js||0)+'</b><small>sessões com erro no navegador · texto na tabela, etapa erro_js</small></div>';
 
     var aviso=document.getElementById("aviso"); aviso.hidden=false;
     aviso.innerHTML = topo<30

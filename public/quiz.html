@@ -6,11 +6,6 @@
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FDFBF7">
 <title>Qual oração falta para você? — Devocional da Mãe que Não Desiste</title>
-<link rel="icon" href="/icon.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="/quiz-capa.webp" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
 <!--
   QUIZ — Devocional da Mãe que Não Desiste
@@ -55,6 +50,97 @@
 <!-- Pré-visualização não pode sujar o Meta nem a UTMify: os pixels só carregam
      fora dela. A checagem roda antes de qualquer script de terceiro. -->
 <script>window.__ND_PREVIEW = /[?&]preview=/.test(location.search);</script>
+
+<!-- Gravação no Supabase. Fica no <head>, antes das fontes e dos pixels: o
+     script do fim do <body> só roda depois que a folha de fontes do Google
+     baixa, e no 4G fraco quem saía antes disso já contava LPV no Meta (o pixel
+     dispara antes) mas nunca chegava ao banco. Em 15/09 o banco tinha 0 visitas
+     reais de anúncio contra ~30 LPV de Vestido + Jantar. -->
+<script>
+(function () {
+  var SUPABASE = "https://asjakwljvzjotycmgtwd.supabase.co/rest/v1/quiz_eventos";
+  var CHAVE = "sb_publishable_JqCQTveGtqP01owfv_1XOA_l3BSW63H";
+  var url = new URLSearchParams(location.search);
+
+  // ?dev=1 marca este navegador como teste; o painel exclui essas sessões.
+  var isDev = false;
+  try {
+    if (url.get("dev") === "1") localStorage.setItem("nd_dev", "1");
+    if (url.get("dev") === "0") localStorage.removeItem("nd_dev");
+    isDev = localStorage.getItem("nd_dev") === "1";
+  } catch (e) {}
+
+  function novoId() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0;
+      return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+  }
+
+  var sessao = null, nova = false;
+  try { sessao = sessionStorage.getItem("nd_quiz_sessao"); } catch (e) {}
+  if (!sessao) {
+    sessao = novoId(); nova = true;
+    try { sessionStorage.setItem("nd_quiz_sessao", sessao); } catch (e) {}
+  }
+
+  var BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|headless|lighthouse|preview|vercel|curl|python|axios|monitor/i;
+
+  // Só colunas que já existem em quiz_eventos.
+  var base = {
+    variante: "nd_quiz",
+    utm_source: url.get("utm_source"),
+    utm_campaign: url.get("utm_campaign"),
+    utm_content: url.get("utm_content"),
+    fbclid: url.get("fbclid"),
+    referrer: document.referrer || null,
+    user_agent: navigator.userAgent,
+    is_dev: isDev,
+    is_bot: BOT_RE.test(navigator.userAgent) || navigator.webdriver === true
+  };
+
+  // keepalive só quando a página vai ser trocada (checkout, LP). Com a página
+  // aberta ele não ajuda, e é o que separa este envio de um fetch comum em
+  // navegador interno de app.
+  function registrar(etapa, ordem, extra, saindo) {
+    if (window.__ND_PREVIEW) return;
+    var linha = { sessao: sessao, etapa: etapa, ordem: ordem };
+    var k;
+    for (k in base) linha[k] = base[k];
+    for (k in (extra || {})) linha[k] = extra[k];
+    try {
+      fetch(SUPABASE, {
+        method: "POST",
+        headers: { apikey: CHAVE, Authorization: "Bearer " + CHAVE, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify(linha),
+        keepalive: !!saindo
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  window.__ndQuiz = { registrar: registrar, nova: nova };
+  if (nova) registrar("abertura", 0);
+
+  // Erro de JS no celular real vira linha no banco (etapa erro_js, texto em
+  // `resposta`). Até 3 por sessão.
+  var erros = 0;
+  window.addEventListener("error", function (ev) {
+    if (erros >= 3) return;
+    erros++;
+    var onde = String(ev.filename || "").split("/").pop() + ":" + (ev.lineno || 0);
+    registrar("erro_js", 99, { resposta: (String(ev.message || "erro") + " @ " + onde).slice(0, 200) });
+  });
+})();
+</script>
+
+<!-- As folhas de estilo vêm DEPOIS da gravação: script inline espera toda
+     folha de estilo que está acima dele terminar de baixar. -->
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="/quiz-capa.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -479,63 +565,8 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   var PREVIEW = window.__ND_PREVIEW === true;
   var UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "fbclid"];
 
-  // ?dev=1 marca este navegador como teste; o painel exclui essas sessões.
-  try {
-    if (url.get("dev") === "1") localStorage.setItem("nd_dev", "1");
-    if (url.get("dev") === "0") localStorage.removeItem("nd_dev");
-  } catch (e) {}
-  var isDev = false;
-  try { isDev = localStorage.getItem("nd_dev") === "1"; } catch (e) {}
-
-  function novoId() {
-    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0;
-      return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
-    });
-  }
-
-  var sessao = null, sessaoNova = false;
-  try { sessao = sessionStorage.getItem("nd_quiz_sessao"); } catch (e) {}
-  if (!sessao) {
-    sessao = novoId(); sessaoNova = true;
-    try { sessionStorage.setItem("nd_quiz_sessao", sessao); } catch (e) {}
-  }
-
-  var BOT_RE = /bot|crawl|spider|slurp|facebookexternalhit|headless|lighthouse|preview|vercel|curl|python|axios|monitor/i;
-
-  // Só colunas que já existem em quiz_eventos: o quiz grava desde o primeiro
-  // minuto, antes de qualquer SQL novo ser rodado.
-  var base = {
-    variante: CONFIG.VARIANTE,
-    utm_source: url.get("utm_source"),
-    utm_campaign: url.get("utm_campaign"),
-    utm_content: url.get("utm_content"),
-    fbclid: url.get("fbclid"),
-    referrer: document.referrer || null,
-    user_agent: navigator.userAgent,
-    is_dev: isDev,
-    is_bot: BOT_RE.test(navigator.userAgent) || navigator.webdriver === true
-  };
-
-  function registrar(etapa, ordem, extra) {
-    if (PREVIEW) return;
-    var linha = Object.assign({ sessao: sessao, etapa: etapa, ordem: ordem }, base, extra || {});
-    if (CONFIG.DEBUG) console.log("[quiz]", linha);
-    try {
-      fetch(CONFIG.SUPABASE_URL + "/rest/v1/quiz_eventos", {
-        method: "POST",
-        headers: {
-          apikey: CONFIG.SUPABASE_ANON,
-          Authorization: "Bearer " + CONFIG.SUPABASE_ANON,
-          "Content-Type": "application/json",
-          Prefer: "return=minimal"
-        },
-        body: JSON.stringify(linha),
-        keepalive: true
-      }).catch(function (e) { if (CONFIG.DEBUG) console.warn("[quiz] falhou", e); });
-    } catch (e) {}
-  }
+  // Sessão, UTMs e envio ao Supabase ficam no <head> (ver o comentário lá).
+  var registrar = window.__ndQuiz.registrar;
 
   function fb() { if (!PREVIEW && typeof window.fbq === "function") window.fbq.apply(null, arguments); }
   function cl() { if (typeof window.clarity === "function") window.clarity.apply(null, arguments); }
@@ -798,7 +829,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     if (indo) return;
     indo = true;
     var destino = comUtms(CONFIG.CHECKOUT_URL);
-    registrar("checkout", 8, { perfil: perfilFinal, resposta: (respostas.compromisso || {}).resposta || null });
+    registrar("checkout", 8, { perfil: perfilFinal, resposta: (respostas.compromisso || {}).resposta || null }, true);
     fb("track", "InitiateCheckout", { value: 34.9, currency: "BRL", content_name: "Devocional da Mãe que Não Desiste" });
     cl("set", "cta_origin", "quiz");
     clEvento("event", "cta_click");
@@ -809,7 +840,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   document.getElementById("ver-lp").addEventListener("click", function (e) {
     if (PREVIEW) { e.preventDefault(); return; }
     e.preventDefault();
-    registrar("para_lp", 9, { perfil: perfilFinal });
+    registrar("para_lp", 9, { perfil: perfilFinal }, true);
     var destino = comUtms("/");
     setTimeout(function () { location.href = destino; }, 150);
   });
@@ -847,10 +878,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     return;
   }
 
-  if (sessaoNova) {
-    registrar("abertura", 0);
-    fb("trackCustom", "QuizAbertura");
-  }
+  if (window.__ndQuiz.nova) fb("trackCustom", "QuizAbertura");
 })();
 </script>
 </body>
