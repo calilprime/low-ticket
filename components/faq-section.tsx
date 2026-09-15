@@ -3,7 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const faqs = [
   {
     q: "Como recebo?",
-    a: "Assim que o pagamento no PIX ou no cartão for confirmado, o devocional e os 3 bônus chegam automaticamente no e-mail que você cadastrar na compra — normalmente em menos de 2 minutos. É tudo digital, em PDF, com acesso vitalício.",
+    a: "Assim que o pagamento no PIX ou no cartão for confirmado, o devocional chega automaticamente no e-mail que você cadastrar na compra — normalmente em menos de 2 minutos. No plano Devocional + 3 Bônus, os bônus chegam junto. É tudo digital, em PDF, com acesso vitalício.",
   },
   {
     q: "E se meu filho não quiser participar?",

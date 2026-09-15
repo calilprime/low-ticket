@@ -498,7 +498,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
       <div><b>9</b><span>versículos</span></div>
       <div><b>9</b><span>reflexões</span></div>
       <div><b>9</b><span>passos de oração</span></div>
-      <div><b>3</b><span>bônus</span></div>
+      <div><b>3</b><span>bônus disponíveis</span></div>
     </div>
     <p class="contagem-nota">Nove dias, um depois do outro — cada um constrói o seguinte.</p>
 
@@ -508,9 +508,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
         <h3 id="r-oferta-titulo">Feito para a mãe que está exatamente aqui</h3>
         <ul class="itens">
           <li><div><b>Devocional da Mãe que Não Desiste</b><span>9 dias de oração pelo coração do seu filho.</span></div></li>
-          <li><div><b>Bônus 1 · Checklist dos 9 Dias</b><span>Se falhar um dia, você continua de onde parou.</span></div></li>
-          <li><div><b>Bônus 2 · Quadro de Orações Respondidas</b><span>Inclusive as respostas pequenas, que a memória apaga.</span></div></li>
-          <li><div><b>Bônus 3 · Cartão de Entrega</b><span>Um lugar concreto para deixar o que não cabe mais em você.</span></div></li>
+          <li><div><b>🎁 3 bônus disponíveis</b><span>Checklist dos 9 Dias, Quadro de Orações Respondidas e Cartão de Entrega — no plano de R$ 47,90.</span></div></li>
         </ul>
 
         <div class="preco" id="oferta-preco">
@@ -521,10 +519,11 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 
         <p class="balao-wrap"><span class="balao">é menos que um lanche</span></p>
 
-        <a class="cta" id="ir-checkout" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247">
+        <a class="cta" id="ir-checkout" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542725">
           <span id="cta-texto">Quero fazer a primeira oração hoje</span>
           <small>(R$ 34,90 — pagamento único)</small>
         </a>
+        <a class="link-lp" id="ir-completo" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247">🎁 Prefiro com os 3 bônus (R$ 47,90)</a>
         <p class="garantias">⚡ Chega no e-mail em até 2 minutos · 🔒 7 dias de garantia</p>
       </div>
     </div>
@@ -555,7 +554,10 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   var CONFIG = {
     SUPABASE_URL: "https://asjakwljvzjotycmgtwd.supabase.co",
     SUPABASE_ANON: "sb_publishable_JqCQTveGtqP01owfv_1XOA_l3BSW63H",
-    CHECKOUT_URL: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247",
+    // Dois planos desde 15/09: 538247 virou o Completo (R$ 47,90); o botão
+    // principal leva ao Básico (R$ 34,90), o preço mostrado no resultado.
+    CHECKOUT_URL: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542725",
+    CHECKOUT_COMPLETO: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247",
     // Separa estas linhas das do Mãe Serena ('quiz') na mesma tabela.
     VARIANTE: "nd_quiz",
     DEBUG: false
@@ -758,6 +760,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
 
     document.getElementById("cta-texto").textContent = CTA_TEXTO[comp] || CTA_TEXTO.ver_antes;
     document.getElementById("ir-checkout").href = comUtms(CONFIG.CHECKOUT_URL);
+    document.getElementById("ir-completo").href = comUtms(CONFIG.CHECKOUT_COMPLETO);
     document.getElementById("ver-lp").href = comUtms("/");
   }
 
@@ -832,6 +835,22 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     registrar("checkout", 8, { perfil: perfilFinal, resposta: (respostas.compromisso || {}).resposta || null }, true);
     fb("track", "InitiateCheckout", { value: 34.9, currency: "BRL", content_name: "Devocional da Mãe que Não Desiste" });
     cl("set", "cta_origin", "quiz");
+    clEvento("event", "cta_click");
+    clEvento("upgrade", "cta_click");
+    setTimeout(function () { location.href = destino; }, 180);
+  });
+
+  // Plano Completo: grava o mesmo `checkout`, com resposta = "completo".
+  document.getElementById("ir-completo").addEventListener("click", function (e) {
+    if (PREVIEW) { e.preventDefault(); return; }
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    if (indo) return;
+    indo = true;
+    var destino = comUtms(CONFIG.CHECKOUT_COMPLETO);
+    registrar("checkout", 8, { perfil: perfilFinal, resposta: "completo" }, true);
+    fb("track", "InitiateCheckout", { value: 47.9, currency: "BRL", content_name: "Devocional da Mãe que Não Desiste [COMPLETO]" });
+    cl("set", "cta_origin", "quiz_completo");
     clEvento("event", "cta_click");
     clEvento("upgrade", "cta_click");
     setTimeout(function () { location.href = destino; }, 180);

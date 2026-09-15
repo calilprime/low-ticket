@@ -1,6 +1,6 @@
 "use client"
 
-import { CHECKOUT_URL, buildCheckoutUrl, goToCheckout } from "@/lib/checkout"
+import { PLANOS, buildCheckoutUrl, goToCheckout, type Plano } from "@/lib/checkout"
 import { cn } from "@/lib/utils"
 
 /**
@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils"
  * Agora o href vale desde o primeiro byte: sem JS, o link leva ao checkout
  * (a HeroSpark dispara o InitiateCheckout dela mesma no load). Com JS, o
  * onClick assume, acrescenta os UTMs do anúncio e dispara o evento daqui.
+ *
+ * Sem `plano`, leva ao Básico (R$ 34,90) — o preço que os anúncios falam.
  */
 export function CtaButton({
   children,
@@ -21,26 +23,28 @@ export function CtaButton({
   className,
   pulse = true,
   origin = 'cta',
+  plano = 'basico',
 }: {
   children: React.ReactNode
   price?: string | null
   className?: string
   pulse?: boolean
   origin?: string
+  plano?: Plano
 }) {
   return (
     <a
-      href={CHECKOUT_URL}
+      href={PLANOS[plano].url}
       onClick={(e) => {
         // Deixa passar o comportamento nativo de "abrir em nova aba".
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
         e.preventDefault()
-        goToCheckout(origin)
+        goToCheckout(origin, plano)
       }}
       // Enriquece o href com os UTMs assim que o componente monta, para que
       // até um "abrir em nova aba" carregue a atribuição.
       ref={(el) => {
-        if (el) el.href = buildCheckoutUrl()
+        if (el) el.href = buildCheckoutUrl(plano)
       }}
       className={cn(
         "flex w-full max-w-lg cursor-pointer flex-col items-center justify-center rounded-full bg-cta px-5 py-4 text-center text-[0.95rem] font-extrabold uppercase leading-tight tracking-wide text-cta-foreground no-underline shadow-xl shadow-cta/30 transition-transform hover:scale-[1.02] hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cta active:translate-y-px sm:text-lg",

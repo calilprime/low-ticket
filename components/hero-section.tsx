@@ -91,8 +91,16 @@ function PriceBox() {
       </p>
       <p className="mt-2 text-base font-extrabold text-primary">R$ 3,87 por cada um dos 9 dias</p>
       <p className="mt-2.5 border-t border-dashed border-gold/55 pt-2.5 text-[0.78rem] leading-relaxed text-muted-foreground">
-        O devocional completo + 3 bônus • imprime em casa quantas vezes quiser
+        Os 9 dias completos • imprime em casa quantas vezes quiser
       </p>
+      {/* Dois planos desde 15/09: o botão daqui leva ao Básico (o preço dos
+          anúncios); os bônus ficam no Completo, apresentado na seção de oferta. */}
+      <a
+        href="#oferta"
+        className="mt-2 inline-block text-[0.8rem] font-bold text-primary underline decoration-gold/60 underline-offset-4"
+      >
+        🎁 3 bônus disponíveis — ver os planos
+      </a>
     </div>
   )
 }
@@ -122,7 +130,7 @@ function ProductShowcase({ priority = false }: { priority?: boolean }) {
           className="aspect-[4/3] w-full rounded-2xl object-cover object-[center_46%]"
         />
         <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-4 py-1 text-[11px] font-bold uppercase tracking-wide text-primary-foreground shadow-lg">
-          Devocional + 3 Bônus
+          Bônus disponíveis
         </span>
         <span className="absolute -bottom-[1.1rem] -right-1.5 rotate-3 rounded-full bg-gold px-3 py-1 font-hand text-[1.05rem] font-bold text-olive shadow-[0_8px_18px_-8px_rgba(0,0,0,0.4)]">
           chega em 2 minutos

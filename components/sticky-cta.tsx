@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-import { CHECKOUT_URL, buildCheckoutUrl, goToCheckout } from "@/lib/checkout"
+import { PLANOS, buildCheckoutUrl, goToCheckout } from "@/lib/checkout"
 
 export function StickyCta() {
   const [visible, setVisible] = useState(false)
@@ -37,7 +37,7 @@ export function StickyCta() {
             da hidratação. Esta barra é a única CTA visível durante boa parte
             da rolagem no mobile. */}
         <a
-          href={CHECKOUT_URL}
+          href={PLANOS.basico.url}
           onClick={(e) => {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
             e.preventDefault()
