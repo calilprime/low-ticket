@@ -10,7 +10,7 @@ export type Plano = 'basico' | 'completo'
 
 export const PLANOS = {
   basico: {
-    url: 'https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542725',
+    url: 'https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542726',
     valor: 34.9,
     nome: 'Devocional da Mãe que Não Desiste [BÁSICO]',
   },

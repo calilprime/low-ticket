@@ -1,5 +1,3 @@
-import { CtaButton } from "@/components/cta-button"
-
 /**
  * Os quatro passos e os nove dias em uma seção só.
  *
@@ -77,8 +75,15 @@ export function WhatsInside() {
           <span className="balao balao-cima">o Dia 1 você faz ainda hoje</span>
         </p>
 
+        {/* Leva aos planos, não ao checkout: com dois planos (15/09), um botão
+            direto aqui mandaria todo mundo ao Básico sem ver o Completo. */}
         <div className="mt-8 flex flex-col items-center gap-3" data-reveal>
-          <CtaButton pulse={false}>Quero Começar o Dia 1 Agora</CtaButton>
+          <a
+            href="#oferta"
+            className="flex w-full max-w-lg items-center justify-center rounded-full bg-cta px-5 py-4 text-center text-[0.95rem] font-extrabold uppercase leading-tight tracking-wide text-cta-foreground no-underline shadow-xl shadow-cta/30 transition-transform hover:scale-[1.02] sm:text-lg"
+          >
+            Quero Começar o Dia 1 — Ver os Planos
+          </a>
         </div>
       </div>
     </section>

@@ -5,18 +5,15 @@ import { CtaButton } from "@/components/cta-button"
 /**
  * Dois planos desde 15/09.
  *
- * Básico (R$ 34,90): o PDF de 13 páginas, sem os inserts. O passo do Dia 9 foi
- * reescrito para não depender do Cartão de Entrega.
  * Completo (R$ 47,90): o PDF de 16 páginas, com os três inserts das páginas
  * 13, 14 e 15. Conferido contra Devocional-da-Mae-que-Nao-Desiste.pdf — a
  * versão antiga desta lista trazia os bônus do Mãe Serena, outro produto.
+ * Básico (R$ 34,90): o PDF de 13 páginas, sem os inserts. O passo do Dia 9 foi
+ * reescrito para não depender do Cartão de Entrega.
  *
+ * O Completo vem primeiro e marcado como "Recomendado" (mesma ordem do topo).
  * Sem preço riscado e sem "mais vendido": a única comparação na página é a
- * diferença real entre os dois planos (R$ 13,00). A antiga âncora de R$ 160,00
- * nunca foi preço cobrado.
- *
- * O Básico vem primeiro porque é o preço que os anúncios falam; o Completo
- * vem em destaque logo depois, com os bônus descritos.
+ * diferença real entre os dois planos (R$ 13,00).
  */
 const bonus = [
   {
@@ -57,39 +54,6 @@ export function OfferSection() {
         </h2>
 
         <div className="mt-10 grid items-start gap-6 md:grid-cols-2">
-          {/* Básico */}
-          <div className="rounded-[2rem] border border-gold/45 bg-card px-5 py-8 shadow-xl shadow-olive/10 sm:px-7" data-reveal>
-            <p className="text-center text-xs font-extrabold uppercase tracking-[0.16em] text-muted-foreground">
-              Devocional
-            </p>
-            <p className="mt-3 text-center font-serif text-5xl font-bold leading-none tabular-nums text-olive">
-              R$ 34,90
-            </p>
-            <p className="mt-2 text-center text-sm font-bold text-primary">R$ 3,87 por cada dia de oração</p>
-
-            <ul className="mt-7 grid gap-3 text-sm leading-relaxed text-foreground sm:text-base">
-              <Item>
-                <strong className="font-bold">Os 9 dias completos</strong>: versículo, reflexão, oração pronta e um passo
-                pequeno por dia
-              </Item>
-              <Item>PDF para ler no celular ou imprimir em casa, quantas vezes precisar</Item>
-              <Item>Pagamento único, sem mensalidade</Item>
-            </ul>
-
-            <p className="mt-5 flex items-start gap-2.5 rounded-2xl bg-gold/12 px-3.5 py-3 text-sm leading-relaxed text-muted-foreground">
-              <Gift className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
-              <span>
-                <strong className="font-bold text-foreground">3 bônus disponíveis</strong> no plano Devocional + 3 Bônus
-              </span>
-            </p>
-
-            <div className="mt-7 flex flex-col items-center">
-              <CtaButton plano="basico" price="R$ 34,90 — pagamento único" origin="oferta_basico" pulse={false}>
-                Quero o Devocional
-              </CtaButton>
-            </div>
-          </div>
-
           {/* Completo */}
           <div
             className="overflow-hidden rounded-[2rem] bg-olive bg-[radial-gradient(90%_45%_at_50%_0%,color-mix(in_oklab,var(--gold)_22%,transparent),transparent_65%)] text-olive-foreground shadow-2xl shadow-olive/25"
@@ -97,7 +61,7 @@ export function OfferSection() {
           >
             <div className="bg-gold px-6 py-2.5 text-center">
               <p className="text-xs font-extrabold uppercase tracking-wide text-[oklch(0.25_0.02_60)] sm:text-sm">
-                Com os 3 bônus
+                Recomendado • com os 3 bônus
               </p>
             </div>
 
@@ -136,6 +100,45 @@ export function OfferSection() {
                   Quero o Devocional + 3 Bônus
                 </CtaButton>
               </div>
+            </div>
+          </div>
+
+          {/* Básico */}
+          <div className="rounded-[2rem] border border-gold/45 bg-card px-5 py-8 shadow-xl shadow-olive/10 sm:px-7" data-reveal>
+            <p className="text-center text-xs font-extrabold uppercase tracking-[0.16em] text-muted-foreground">
+              Só o Devocional
+            </p>
+            <p className="mt-3 text-center font-serif text-5xl font-bold leading-none tabular-nums text-olive">
+              R$ 34,90
+            </p>
+            <p className="mt-2 text-center text-sm font-bold text-primary">R$ 3,87 por cada dia de oração</p>
+
+            <ul className="mt-7 grid gap-3 text-sm leading-relaxed text-foreground sm:text-base">
+              <Item>
+                <strong className="font-bold">Os 9 dias completos</strong>: versículo, reflexão, oração pronta e um passo
+                pequeno por dia
+              </Item>
+              <Item>PDF para ler no celular ou imprimir em casa, quantas vezes precisar</Item>
+              <Item>Pagamento único, sem mensalidade</Item>
+            </ul>
+
+            <p className="mt-5 flex items-start gap-2.5 rounded-2xl bg-gold/12 px-3.5 py-3 text-sm leading-relaxed text-muted-foreground">
+              <Gift className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+              <span>
+                <strong className="font-bold text-foreground">3 bônus disponíveis</strong> no plano Devocional + 3 Bônus
+              </span>
+            </p>
+
+            <div className="mt-7 flex flex-col items-center">
+              <CtaButton
+                plano="basico"
+                price="R$ 34,90 — pagamento único"
+                origin="oferta_basico"
+                pulse={false}
+                className="border-2 border-cta bg-transparent text-cta shadow-none"
+              >
+                Quero Só o Devocional
+              </CtaButton>
             </div>
           </div>
         </div>

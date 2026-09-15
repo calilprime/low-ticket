@@ -325,6 +325,16 @@ h2{font-size:clamp(23px,6.2vw,28px);line-height:1.2}
 .cta small{display:block;margin-top:3px;font-size:12px;font-weight:700;text-transform:none;letter-spacing:0;opacity:.95}
 @keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
 .garantias{margin-top:10px;text-align:center;font-size:12.5px;color:color-mix(in oklab,var(--olive-fg) 80%,transparent)}
+/* Dois planos (15/09) */
+.planos{margin-top:24px;display:grid;gap:16px}
+.preco.plano{position:relative;margin-top:0;padding:18px 14px 16px;border-radius:20px;border:1px solid color-mix(in oklab,var(--olive-fg) 20%,transparent);background:color-mix(in oklab,var(--olive-fg) 5%,transparent)}
+.preco.plano-rec{padding-top:24px;border:2px solid var(--gold);background:color-mix(in oklab,var(--gold) 13%,transparent)}
+.plano .selo{position:absolute;top:-12px;left:50%;translate:-50% 0;white-space:nowrap;background:var(--gold);color:var(--gold-ink);font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 12px;border-radius:999px}
+.plano-nome{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in oklab,var(--olive-fg) 80%,transparent)}
+.plano .itens{text-align:left;margin-top:14px}
+.plano .itens li{padding:9px 11px}
+.preco .valor.valor-menor{font-size:38px}
+.cta.cta-sec{background:transparent;color:var(--olive-fg);border:2px solid color-mix(in oklab,var(--olive-fg) 45%,transparent);box-shadow:none;animation:none}
 
 .honesto{margin-top:24px;padding:16px;border-radius:16px;border:1px dashed var(--border);font-size:14.5px;color:var(--muted)}
 .honesto strong{color:var(--foreground)}
@@ -506,24 +516,38 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
       <div class="faixa">Pagamento único · Acesso vitalício</div>
       <div class="miolo">
         <h3 id="r-oferta-titulo">Feito para a mãe que está exatamente aqui</h3>
-        <ul class="itens">
-          <li><div><b>Devocional da Mãe que Não Desiste</b><span>9 dias de oração pelo coração do seu filho.</span></div></li>
-          <li><div><b>🎁 3 bônus disponíveis</b><span>Checklist dos 9 Dias, Quadro de Orações Respondidas e Cartão de Entrega — no plano de R$ 47,90.</span></div></li>
-        </ul>
+        <!-- Dois planos desde 15/09: o Completo primeiro, "Recomendado" (não
+             "mais escolhido": ainda não tem venda). oferta_vista é gravada
+             quando o preço do Completo entra na tela. -->
+        <div class="planos">
+          <div class="preco plano plano-rec">
+            <span class="selo">Recomendado</span>
+            <p class="plano-nome">Devocional + 3 Bônus</p>
+            <div class="valor" id="oferta-preco">R$&nbsp;47,90 <small>uma vez</small></div>
+            <ul class="itens">
+              <li><div><b>Os 9 dias do devocional</b><span>Versículo, reflexão, oração pronta e um passo por dia.</span></div></li>
+              <li><div><b>Bônus 1 · Checklist dos 9 Dias</b></div></li>
+              <li><div><b>Bônus 2 · Quadro de Orações Respondidas</b></div></li>
+              <li><div><b>Bônus 3 · Cartão de Entrega</b></div></li>
+            </ul>
+            <a class="cta" id="ir-completo" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247">
+              <span id="cta-texto">Quero fazer a primeira oração hoje</span>
+              <small>(com os 3 bônus · R$ 47,90)</small>
+            </a>
+          </div>
 
-        <div class="preco" id="oferta-preco">
-          <div class="valor">R$&nbsp;34,90 <small>uma vez</small></div>
-          <p class="dia"><b>R$ 3,87</b> por cada um dos 9 dias</p>
-          <p class="termos">PIX ou cartão · arquivo digital para imprimir em casa</p>
+          <div class="preco plano">
+            <p class="plano-nome">Só o Devocional</p>
+            <div class="valor valor-menor">R$&nbsp;34,90 <small>uma vez</small></div>
+            <p class="dia"><b>R$ 3,87</b> por cada um dos 9 dias</p>
+            <a class="cta cta-sec" id="ir-checkout" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542726">
+              Quero só o devocional
+              <small>(R$ 34,90 — pagamento único)</small>
+            </a>
+          </div>
+
+          <div class="preco"><p class="termos">PIX ou cartão · arquivo digital para imprimir em casa</p></div>
         </div>
-
-        <p class="balao-wrap"><span class="balao">é menos que um lanche</span></p>
-
-        <a class="cta" id="ir-checkout" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542725">
-          <span id="cta-texto">Quero fazer a primeira oração hoje</span>
-          <small>(R$ 34,90 — pagamento único)</small>
-        </a>
-        <a class="link-lp" id="ir-completo" href="https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247">🎁 Prefiro com os 3 bônus (R$ 47,90)</a>
         <p class="garantias">⚡ Chega no e-mail em até 2 minutos · 🔒 7 dias de garantia</p>
       </div>
     </div>
@@ -556,7 +580,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     SUPABASE_ANON: "sb_publishable_JqCQTveGtqP01owfv_1XOA_l3BSW63H",
     // Dois planos desde 15/09: 538247 virou o Completo (R$ 47,90); o botão
     // principal leva ao Básico (R$ 34,90), o preço mostrado no resultado.
-    CHECKOUT_URL: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542725",
+    CHECKOUT_URL: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-basico-542726",
     CHECKOUT_COMPLETO: "https://pay.herospark.com/devocional-da-mae-que-nao-desiste-538247",
     // Separa estas linhas das do Mãe Serena ('quiz') na mesma tabela.
     VARIANTE: "nd_quiz",

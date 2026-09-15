@@ -2,8 +2,11 @@
 
 import { useEffect, useState } from "react"
 
-import { PLANOS, buildCheckoutUrl, goToCheckout } from "@/lib/checkout"
-
+/**
+ * Desde 15/09 (dois planos) esta barra leva à seção de planos, não ao
+ * checkout: um botão direto aqui mandaria todo mundo ao Básico sem ver o
+ * Completo. É um âncora de página, então funciona antes da hidratação.
+ */
 export function StickyCta() {
   const [visible, setVisible] = useState(false)
 
@@ -33,23 +36,16 @@ export function StickyCta() {
       }`}
     >
       <div className="mx-auto flex max-w-md flex-col items-center gap-1.5">
-        {/* Âncora, pelo mesmo motivo do CtaButton: o href precisa valer antes
-            da hidratação. Esta barra é a única CTA visível durante boa parte
-            da rolagem no mobile. */}
         <a
-          href={PLANOS.basico.url}
-          onClick={(e) => {
-            if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return
-            e.preventDefault()
-            goToCheckout('sticky')
-          }}
-          ref={(el) => {
-            if (el) el.href = buildCheckoutUrl()
+          href="#oferta"
+          onClick={() => {
+            const w = window as any
+            if (typeof w.clarity === "function") w.clarity("event", "sticky_planos")
           }}
           tabIndex={visible ? 0 : -1}
           className="block w-full cursor-pointer rounded-full bg-cta px-5 py-3.5 text-center text-sm font-extrabold uppercase leading-snug tracking-wide text-cta-foreground no-underline shadow-lg shadow-cta/30 active:translate-y-px"
         >
-          Quero começar o Dia 1 — R$ 34,90
+          Escolher meu plano — a partir de R$ 34,90
         </a>
         <p className="text-xs text-muted-foreground">
           Acesso imediato no e-mail • 7 dias de garantia

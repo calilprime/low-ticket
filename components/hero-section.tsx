@@ -34,22 +34,10 @@ export function HeroSection() {
               <ProductShowcase priority />
             </div>
 
-            <PriceBox />
+            <PlanosTopo />
 
-            <div className="mt-4 flex flex-col items-center gap-3 lg:items-start">
-              <CtaButton price="R$ 34,90 — pagamento único" origin="hero">
-                Quero Começar o Dia 1 Agora
-              </CtaButton>
-              <p className="text-sm font-semibold text-muted-foreground">
-                ⚡ Acesso imediato no e-mail • 🔒 Garantia de 7 dias
-              </p>
-            </div>
-
-            {/* Balão: R$ 3,87/dia é raciocínio, "menos que um lanche" é
-                reconhecimento imediato. Os dois juntos fazem o preço parecer
-                pequeno sem que a página precise afirmar que é barato. */}
-            <p className="mt-6 text-center lg:text-left" data-reveal>
-              <span className="balao">é menos que um lanche — e dura os 9 dias</span>
+            <p className="mt-4 text-sm font-semibold text-muted-foreground">
+              ⚡ Acesso imediato no e-mail • 🔒 Garantia de 7 dias
             </p>
 
             {/* O depoimento que fala de direção, não de desfecho: a copy dos
@@ -77,30 +65,51 @@ export function HeroSection() {
 }
 
 /**
- * O bloco de preço na primeira tela.
+ * Os dois planos na primeira tela.
  *
- * Estava na sexta seção de nove. Três dos cinco anúncios no ar (Vestido,
- * Jantar e Vídeo A) não trazem o valor na copy — sem isto, a mãe descobria
- * R$ 34,90 só no checkout da HeroSpark, depois de já ter clicado.
+ * O preço ficava aqui desde a LP v2 (a mãe descobria R$ 34,90 só no checkout).
+ * Com dois planos (15/09), um botão único na primeira tela levava todo mundo ao
+ * Básico sem ela ver que o Completo existe. Agora os dois aparecem juntos: o
+ * Completo primeiro, com "Recomendado", e o Básico com botão secundário.
+ *
+ * "Recomendado", e não "mais escolhido": o Completo ainda não tem venda, e
+ * afirmar preferência que não existe é o tipo de prova falsa que a página evita.
  */
-function PriceBox() {
+function PlanosTopo() {
   return (
-    <div className="mx-auto mt-8 max-w-md rounded-[1.25rem] border border-gold/45 border-t-4 border-t-gold bg-gradient-to-b from-card to-[color-mix(in_oklab,var(--gold)_10%,var(--card))] px-4 pb-[1.1rem] pt-[1.05rem] text-center shadow-[0_14px_30px_-18px_color-mix(in_oklab,var(--gold)_80%,transparent)] lg:mx-0">
-      <p className="font-serif text-[2.15rem] font-extrabold leading-none tabular-nums text-olive">
-        R$&nbsp;34,90 <span className="text-base font-semibold text-muted-foreground">uma vez</span>
-      </p>
-      <p className="mt-2 text-base font-extrabold text-primary">R$ 3,87 por cada um dos 9 dias</p>
-      <p className="mt-2.5 border-t border-dashed border-gold/55 pt-2.5 text-[0.78rem] leading-relaxed text-muted-foreground">
-        Os 9 dias completos • imprime em casa quantas vezes quiser
-      </p>
-      {/* Dois planos desde 15/09: o botão daqui leva ao Básico (o preço dos
-          anúncios); os bônus ficam no Completo, apresentado na seção de oferta. */}
-      <a
-        href="#oferta"
-        className="mt-2 inline-block text-[0.8rem] font-bold text-primary underline decoration-gold/60 underline-offset-4"
-      >
-        🎁 3 bônus disponíveis — ver os planos
-      </a>
+    <div className="mx-auto mt-9 grid max-w-md gap-3 text-center lg:mx-0">
+      <div className="relative rounded-[1.25rem] border-2 border-cta bg-card px-4 pb-4 pt-6 shadow-[0_14px_30px_-18px_color-mix(in_oklab,var(--cta)_70%,transparent)]">
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-cta px-3.5 py-0.5 text-[11px] font-extrabold uppercase tracking-wide text-cta-foreground">
+          Recomendado
+        </span>
+        <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-muted-foreground">Devocional + 3 Bônus</p>
+        <p className="mt-2 font-serif text-[2.15rem] font-extrabold leading-none tabular-nums text-olive">
+          R$&nbsp;47,90 <span className="text-base font-semibold text-muted-foreground">uma vez</span>
+        </p>
+        <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground">
+          Os 9 dias + <strong className="font-bold text-foreground">Checklist, Quadro de Orações Respondidas e Cartão de Entrega</strong>
+        </p>
+        <CtaButton plano="completo" price="R$ 47,90 — com os 3 bônus" origin="hero_completo" className="mt-3.5 max-w-none">
+          Quero Começar com os Bônus
+        </CtaButton>
+      </div>
+
+      <div className="rounded-[1.25rem] border border-gold/45 bg-card px-4 pb-4 pt-4">
+        <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-muted-foreground">Só o Devocional</p>
+        <p className="mt-2 font-serif text-[1.7rem] font-extrabold leading-none tabular-nums text-olive">
+          R$&nbsp;34,90 <span className="text-sm font-semibold text-muted-foreground">uma vez</span>
+        </p>
+        <p className="mt-1.5 text-[0.8rem] font-bold text-primary">R$ 3,87 por cada um dos 9 dias</p>
+        <CtaButton
+          plano="basico"
+          price="R$ 34,90 — pagamento único"
+          origin="hero_basico"
+          pulse={false}
+          className="mt-3 max-w-none border-2 border-cta bg-transparent py-3 text-[0.85rem] text-cta shadow-none sm:text-base"
+        >
+          Quero Só o Devocional
+        </CtaButton>
+      </div>
     </div>
   )
 }
