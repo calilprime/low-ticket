@@ -491,7 +491,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
   <section class="tela" data-etapa="resultado" data-ordem="6" aria-live="polite">
     <span class="selo">Seu resultado</span>
     <h1 id="r-titulo"></h1>
-    <p class="leitura" id="r-leitura"></p>
 
     <p class="eco" id="r-eco"></p>
 
@@ -765,7 +764,6 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document
     var p3 = (respostas.p3 || {}).resposta || "palavras";
 
     document.getElementById("r-titulo").textContent = p.titulo;
-    document.getElementById("r-leitura").textContent = p.leitura;
     document.getElementById("r-eco").innerHTML = (ECO_P3[p3] || ECO_P3.palavras) + (ECO_COMPROMISSO[comp] || "");
     document.getElementById("r-versiculo").innerHTML = p.versiculo + "<cite>" + p.ref + "</cite>";
 
