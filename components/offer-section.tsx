@@ -95,6 +95,16 @@ export function OfferSection() {
                 ))}
               </ul>
 
+              {/* Depoimento real (WhatsApp, 18/09, autorizado): fala do Cartão de
+                  Entrega, que só existe no Completo. */}
+              <figure className="mt-6 rounded-2xl bg-olive-foreground/6 px-4 py-3.5 ring-1 ring-gold/35">
+                <blockquote className="text-sm italic leading-relaxed text-olive-foreground/90">
+                  &ldquo;Eu preenchi o Cartão de Entrega, recortei e guardei dentro da minha Bíblia. Toda vez que sinto a
+                  ansiedade voltar, eu olho para o cartão e lembro que entreguei o coração do meu filho a Deus.&rdquo;
+                </blockquote>
+                <figcaption className="mt-1.5 text-xs text-olive-foreground/65">— Maria Clara, compradora</figcaption>
+              </figure>
+
               <div className="mt-7 flex flex-col items-center">
                 <CtaButton plano="completo" price="R$ 47,90 — pagamento único" origin="oferta_completo">
                   Quero o Devocional + 3 Bônus
@@ -154,13 +164,25 @@ export function OfferSection() {
         {/* O relato de reaproximação vive aqui, depois do preço — e não na
             primeira tela, onde contradiria a anti-promessa que a copy dos
             anúncios usa para trazer a mãe até a página. */}
-        <figure className="mx-auto mt-9 max-w-2xl border-l-[3px] border-gold py-0.5 pl-4" data-reveal>
-          <blockquote className="text-sm italic leading-relaxed text-foreground sm:text-base">
-            &ldquo;Meu filho de 16 anos mal falava comigo. No dia 4 eu chorei orando, e naquela semana ele me
-            procurou para conversar pela primeira vez em meses.&rdquo;
-          </blockquote>
-          <figcaption className="mt-2 text-xs text-muted-foreground">— Juliana M., mãe de um adolescente, 48 anos</figcaption>
-        </figure>
+        <div className="mx-auto mt-9 grid max-w-2xl gap-6" data-reveal>
+          {/* Depoimento real (WhatsApp, 18/09, autorizado). Fala de reação do
+              filho, então fica aqui, depois do preço, como o da Juliana. */}
+          <figure className="border-l-[3px] border-gold py-0.5 pl-4">
+            <blockquote className="text-sm italic leading-relaxed text-foreground sm:text-base">
+              &ldquo;Eu tava no fundo do poço com o silêncio do meu filho. Quando cheguei no Dia 2 e mandei uma
+              mensagem só dizendo que lembrei dele, sem nenhuma pergunta ou cobrança, ele — que vivia me dando vácuo —
+              respondeu na hora com um coração. Não resolveu tudo da noite pro dia, mas quebrou o gelo.&rdquo;
+            </blockquote>
+            <figcaption className="mt-2 text-xs text-muted-foreground">— Renata A., compradora</figcaption>
+          </figure>
+          <figure className="border-l-[3px] border-gold py-0.5 pl-4">
+            <blockquote className="text-sm italic leading-relaxed text-foreground sm:text-base">
+              &ldquo;Meu filho de 16 anos mal falava comigo. No dia 4 eu chorei orando, e naquela semana ele me
+              procurou para conversar pela primeira vez em meses.&rdquo;
+            </blockquote>
+            <figcaption className="mt-2 text-xs text-muted-foreground">— Juliana M., mãe de um adolescente, 48 anos</figcaption>
+          </figure>
+        </div>
       </div>
     </section>
   )

@@ -44,14 +44,15 @@ export function HeroSection() {
                 anúncios abre com "orar não é pedir que ele volte", e a primeira
                 tela não pode contradizer o que trouxe a mãe até aqui. O relato
                 de reaproximação está na seção de oferta, depois do preço. */}
+            {/* Depoimento real de compradora (WhatsApp, 18/09, autorizado). Fala
+                do alívio, não do filho — por isso pode ficar na primeira tela. */}
             <figure className="mt-8 border-l-[3px] border-gold py-0.5 pl-4 text-left">
               <blockquote className="text-sm italic leading-relaxed text-foreground sm:text-base">
-                &ldquo;Eu não sabia mais o que pedir. Só chorava.{" "}
-                <span className="grifo">Ter a oração pronta na minha frente me devolveu a direção.</span>&rdquo;
+                &ldquo;<span className="grifo">Foi o único material que não me fez sentir mais culpada</span> do que eu
+                já tava. Quando li no começo que o devocional serve para aliviar, e não para colocar mais cobrança
+                na lista da mãe, eu chorei.&rdquo;
               </blockquote>
-              <figcaption className="mt-2 text-xs text-muted-foreground">
-                — Rosângela T., mãe de dois filhos, 52 anos
-              </figcaption>
+              <figcaption className="mt-2 text-xs text-muted-foreground">— Joana S., compradora</figcaption>
             </figure>
           </div>
 
